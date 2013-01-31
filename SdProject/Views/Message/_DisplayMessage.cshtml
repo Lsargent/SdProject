@@ -1,0 +1,15 @@
+﻿@model SdProject.Models.MessageModels.MessageModel
+
+@{ var message = Model.Message; }
+
+<div>
+    <div> Id: @message.Id </div>
+    <div>
+        <div> Author: AuthorName </div>
+        <div> Created: @message.Created </div>
+        <div>Last Modified: @message.LastModified </div>
+    </div>
+    <div>
+        @message.MessageText;
+    </div>
+</div>
