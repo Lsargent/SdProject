@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Threading;
 using System.Web.Mvc;
+using DataAccess;
 using WebMatrix.WebData;
 using SdProject.Models;
 
@@ -25,11 +26,11 @@ namespace SdProject.Filters
         {
             public SimpleMembershipInitializer()
             {
-                Database.SetInitializer<UsersContext>(null);
+                Database.SetInitializer<SdDb>(null);
 
                 try
                 {
-                    using (var context = new UsersContext())
+                    using (var context = new SdDb())
                     {
                         if (!context.Database.Exists())
                         {
@@ -38,7 +39,7 @@ namespace SdProject.Filters
                         }
                     }
 
-                    WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", autoCreateTables: true);
+                    WebSecurity.InitializeDatabaseConnection("DevData.LeeSargent", "User", "UserId", "UserName", autoCreateTables: true);
                 }
                 catch (Exception ex)
                 {

@@ -9,6 +9,7 @@ namespace DataAccess {
         Message GetMessage(Expression<Func<Message, bool>> wherePredicate);
         IEnumerable<Message> Messages { get; }
         IEnumerable<Message> GetMessages<TKey>(Func<Message, TKey> orderByPedicate);
-        void SaveMessage(Message message);
+        void AddMessage(Message message);
+        void SaveMessages();
     }
 }

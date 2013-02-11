@@ -32,6 +32,14 @@ namespace DataAccess {
             return (desc) ? items.OrderByDescending(key) : items.OrderBy(key);
         } 
 
+        public virtual void Add<TClass>(TClass itemToAdd) where TClass: class , new() {
+            _context.Set<TClass>().Add(itemToAdd);
+        }
+
+        public virtual void SaveChanges() {
+            _context.SaveChanges();
+        }
+
         public void Dispose()
         {
             if(_context != null) { _context.Dispose(); }

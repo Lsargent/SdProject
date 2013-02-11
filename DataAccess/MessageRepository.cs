@@ -13,7 +13,7 @@ namespace DataAccess {
         }
 
         public Message GetMessage(Expression<Func<Message, bool>> wherePredicate) {
-            return Get<Message>(wherePredicate);
+            return Get(wherePredicate);
         }
 
         private IEnumerable<Message> _messages;
@@ -21,15 +21,16 @@ namespace DataAccess {
             get { return _messages ?? (_messages = GetAll<Message>()); }
         }
 
-        
-
         public IEnumerable<Message> GetMessages<TKey>(Func<Message, TKey> orderByPredicate) {
             return GetAllOrderedBy(orderByPredicate);
         }
 
-        public void SaveMessage(Message message) {
-            Context.Messages.Add(message);
-            Context.SaveChanges();
+        public void AddMessage(Message message) {
+            Add(message);
+        }
+
+        public void SaveMessages() {
+            SaveChanges();
         }
     }
 }

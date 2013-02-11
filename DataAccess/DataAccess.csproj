@@ -48,6 +48,11 @@
     <Compile Include="IHouseRepository.cs" />
     <Compile Include="IMessageRepository.cs" />
     <Compile Include="MessageRepository.cs" />
+    <Compile Include="Migrations\201302061955087_InitialCreate.cs" />
+    <Compile Include="Migrations\201302061955087_InitialCreate.Designer.cs">
+      <DependentUpon>201302061955087_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="RepositoryBase.cs" />
     <Compile Include="SdDb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -61,6 +66,11 @@
       <Project>{585c170e-37ed-4764-ae8c-f2ef4eedfcae}</Project>
       <Name>Logic</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201302061955087_InitialCreate.resx">
+      <DependentUpon>201302061955087_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -171,6 +171,7 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\HouseDisplayModel.cs" />
+    <Compile Include="Models\MessageModels\CreateMessageModel.cs" />
     <Compile Include="Models\MessageModels\MessageListingModel.cs" />
     <Compile Include="Models\MessageModels\MessageModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -289,7 +290,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Message\_DisplayMessage.cshtml" />
-    <Content Include="Views\Message\MessageListing.cshtml" />
+    <Content Include="Views\Message\Listing.cshtml" />
+    <Content Include="Views\Message\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
