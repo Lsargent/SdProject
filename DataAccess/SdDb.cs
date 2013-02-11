@@ -5,7 +5,7 @@ namespace DataAccess
 {
     public class SdDb : DbContext 
     {
-        public SdDb() : base("name = DevData.LeeSargent") {
+        public SdDb() : base("name = " + AppConfig.GetActiveConnectionString()) {
         }
         public DbSet<House> Houses { get; set; }
         public DbSet<Address> Addresses { get; set; }     
