@@ -26,8 +26,6 @@ namespace SdProject.Filters
         {
             public SimpleMembershipInitializer()
             {
-                Database.SetInitializer<SdDb>(null);
-
                 try
                 {
                     using (var context = new SdDb())
@@ -39,7 +37,7 @@ namespace SdProject.Filters
                         }
                     }
 
-                    WebSecurity.InitializeDatabaseConnection("DevData.LeeSargent", "User", "UserId", "UserName", autoCreateTables: true);
+                    WebSecurity.InitializeDatabaseConnection("DevData.LeeSargent", "Users", "UserId", "UserName", autoCreateTables: true);
                 }
                 catch (Exception ex)
                 {

@@ -1,12 +1,35 @@
-﻿
+﻿namespace Logic {
+    public class Address : OwnedEntity {
+        public override int Id {
+            get;
+            set;
+        }
 
-namespace Logic {
-    public class Address {
-        public int Id { get; set; }
-        public string StreetAddress { get; set; }
-        public string StreetAddress2 { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
-        public string ZipCode { get; set; }
+        public virtual string StreetAddress {
+            get;
+            set;
+        }
+
+        public virtual string StreetAddress2 {
+            get;
+            set;
+        }
+
+        public virtual string City {
+            get;
+            set;
+        }
+
+        public virtual string State {
+            get;
+            set;
+        }
+
+        public virtual string ZipCode {
+            get;
+            set;
+        }
+
     }
 }
+

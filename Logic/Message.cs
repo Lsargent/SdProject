@@ -1,12 +1,19 @@
-﻿using System;
+﻿namespace Logic {
+    public class Message : OwnedEntity {
+        public override int Id {
+            get;
+            set;
+        }
 
+        public virtual string MessageBody {
+            get;
+            set;
+        }
 
-namespace Logic {
-    public class Message {
-        public int Id { get; set; }
-        public string MessageBody { get; set; }       
-        public DateTime Created { get; set; }
-        public DateTime LastModified { get; set; } 
-        public string LastModifiedBy { get; set; }     
+        public virtual string Subject {
+            get;
+            set;
+        }
     }
 }
+

@@ -1,36 +1,37 @@
 ﻿using System;
 
 namespace Logic {
-    public class House : BaseComponent {
-        public override int Id {
+    public class EntityChange {
+        public virtual string Editedby {
             get;
             set;
         }
 
-        public virtual string HeatingType {
+        public virtual DateTime EditedOn {
             get;
             set;
         }
 
-        public virtual int StoryCount {
+        public virtual int Id {
             get;
             set;
         }
 
-        public virtual int RoomCount {
+        public virtual Entity Entity {
             get;
             set;
         }
 
-        public virtual Double FloorSpace {
+        public virtual string IpAddress {
             get;
             set;
         }
 
-        public virtual Address Address {
+        public virtual string UserAgent {
             get;
             set;
         }
+
     }
 }
 

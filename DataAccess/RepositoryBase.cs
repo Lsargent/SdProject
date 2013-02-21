@@ -33,11 +33,11 @@ namespace DataAccess {
         } 
 
         public virtual void Add<TClass>(TClass itemToAdd) where TClass: class , new() {
-            _context.Set<TClass>().Add(itemToAdd);
+            Context.Set<TClass>().Add(itemToAdd);
         }
 
         public virtual void SaveChanges() {
-            _context.SaveChanges();
+            Context.SaveChanges();
         }
 
         public void Dispose()

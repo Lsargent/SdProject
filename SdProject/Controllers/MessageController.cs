@@ -24,7 +24,7 @@ namespace SdProject.Controllers
                     MessageBody = message.MessageBody,
                     Created = DateTime.Now,
                     LastModified = DateTime.Now,
-                    
+                    LastModifiedBy = "Test"                   
                 };
                 messageRepo.AddMessage(newMessage);
                 messageRepo.SaveMessages();
