@@ -37,7 +37,7 @@ namespace SdProject.Filters
                         }
                     }
 
-                    WebSecurity.InitializeDatabaseConnection("DevData.LeeSargent", "Users", "UserId", "UserName", autoCreateTables: true);
+                    WebSecurity.InitializeDatabaseConnection("DevData.LeeSargent", "Users", "Id", "UserName", autoCreateTables: true);
                 }
                 catch (Exception ex)
                 {

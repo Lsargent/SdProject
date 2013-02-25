@@ -52,6 +52,7 @@
     <Compile Include="Image.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="MessageThread.cs" />
+    <Compile Include="OperationStatus.cs" />
     <Compile Include="OwnedEntity.cs" />
     <Compile Include="OwnedEntityChange.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

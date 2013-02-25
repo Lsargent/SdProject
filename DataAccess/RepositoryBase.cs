@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
+using Logic;
 
 namespace DataAccess {
     public class RepositoryBase<TContextClass> : IDisposable 
@@ -30,14 +31,36 @@ namespace DataAccess {
         public virtual IEnumerable<TClass> GetAllOrderedBy<TClass, TKey>(Func<TClass, TKey> key, bool desc = false) where TClass : class, new() {
             var items = GetAll<TClass>();
             return (desc) ? items.OrderByDescending(key) : items.OrderBy(key);
-        } 
-
-        public virtual void Add<TClass>(TClass itemToAdd) where TClass: class , new() {
-            Context.Set<TClass>().Add(itemToAdd);
         }
 
-        public virtual void SaveChanges() {
-            Context.SaveChanges();
+        public virtual OperationStatus<TClass> Add<TClass>(TClass itemToAdd) where TClass : class , new() {
+            var opStatus = new OperationStatus<TClass> { WasSuccessful = true };
+            try {
+                opStatus.EffectedItems.Add(Context.Set<TClass>().Add(itemToAdd));
+                opStatus.WasSuccessful = SaveChanges() > 0;
+            }
+            catch (Exception e) {
+                opStatus.WasSuccessful = false;
+                opStatus.Exception = e;
+            }
+            return opStatus;
+        }
+
+        public virtual OperationStatus<TClass> Update<TClass>(TClass itemToUpdate) where TClass : class, new() {
+            var opStatus = new OperationStatus<TClass> { WasSuccessful = true };
+            try {
+                opStatus.EffectedItems.Add(Context.Set<TClass>().Attach(itemToUpdate));
+                opStatus.WasSuccessful = SaveChanges() > 0;
+            }
+            catch (Exception e) {
+                opStatus.WasSuccessful = false;
+                opStatus.Exception = e;
+            }
+            return opStatus;
+        }
+
+        public virtual int SaveChanges() {
+            return Context.SaveChanges();
         }
 
         public void Dispose()

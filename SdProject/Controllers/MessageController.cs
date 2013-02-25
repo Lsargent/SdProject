@@ -6,11 +6,14 @@ using System.Web.Mvc;
 using DataAccess;
 using Logic;
 using SdProject.Models.MessageModels;
+using WebMatrix.WebData;
 
 namespace SdProject.Controllers
 {
+    [Authorize]
     public class MessageController : Controller {
         private IMessageRepository messageRepo = new MessageRepository();
+        private IUserRepository userRepo = new UserRepository();
 
         [HttpGet]
         public ActionResult Create() {
@@ -20,21 +23,33 @@ namespace SdProject.Controllers
         [HttpPost]
         public ActionResult Create(CreateMessageModel message) {
             if (ModelState.IsValid) {
-                var newMessage = new Message() {
+                var user = userRepo.GetUser(WebSecurity.CurrentUserId);
+                var newMessage = new Message {
                     MessageBody = message.MessageBody,
-                    Created = DateTime.Now,
-                    LastModified = DateTime.Now,
-                    LastModifiedBy = "Test"                   
+                    Subject = message.Subject,
+                    History = new List<OwnedEntityChange>(),
+                    Owners = new List<User> { user }
                 };
-                messageRepo.AddMessage(newMessage);
-                messageRepo.SaveMessages();
+                var opStatus = messageRepo.AddMessage(newMessage);
+                if (opStatus.WasSuccessful) {
+                    newMessage = opStatus.EffectedItems.First();
+                    newMessage.History.Add(new OwnedEntityChange {
+                        Editedby = user,
+                        EditedOn = DateTime.Now,
+                        IpAddress = HttpContext.Request.UserHostAddress,
+                        UserAgent = HttpContext.Request.UserAgent,
+                        OwnedEntity = newMessage,
+                        Entity = newMessage,
+                    });
+                    messageRepo.UpdateMessage(newMessage);
+                }
             }
             return RedirectToAction("Listing");
         }
 
         public ActionResult Listing() {
-            var messages = messageRepo.Messages.Select(message => new MessageModel() {Message = message}).ToList();
-            var model = new MessageListingModel() {Messages = messages};
+            var messages = messageRepo.Messages.Select(message => new MessageModel {Message = message} ).ToList();
+            var model = new MessageListingModel {Messages = messages};
             return View(model);
         }
 

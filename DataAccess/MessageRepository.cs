@@ -25,12 +25,12 @@ namespace DataAccess {
             return GetAllOrderedBy(orderByPredicate);
         }
 
-        public void AddMessage(Message message) {
-            Add(message);
+        public OperationStatus<Message> AddMessage(Message message) {
+            return Add(message);
         }
 
-        public void SaveMessages() {
-            SaveChanges();
+        public OperationStatus<Message> UpdateMessage(Message message) {
+            return Update(message);
         }
     }
 }
