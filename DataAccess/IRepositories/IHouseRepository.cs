@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Logic;
 
-namespace DataAccess {
+namespace DataAccess.IRepositories {
     public interface IHouseRepository : IBaseRepository {
         House GetHouse(int houseId);
-        IEnumerable<House> Houses { get; }
+        IQueryable<House> Houses { get; }
     }
 }

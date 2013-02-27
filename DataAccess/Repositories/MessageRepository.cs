@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+using DataAccess.IRepositories;
 using Logic;
 
-namespace DataAccess {
+namespace DataAccess.Repositories {
     public class MessageRepository : RepositoryBase<SdDb>, IMessageRepository {
         public Message GetMessage(int id) {
             return GetMessage(message => message.Id == id);
@@ -16,12 +14,12 @@ namespace DataAccess {
             return Get(wherePredicate);
         }
 
-        private IEnumerable<Message> _messages;
-        public IEnumerable<Message> Messages {
+        private IQueryable<Message> _messages;
+        public IQueryable<Message> Messages {
             get { return _messages ?? (_messages = GetAll<Message>()); }
         }
 
-        public IEnumerable<Message> GetMessages<TKey>(Func<Message, TKey> orderByPredicate) {
+        public IQueryable<Message> GetMessages<TKey>(Expression<Func<Message, TKey>> orderByPredicate) {
             return GetAllOrderedBy(orderByPredicate);
         }
 

@@ -1,17 +1,36 @@
 ﻿using System;
+using System.Net;
+using System.Web;
 
 namespace Logic {
     public class EntityChange {
-        public virtual int Id { get; set; }
+        public EntityChange() {}
 
-        public virtual string Editedby { get; set; }
+        public EntityChange(EntityChangeParams changeParams) {
+            Editedby = changeParams.Request.UserHostName;
+            IpAddress = changeParams.Request.UserHostAddress;
+            UserAgent = changeParams.Request.UserAgent;
+            EditedOn = DateTime.Now;
+        }
 
-        public virtual string IpAddress { get; set; }
+        public int Id { get; set; }
 
-        public virtual string UserAgent { get; set; }
+        public string Editedby { get; set; }
 
-        public virtual DateTime EditedOn { get; set; }
+        public string IpAddress { get; set; }
+
+        public string UserAgent { get; set; }
+
+        public DateTime EditedOn { get; set; }
 
         public virtual Entity Entity { get; set; }
+    }
+
+    public class EntityChangeParams {
+        public EntityChangeParams(HttpRequestBase request) {
+            Request = request;
+        }
+
+        public HttpRequestBase Request { get; set; }
     }
 }

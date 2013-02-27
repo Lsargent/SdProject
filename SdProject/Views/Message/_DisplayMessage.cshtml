@@ -6,10 +6,13 @@
     <div> Id: @message.Id </div>
     <div>
         <div> Author: AuthorName </div>
-        <div> Created: @message.Created </div>
-        <div>Last Modified: @message.LastModified </div>
+        @*<div> Created: @message.OEntity.History.First().EditedOn </div>
+        <div>Last Modified: @message.OEntity.History.Last().EditedOn</div>*@
     </div>
     <div>
-        @message.MessageBody;
+        @message.Subject
+    </div>
+    <div>
+        @message.MessageBody
     </div>
 </div>

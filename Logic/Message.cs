@@ -1,7 +1,19 @@
 ﻿namespace Logic {
-    public class Message : OwnedEntity {
-        public virtual string MessageBody { get; set; }
+    public class Message {
+        public Message() {}
 
-        public virtual string Subject { get; set; }
+        public Message(string subject, string messageBody, OwnedEntityParams oEParams) {
+            Subject = subject;
+            MessageBody = messageBody;
+            OEntity = new OwnedEntity(oEParams);
+        }
+
+        public int Id { get; set; }
+
+        public string MessageBody { get; set; }
+
+        public string Subject { get; set; }
+
+        public virtual OwnedEntity OEntity { get; set; }
     }
 }

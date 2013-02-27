@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using Logic;
 
-namespace DataAccess {
+namespace DataAccess.Repositories {
     public class RepositoryBase<TContextClass> : IDisposable 
         where TContextClass : DbContext, new() {
 
@@ -24,13 +23,13 @@ namespace DataAccess {
             throw new ApplicationException("a predicate value must be passed.");          
         }
 
-        public virtual IEnumerable<TClass> GetAll<TClass>() where TClass : class, new() {
+        public virtual IQueryable<TClass> GetAll<TClass>() where TClass : class, new() {
             return Context.Set<TClass>();
         }
 
-        public virtual IEnumerable<TClass> GetAllOrderedBy<TClass, TKey>(Func<TClass, TKey> key, bool desc = false) where TClass : class, new() {
+        public virtual IQueryable<TClass> GetAllOrderedBy<TClass, TKey>(Expression<Func<TClass, TKey>> key, bool desc = false) where TClass : class, new() {
             var items = GetAll<TClass>();
-            return (desc) ? items.OrderByDescending(key) : items.OrderBy(key);
+            return (desc) ? items.OrderByDescending(key): items.OrderBy(key);
         }
 
         public virtual OperationStatus<TClass> Add<TClass>(TClass itemToAdd) where TClass : class , new() {

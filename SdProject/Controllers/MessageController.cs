@@ -4,51 +4,45 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DataAccess;
+using DataAccess.IRepositories;
+using DataAccess.Repositories;
 using Logic;
+using SdProject.Filters;
 using SdProject.Models.MessageModels;
 using WebMatrix.WebData;
 
 namespace SdProject.Controllers
 {
     [Authorize]
+    [InitializeSimpleMembership]
     public class MessageController : Controller {
-        private IMessageRepository messageRepo = new MessageRepository();
-        private IUserRepository userRepo = new UserRepository();
 
         [HttpGet]
-        public ActionResult Create() {
-            return View();
+        public PartialViewResult Create() {
+            return PartialView("_Create");
         }
 
         [HttpPost]
         public ActionResult Create(CreateMessageModel message) {
             if (ModelState.IsValid) {
-                var user = userRepo.GetUser(WebSecurity.CurrentUserId);
-                var newMessage = new Message {
-                    MessageBody = message.MessageBody,
-                    Subject = message.Subject,
-                    History = new List<OwnedEntityChange>(),
-                    Owners = new List<User> { user }
-                };
-                var opStatus = messageRepo.AddMessage(newMessage);
-                if (opStatus.WasSuccessful) {
-                    newMessage = opStatus.EffectedItems.First();
-                    newMessage.History.Add(new OwnedEntityChange {
-                        Editedby = user,
-                        EditedOn = DateTime.Now,
-                        IpAddress = HttpContext.Request.UserHostAddress,
-                        UserAgent = HttpContext.Request.UserAgent,
-                        OwnedEntity = newMessage,
-                        Entity = newMessage,
-                    });
-                    messageRepo.UpdateMessage(newMessage);
+                User user;
+                using (var userRepo = new UserRepository()) {
+                     user = userRepo.GetUser(WebSecurity.CurrentUserId);
+                }
+
+                var newMessage = new Message(message.Subject,message.MessageBody, new OwnedEntityParams(Request, user));
+                using (var messageRepo = new MessageRepository()) {
+                    messageRepo.AddMessage(newMessage);
                 }
             }
             return RedirectToAction("Listing");
         }
 
         public ActionResult Listing() {
-            var messages = messageRepo.Messages.Select(message => new MessageModel {Message = message} ).ToList();
+            List<MessageModel> messages;
+            using (var messageRepo = new MessageRepository()) {
+                messages = messageRepo.Messages.Select(message => new MessageModel {Message = message}).ToList();
+            }
             var model = new MessageListingModel {Messages = messages};
             return View(model);
         }
