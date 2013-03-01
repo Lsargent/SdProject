@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace Logic {
-    public class OwnedEntity {
+    public class OwnedEntity : IObjectState {
         public OwnedEntity(){}
 
         public OwnedEntity(OwnedEntityParams oEParams) {
@@ -17,6 +18,9 @@ namespace Logic {
         public virtual ViewPolicy ViewPolicy { get; set; }
 
         public virtual List<OwnedEntityChange> OwnedHistory { get; set; }
+
+        [NotMapped]
+        public ObjectState ObjectState { get; set; }
     }
 
     public class OwnedEntityParams {

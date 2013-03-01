@@ -1,7 +1,8 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Logic {
-    public class House {
+    public class House : IObjectState {
         public int Id { get; set; }
 
         public string HeatingType { get; set; }
@@ -15,5 +16,8 @@ namespace Logic {
         public virtual Address Address { get; set; }
 
         public virtual BaseComponent Base { get; set; }
+
+        [NotMapped]
+        public ObjectState ObjectState { get; set; }
     }
 }

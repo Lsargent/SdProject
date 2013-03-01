@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using Logic;
+using Logic.Helpers;
 
 namespace DataAccess.Repositories {
     public class RepositoryBase<TContextClass> : IDisposable 
@@ -55,10 +56,11 @@ namespace DataAccess.Repositories {
             return opStatus;
         }
 
-        public virtual OperationStatus<TClass> Update<TClass>(TClass itemToUpdate) where TClass : class, new() {
+        public virtual OperationStatus<TClass> InsertOrUpdate<TClass>(TClass itemToUpdate) where TClass : class, new() {
             var opStatus = new OperationStatus<TClass> { WasSuccessful = true };
             try {
-                opStatus.EffectedItems.Add(Context.Set<TClass>().Attach(itemToUpdate));
+                opStatus.EffectedItems.Add(Context.Set<TClass>().Add(itemToUpdate));
+                Context.ApplyStateChanges();
                 opStatus.WasSuccessful = SaveChanges() > 0;
             }
             catch (Exception e) {

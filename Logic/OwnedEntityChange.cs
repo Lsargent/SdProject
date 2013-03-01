@@ -1,8 +1,9 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Web;
 
 namespace Logic {
-    public class OwnedEntityChange {
+    public class OwnedEntityChange : IObjectState {
         public OwnedEntityChange() {
         }
 
@@ -24,6 +25,9 @@ namespace Logic {
         public virtual User EditedbyUser { get; set; }
 
         public virtual OwnedEntity OwnedEntity { get; set; }
+
+        [NotMapped]
+        public ObjectState ObjectState { get; set; }
     }
 
     public class OwnedEntityChangeParams {

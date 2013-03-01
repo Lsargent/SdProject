@@ -1,5 +1,7 @@
-﻿namespace Logic {
-    public class Message {
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Logic {
+    public class Message : IObjectState {
         public Message() {}
 
         public Message(string subject, string messageBody, OwnedEntityParams oEParams) {
@@ -15,5 +17,8 @@
         public string Subject { get; set; }
 
         public virtual OwnedEntity OwnedEntity { get; set; }
+
+        [NotMapped]
+        public ObjectState ObjectState { get; set; }
     }
 }

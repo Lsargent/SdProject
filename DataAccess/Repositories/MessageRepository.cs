@@ -16,7 +16,7 @@ namespace DataAccess.Repositories {
 
         private IQueryable<Message> _messages;
         public IQueryable<Message> Messages {
-            get { return _messages ?? (_messages = GetAllWithIncludes<Message>(message => message.OwnedEntity.OwnedHistory)); }
+            get { return _messages ?? (_messages = GetAll<Message>()); }
         }
 
         public IQueryable<Message> GetMessages<TKey>(Expression<Func<Message, TKey>> orderByPredicate) {
@@ -28,7 +28,7 @@ namespace DataAccess.Repositories {
         }
 
         public OperationStatus<Message> UpdateMessage(Message message) {
-            return Update(message);
+            return InsertOrUpdate(message);
         }
     }
 }

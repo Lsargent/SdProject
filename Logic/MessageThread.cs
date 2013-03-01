@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Logic {
-    public class MessageThread {
+    public class MessageThread : IObjectState {
         public int Id { get; set; }
 
         public string Subject { get; set; }
@@ -11,5 +12,8 @@ namespace Logic {
         public virtual User Author { get; set; }
 
         public virtual OwnedEntity OEntity { get; set; }
+
+        [NotMapped]
+        public ObjectState ObjectState { get; set; }
     }
 }

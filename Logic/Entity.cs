@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace Logic {
-    public class Entity {
+    public class Entity : IObjectState{
         public Entity() {}
 
         public Entity(EntityParams eParams) {
@@ -16,7 +17,10 @@ namespace Logic {
 
         public virtual EntityChange Created { get; set; }
 
-        public virtual List<EntityChange> History { get; set; }     
+        public virtual List<EntityChange> History { get; set; }
+
+        [NotMapped]
+        public ObjectState ObjectState { get; set; }
     }
 
     public class EntityParams {

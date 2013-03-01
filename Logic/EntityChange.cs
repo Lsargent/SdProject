@@ -1,9 +1,10 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Net;
 using System.Web;
 
 namespace Logic {
-    public class EntityChange {
+    public class EntityChange : IObjectState {
         public EntityChange() {}
 
         public EntityChange(EntityChangeParams changeParams) {
@@ -24,6 +25,9 @@ namespace Logic {
         public DateTime EditedOn { get; set; }
 
         public virtual Entity Entity { get; set; }
+
+        [NotMapped]
+        public ObjectState ObjectState { get; set; }
     }
 
     public class EntityChangeParams {
