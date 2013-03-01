@@ -171,6 +171,7 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\HouseDisplayModel.cs" />
+    <Compile Include="Models\MessageModels\CreateMessageModel.cs" />
     <Compile Include="Models\MessageModels\MessageListingModel.cs" />
     <Compile Include="Models\MessageModels\MessageModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -289,7 +290,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Message\_DisplayMessage.cshtml" />
-    <Content Include="Views\Message\MessageListing.cshtml" />
+    <Content Include="Views\Message\Listing.cshtml" />
+    <Content Include="Views\Message\_Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -321,9 +323,9 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>52983</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:1088/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
