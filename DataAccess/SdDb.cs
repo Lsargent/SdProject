@@ -4,7 +4,7 @@ using System.Data.Entity;
 namespace DataAccess
 {
     public class SdDb : DbContext 
-    {
+    {       
         public SdDb() : base("name = " + AppConfig.GetActiveConnectionString()) {
         }
 

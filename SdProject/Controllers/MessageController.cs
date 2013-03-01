@@ -41,7 +41,8 @@ namespace SdProject.Controllers
         public ActionResult Listing() {
             List<MessageModel> messages;
             using (var messageRepo = new MessageRepository()) {
-                messages = messageRepo.Messages.Select(message => new MessageModel {Message = message}).ToList();
+                messages = messageRepo.Messages.ToList().Select(message => new MessageModel(message)).ToList();
+                ViewBag.Date = messageRepo.Messages.FirstOrDefault().OwnedEntity.OwnedHistory.FirstOrDefault().EditedOn;
             }
             var model = new MessageListingModel {Messages = messages};
             return View(model);

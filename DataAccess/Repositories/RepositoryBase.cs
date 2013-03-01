@@ -23,8 +23,18 @@ namespace DataAccess.Repositories {
             throw new ApplicationException("a predicate value must be passed.");          
         }
 
+        
+
         public virtual IQueryable<TClass> GetAll<TClass>() where TClass : class, new() {
             return Context.Set<TClass>();
+        }
+
+        public virtual IQueryable<TClass> GetAllWithIncludes<TClass>(params Expression<Func<TClass, object>>[] includes) where TClass : class, new() {
+            IQueryable<TClass> query = Context.Set<TClass>();
+            foreach (var include in includes) {
+                query.Include(include);
+            }
+            return query;
         }
 
         public virtual IQueryable<TClass> GetAllOrderedBy<TClass, TKey>(Expression<Func<TClass, TKey>> key, bool desc = false) where TClass : class, new() {
