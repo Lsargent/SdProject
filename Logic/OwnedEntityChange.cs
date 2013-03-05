@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Web;
 
@@ -7,37 +8,32 @@ namespace Logic {
         public OwnedEntityChange() {
         }
 
-        public OwnedEntityChange(OwnedEntityChangeParams changeParams) {
-            IpAddress = changeParams.Request.UserHostAddress;
-            UserAgent = changeParams.Request.UserAgent;
+        public OwnedEntityChange(HttpRequestBase request, User user) {
+            IpAddress = request.UserHostAddress;
+            UserAgent = request.UserAgent;
             EditedOn = DateTime.Now;
-            EditedbyUser = changeParams.User;
+            EditedbyUser = user;
+            ObjectState = ObjectState.Added;
         }
 
         public int Id { get; set; }
 
+        [Required]
         public string IpAddress { get; set; }
 
+        [Required]
         public string UserAgent { get; set; }
 
+        [Required]
         public DateTime EditedOn { get; set; }
 
+        [Required]
         public virtual User EditedbyUser { get; set; }
 
+        [Required]
         public virtual OwnedEntity OwnedEntity { get; set; }
 
         [NotMapped]
         public ObjectState ObjectState { get; set; }
-    }
-
-    public class OwnedEntityChangeParams {
-        public OwnedEntityChangeParams(HttpRequestBase request, User user) {
-            Request = request;
-            User = user;
-        }
-
-        public HttpRequestBase Request { get; set; }
-
-        public User User { get; set; }
     }
 }

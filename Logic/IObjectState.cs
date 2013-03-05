@@ -2,9 +2,9 @@
     public interface IObjectState {
         ObjectState ObjectState { get; set; }
     }
-    public enum ObjectState {
-        Added,
+    public enum ObjectState {       
         Unchanged,
+        Added,
         Modified,
         Deleted
     }

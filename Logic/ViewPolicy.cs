@@ -2,6 +2,14 @@
 
 namespace Logic {
     public class ViewPolicy : IObjectState {
+        public ViewPolicy() {}
+
+        public ViewPolicy(string policy, Entity entity) {
+            Policy = policy;
+            Entity = entity;
+            ObjectState = ObjectState.Added;
+        }
+
         public int Id { get; set; }
 
         public string Policy { get; set; }
