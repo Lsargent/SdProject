@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using DataAccess;
 using WebMatrix.WebData;
 using SdProject.Models;
+using Logic;
 
 namespace SdProject.Filters
 {
@@ -37,7 +38,7 @@ namespace SdProject.Filters
                         }
                     }
 
-                    WebSecurity.InitializeDatabaseConnection("DevData.LeeSargent", "Users", "Id", "UserName", autoCreateTables: true);
+                    WebSecurity.InitializeDatabaseConnection(AppConfig.GetActiveConnectionString(), "Users", "Id", "UserName", autoCreateTables: true);
                 }
                 catch (Exception ex)
                 {
