@@ -30,9 +30,11 @@ namespace SdProject.Controllers
                      user = userRepo.GetUser(WebSecurity.CurrentUserId);
                 }
 
-                var newMessage = new Message(message.Subject,message.MessageBody, new OwnedEntityParams(Request, user));
+                var newMessage = new Message(message.Subject,message.MessageBody, 
+                                    new OwnedEntity(user, 
+                                        new OwnedEntityChange(Request, user)));
                 using (var messageRepo = new MessageRepository()) {
-                    messageRepo.AddMessage(newMessage);
+                    messageRepo.InsertOrUpdate(newMessage);
                 }
             }
             return RedirectToAction("Listing");
@@ -42,7 +44,6 @@ namespace SdProject.Controllers
             List<MessageModel> messages;
             using (var messageRepo = new MessageRepository()) {
                 messages = messageRepo.Messages.ToList().Select(message => new MessageModel(message)).ToList();
-                ViewBag.Date = messageRepo.Messages.FirstOrDefault().OwnedEntity.OwnedHistory.FirstOrDefault().EditedOn;
             }
             var model = new MessageListingModel {Messages = messages};
             return View(model);
