@@ -1,4 +1,5 @@
-﻿using Logic;
+﻿using System.Data.Entity.ModelConfiguration.Conventions;
+using Logic;
 using System.Data.Entity;
 
 namespace DataAccess
@@ -21,6 +22,10 @@ namespace DataAccess
         public DbSet<OwnedEntity> OwnedEntities { get; set; }
         public DbSet<OwnedEntityChange> OwnedEntityChanges { get; set; } 
         public DbSet<User> Users { get; set; }
-        public DbSet<ViewPolicy> ViewPolicies { get; set; } 
+        public DbSet<ViewPolicy> ViewPolicies { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder) {
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+        }
     }
 }
