@@ -14,9 +14,8 @@ namespace DataAccess.Repositories {
             return Get(wherePredicate);
         }
 
-        private IQueryable<Message> _messages;
         public IQueryable<Message> Messages {
-            get { return _messages ?? (_messages = GetAll<Message>()); }
+            get { return GetAll<Message>()); }
         }
 
         public IQueryable<Message> GetMessages<TKey>(Expression<Func<Message, TKey>> orderByPredicate) {
