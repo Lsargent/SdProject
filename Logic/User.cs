@@ -17,6 +17,9 @@ namespace Logic {
 
         public string UserName { get; set; }
 
+        [EmailAddress]
+        public string Email { get; set; }
+
         public virtual List<House> Houses { get; set; }
 
         public virtual Address PrimaryAddress { get; set; }
