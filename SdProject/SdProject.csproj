@@ -239,6 +239,10 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
+    <Content Include="Scripts\jquery.imgareaselect.js" />
+    <Content Include="Scripts\jquery.imgareaselect.min.js" />
+    <Content Include="Scripts\jquery.imgareaselect.pack.js" />
+    <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -292,8 +296,9 @@
     <Content Include="Views\Message\_DisplayMessage.cshtml" />
     <Content Include="Views\Message\Listing.cshtml" />
     <Content Include="Views\Message\_Create.cshtml" />
-    <Content Include="Views\Account\EnterInfo.cshtml" />
+    <Content Include="Views\House\EnterInfo.cshtml" />
     <Content Include="Views\Account\PageView.cshtml" />
+    <Content Include="Views\Account\UploadImage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -5,6 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Globalization;
 using System.Web.Security;
+using System.Web.Http;
+using System.Web;
 
 namespace SdProject.Models
 {
@@ -113,4 +115,35 @@ namespace SdProject.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
+
+    public class UploadImageModel
+    {
+        [Display(Name = "Internet URL")]
+        public string Url { get; set; }
+
+        public bool IsUrl { get; set; }
+
+        [Display(Name = "Flickr image")]
+        public string Flickr { get; set; }
+
+        public bool IsFlickr { get; set; }
+
+        [Display(Name = "Local file")]
+        public HttpPostedFileBase File { get; set; }
+
+        public bool IsFile { get; set; }
+
+        [Range(0, int.MaxValue)]
+        public int X { get; set; }
+
+        [Range(0, int.MaxValue)]
+        public int Y { get; set; }
+
+        [Range(1, int.MaxValue)]
+        public int Width { get; set; }
+
+        [Range(1, int.MaxValue)]
+        public int Height { get; set; }
+    }
+
 }
