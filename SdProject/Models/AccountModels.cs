@@ -78,72 +78,8 @@ namespace SdProject.Models
         public string ProviderUserId { get; set; }
     }
 
-    public class EnterInfo
-    {
-        [Display(Name = "Street Address")]
-        public string StreetAddress { get; set; }
+    
 
-        [Display(Name = "City")]
-        public string City { get; set; }
 
-        [Display(Name = "Zip Code")]
-        public int ZipCode { get; set; }
-
-        [Required]
-        [Display(Name = "House Style")]
-        public string Style { get; set; }
-
-        [Required]
-        [Display(Name = "Square Footage")]
-        public int SquareFeet { get; set; }
-
-        [Required]
-        [Display(Name = "Number of Bedrooms")]
-        public int Bedrooms { get; set; }
-
-        [Required]
-        [Display(Name = "Number of Bathrooms")]
-        public int Bathrooms { get; set; }
-
-        [Required]
-        [DataType(DataType.MultilineText)]
-        [Display(Name = "Description/Extras")]
-        public string Extras { get; set; }
-
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
-    }
-
-    public class UploadImageModel
-    {
-        [Display(Name = "Internet URL")]
-        public string Url { get; set; }
-
-        public bool IsUrl { get; set; }
-
-        [Display(Name = "Flickr image")]
-        public string Flickr { get; set; }
-
-        public bool IsFlickr { get; set; }
-
-        [Display(Name = "Local file")]
-        public HttpPostedFileBase File { get; set; }
-
-        public bool IsFile { get; set; }
-
-        [Range(0, int.MaxValue)]
-        public int X { get; set; }
-
-        [Range(0, int.MaxValue)]
-        public int Y { get; set; }
-
-        [Range(1, int.MaxValue)]
-        public int Width { get; set; }
-
-        [Range(1, int.MaxValue)]
-        public int Height { get; set; }
-    }
 
 }
