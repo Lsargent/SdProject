@@ -8,7 +8,6 @@ using SdProject.Filters;
 
 namespace SdProject.Controllers
 {
-    [InitializeSimpleMembership]
     public class HomeController : Controller
     {
         public ActionResult Index()
