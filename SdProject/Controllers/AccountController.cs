@@ -16,7 +16,6 @@ using SdProject.Models;
 namespace SdProject.Controllers
 {
     [Authorize]
-    [InitializeSimpleMembership]
     public class AccountController : Controller
     {
         //
