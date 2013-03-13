@@ -11,6 +11,8 @@ using Logic;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using SdProject.Filters;
+using SdProject.Models.AccountModels;
+using DataAccess.Repositories;
 using SdProject.Models;
 using System.Drawing;
 using System.Net;
@@ -21,7 +23,6 @@ using System.Linq.Expressions;
 namespace SdProject.Controllers
 {
     [Authorize]
-    [InitializeSimpleMembership]
     public class AccountController : Controller
     {
         //
@@ -86,7 +87,11 @@ namespace SdProject.Controllers
                 // Attempt to register the user
                 try
                 {
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
+                    var user = new User(model.UserName, new Entity(new EntityChange(Request)));
+                    using (var repo = new UserRepository()) {
+                        repo.Add(user);
+                    }
+                    WebSecurity.CreateAccount(model.UserName, model.Password);
                     WebSecurity.Login(model.UserName, model.Password);
                     return RedirectToAction("EnterInfo");
                 }
@@ -149,7 +154,7 @@ namespace SdProject.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Manage(LocalPasswordModel model)
+        public ActionResult Manage(ManageAccountInfoModel model)
         {
             bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             ViewBag.HasLocalPassword = hasLocalAccount;

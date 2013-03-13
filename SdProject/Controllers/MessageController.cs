@@ -14,7 +14,6 @@ using WebMatrix.WebData;
 namespace SdProject.Controllers
 {
     [Authorize]
-    [InitializeSimpleMembership]
     public class MessageController : Controller {
 
         [HttpGet]
