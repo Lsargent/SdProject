@@ -86,9 +86,9 @@ namespace SdProject.Controllers
                 // Attempt to register the user
                 try
                 {
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
+                    WebSecurity.CreateUserAndAccount(model.email, model.UserName, model.Password);
                     WebSecurity.Login(model.UserName, model.Password);
-                    return RedirectToAction("EnterInfo");
+                    return RedirectToAction("PageView", "Account");
                 }
                 catch (MembershipCreateUserException e)
                 {
@@ -340,6 +340,10 @@ namespace SdProject.Controllers
         public ActionResult PageView()
         {
             return View();
+            //if (ModelState.IsValid)
+            //{
+            //    return RedirectToAction("EnterInfo", "House");
+            //}
         }
 
         public ActionResult UploadImage()

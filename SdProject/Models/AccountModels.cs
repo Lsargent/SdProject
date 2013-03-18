@@ -56,6 +56,11 @@ namespace SdProject.Models
     public class RegisterModel
     {
         [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string email { get; set; }
+
+        [Required]
         [Display(Name = "User name")]
         public string UserName { get; set; }
 
