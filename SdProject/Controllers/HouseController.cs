@@ -13,7 +13,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SdProject.Controllers
 {
     [Authorize]
-    [InitializeSimpleMembership]
     public class HouseController : Controller
     {
         //
