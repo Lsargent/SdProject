@@ -8,7 +8,7 @@ using System.Web.Security;
 using System.Web.Http;
 using System.Web;
 
-namespace SdProject.Models
+namespace SdProject.Models.AccountModels
 {
     public class RegisterExternalLoginModel
     {
@@ -19,7 +19,7 @@ namespace SdProject.Models
         public string ExternalLoginData { get; set; }
     }
 
-    public class LocalPasswordModel
+    public class ManageAccountInfoModel
     {
         [Required]
         [DataType(DataType.Password)]
