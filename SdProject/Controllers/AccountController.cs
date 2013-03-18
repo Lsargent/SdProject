@@ -23,7 +23,6 @@ using System.Linq.Expressions;
 namespace SdProject.Controllers
 {
     [Authorize]
-    [InitializeSimpleMembership]
     public class AccountController : Controller
     {
         //
