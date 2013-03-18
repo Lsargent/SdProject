@@ -30,8 +30,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\SdProject\bin\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,9 +47,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Address.cs" />
+    <Compile Include="AppConfig.cs" />
+    <Compile Include="BaseComponent.cs" />
+    <Compile Include="Entity.cs" />
+    <Compile Include="EntityChange.cs" />
+    <Compile Include="Friend.cs" />
+    <Compile Include="FriendStatus.cs" />
+    <Compile Include="Helpers\ContextHelper.cs" />
+    <Compile Include="Helpers\ObjectStateHelper.cs" />
     <Compile Include="House.cs" />
+    <Compile Include="Image.cs" />
+    <Compile Include="IObjectState.cs" />
     <Compile Include="Message.cs" />
+    <Compile Include="MessageThread.cs" />
+    <Compile Include="OperationStatus.cs" />
+    <Compile Include="OwnedEntity.cs" />
+    <Compile Include="OwnedEntityChange.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="ViewPolicy.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

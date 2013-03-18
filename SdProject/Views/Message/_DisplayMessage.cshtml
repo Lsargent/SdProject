@@ -1,15 +1,30 @@
 ﻿@model SdProject.Models.MessageModels.MessageModel
 
-@{ var message = Model.Message; }
+
 
 <div>
-    <div> Id: @message.Id </div>
     <div>
-        <div> Author: AuthorName </div>
-        <div> Created: @message.Created </div>
-        <div>Last Modified: @message.LastModified </div>
+        <div>
+            <div> Author: @Model.Author</div>         
+        </div> 
+        <div>
+            <div>
+                <div> @Model.Subject </div>
+                <div> Created: @Model.Created</div>
+            </div>
+            <div>
+                @Model.MessageBody
+            </div>
+            <div>
+                @if(@Model.LastModified != @Model.Created) {
+                    <div>LastModified: @Model.LastModified</div>
+                }
+                @if(@Model.LastModifiedBy != @Model.Author) {
+                    <div>Last Modified By: @Model.LastModifiedBy</div>
+                }
+            </div>
+        </div>   
+        
     </div>
-    <div>
-        @message.MessageText;
-    </div>
+    
 </div>
