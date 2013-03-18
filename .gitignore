@@ -29,3 +29,5 @@ _ReSharper*/
 $tf*/
 SdProject/SdProject/App_Data/*.mdf
 SdProject/SdProject/App_Data/*.ldf
+SdProject/App_Data/*.mdf
+SdProject/App_Data/*.ldf
