@@ -39,6 +39,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ImageResizer">
+      <HintPath>..\packages\ImageResizer.3.3.3\lib\ImageResizer.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Mvc">
+      <HintPath>..\packages\ImageResizer.Mvc.3.3.3\lib\ImageResizer.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -169,7 +175,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\AccountModels\AccountModels.cs" />
+    <Compile Include="Models\AccountModels\DisplayAccountInfoModel.cs" />
     <Compile Include="Models\HouseDisplayModel.cs" />
     <Compile Include="Models\MessageModels\CreateMessageModel.cs" />
     <Compile Include="Models\MessageModels\MessageListingModel.cs" />
@@ -239,6 +246,10 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
+    <Content Include="Scripts\jquery.imgareaselect.js" />
+    <Content Include="Scripts\jquery.imgareaselect.min.js" />
+    <Content Include="Scripts\jquery.imgareaselect.pack.js" />
+    <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -256,6 +267,7 @@
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\_references.js" />
@@ -292,8 +304,11 @@
     <Content Include="Views\Message\_DisplayMessage.cshtml" />
     <Content Include="Views\Message\Listing.cshtml" />
     <Content Include="Views\Message\_Create.cshtml" />
-    <Content Include="Views\Account\EnterInfo.cshtml" />
+    <Content Include="Views\House\EnterInfo.cshtml" />
     <Content Include="Views\Account\PageView.cshtml" />
+    <Content Include="Views\Account\_DisplayAccountInfo.cshtml" />
+    <Content Include="Views\Account\UploadImage.cshtml" />
+    <Content Include="Views\House\UploadImage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

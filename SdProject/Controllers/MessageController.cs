@@ -14,7 +14,6 @@ using WebMatrix.WebData;
 namespace SdProject.Controllers
 {
     [Authorize]
-    [InitializeSimpleMembership]
     public class MessageController : Controller {
 
         [HttpGet]
@@ -30,7 +29,7 @@ namespace SdProject.Controllers
                      user = userRepo.GetUser(WebSecurity.CurrentUserId);
                 }
 
-                var newMessage = new Message(message.Subject,message.MessageBody, 
+                var newMessage = new Message(message.Subject,message.MessageBody,
                                     new OwnedEntity(user, 
                                         new OwnedEntityChange(Request, user)));
                 using (var messageRepo = new MessageRepository()) {
