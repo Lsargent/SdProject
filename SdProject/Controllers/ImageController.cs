@@ -8,7 +8,7 @@ namespace SdProject.Controllers
 {
     public class ImageController : Controller
     {
-        public ActionResult ImageUpload()
+        public ActionResult UploadImage()
         {
             return View();
         }
