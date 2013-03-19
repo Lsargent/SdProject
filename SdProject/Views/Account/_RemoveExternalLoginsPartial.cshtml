@@ -5,7 +5,7 @@
     <h3>Registered external logins</h3>
     <table>
         <tbody>
-        @foreach (SdProject.Models.ExternalLogin externalLogin in Model)
+        @foreach (SdProject.Models.AccountModels.ExternalLogin externalLogin in Model)
         {
             <tr>
                 <td>@externalLogin.ProviderDisplayName</td>
