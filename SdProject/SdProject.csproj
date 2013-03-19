@@ -177,7 +177,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels\AccountModels.cs" />
-    <Compile Include="Models\AccountModels\DisplayAccountInfoModel.cs" />
+    <Compile Include="Models\AccountModels\DisplayAccountModel.cs" />
     <Compile Include="Models\HouseDisplayModel.cs" />
     <Compile Include="Models\ImageModel\UploadImage.cs" />
     <Compile Include="Models\MessageModels\CreateMessageModel.cs" />
@@ -312,6 +312,7 @@
     <Content Include="Views\Account\_DisplayAccountInfo.cshtml" />
     <Content Include="Views\Image\UploadImage.cshtml" />
     <Content Include="Views\Account\UploadImage.cshtml" />
+    <Content Include="Views\House\UploadImage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

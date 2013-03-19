@@ -352,7 +352,7 @@ namespace SdProject.Controllers
             {
                 user = userrepo.GetUser(WebSecurity.CurrentUserId);
             }
-            return View(new DisplayAccountInfoModel() { User = user });
+            return View(new DisplayAccountModel() { User = user });
         }
 
         #region Helpers
