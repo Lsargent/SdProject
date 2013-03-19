@@ -17,7 +17,7 @@ namespace SdProject.Controllers
     public class MessageController : Controller {
 
         [HttpGet]
-        public PartialViewResult Create() {
+        public ActionResult Create() {
             return PartialView("_Create");
         }
 
