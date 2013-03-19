@@ -3,10 +3,11 @@ using System.Linq;
 using Logic;
 
 namespace SdProject.Models.MessageModels {
-    public class MessageModel 
+    public class DisplayMessageModel 
     {
-        public MessageModel(Message message) 
+        public DisplayMessageModel(Message message) 
         {
+            MessageId = message.Id;
             Author = message.OwnedEntity.OwnedHistory.First().EditedbyUser.UserName;
             Subject = message.Subject;
             MessageBody = message.MessageBody;
@@ -14,6 +15,7 @@ namespace SdProject.Models.MessageModels {
             LastModified = message.OwnedEntity.OwnedHistory.Last().EditedOn;
             LastModifiedBy = message.OwnedEntity.OwnedHistory.Last().EditedbyUser.UserName;
         }
+        public int MessageId { get; set; }
 
         public string LastModifiedBy { get; set; }
 

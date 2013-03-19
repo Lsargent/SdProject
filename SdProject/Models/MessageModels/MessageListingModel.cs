@@ -8,6 +8,6 @@ namespace SdProject.Models.MessageModels
 {
     public class MessageListingModel 
     {
-        public List<MessageModel> Messages { get; set; }
+        public List<DisplayMessageModel> Messages { get; set; }
     }
 }
