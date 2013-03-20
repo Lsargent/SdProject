@@ -9,6 +9,7 @@ using WebMatrix.WebData;
 using SdProject.Filters;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using SdProject.Models;
 
 namespace SdProject.Controllers
 {
@@ -51,14 +52,26 @@ namespace SdProject.Controllers
                                             house.extras,
                                             new BaseComponent( new OwnedEntity(user, new OwnedEntityChange(Request, user))),
                                             house.heatingType);
-
+                using(var houseRepo = new HouseRepository()){
+                    houseRepo.InsertOrUpdate(newHouse);
+                }
             }
-            return RedirectToAction("UploadImage", "Image");
+            return RedirectToAction("PageView", "Account");
         }
 
         public ActionResult UploadImage()
         {
             return View();
+        }
+
+        public ActionResult House(int houseid)
+        {
+            HouseDisplayModel house;
+            using(var houserepo = new HouseRepository())
+            {
+                house = new HouseDisplayModel(houserepo.GetHouse(houseid));
+            }
+            return View(house);
         }
         
     }

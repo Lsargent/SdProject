@@ -5,12 +5,10 @@
     ViewBag.Title = "PageView";
 }
 
-<h2>@Model.User.UserName</h2>
-<h2># of bathrooms</h2>
-
-@*<h1>@Model.User.Houses.First().Bathrooms</h1>*@
+<h2>Welcome, @Model.User.UserName!</h2>
 <p>Tell Us about your house!</p>
 @Html.ActionLink("Add your house!", "EnterInfo", "House")
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

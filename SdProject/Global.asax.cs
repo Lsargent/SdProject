@@ -22,11 +22,7 @@ namespace SdProject
     {
         protected void Application_Start()
         {
-<<<<<<< HEAD
-=======
-            //Database.Delete(AppConfig.GetActiveConnectionString());
-
->>>>>>> 425c68d1a3dc1ebf9a8ba4a2a15b6a36f65bf1c9
+            //Database.Delete(AppConfig.GetActiveConnectionString())
             AreaRegistration.RegisterAllAreas();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
