@@ -176,11 +176,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels\AccountModels.cs" />
-    <Compile Include="Models\AccountModels\DisplayAccountInfoModel.cs" />
+    <Compile Include="Models\AccountModels\DisplayAccountModel.cs" />
     <Compile Include="Models\HouseDisplayModel.cs" />
     <Compile Include="Models\MessageModels\CreateMessageModel.cs" />
+    <Compile Include="Models\MessageModels\EditMessageModel.cs" />
     <Compile Include="Models\MessageModels\MessageListingModel.cs" />
-    <Compile Include="Models\MessageModels\MessageModel.cs" />
+    <Compile Include="Models\MessageModels\DisplayMessageModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -302,12 +303,11 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Message\_DisplayMessage.cshtml" />
-    <Content Include="Views\Message\Listing.cshtml" />
+    <Content Include="Views\Message\_Listing.cshtml" />
     <Content Include="Views\Message\_Create.cshtml" />
     <Content Include="Views\House\EnterInfo.cshtml" />
     <Content Include="Views\Account\PageView.cshtml" />
     <Content Include="Views\Account\_DisplayAccountInfo.cshtml" />
-    <Content Include="Views\Account\UploadImage.cshtml" />
     <Content Include="Views\House\UploadImage.cshtml" />
   </ItemGroup>
   <ItemGroup>

@@ -6,7 +6,7 @@ using System.Web;
 
 namespace SdProject.Models.AccountModels 
 {
-    public class DisplayAccountInfoModel 
+    public class DisplayAccountModel 
     {
         public User User { get; set; }
     }
