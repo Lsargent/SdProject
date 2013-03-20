@@ -6,7 +6,7 @@
 }
 
 <div>
-    @foreach(MessageModel message in Model.Messages) {
+    @foreach(DisplayMessageModel message in Model.Messages) {
         @Html.Partial("_DisplayMessage", message)
     }
 

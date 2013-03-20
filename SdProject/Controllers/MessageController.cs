@@ -18,7 +18,6 @@ namespace SdProject.Controllers
 
         [HttpGet]
         public ActionResult Create() {
-            var isAjax = Request.IsAjaxRequest();
             return PartialView("_Create");
         }
 
@@ -36,8 +35,9 @@ namespace SdProject.Controllers
                 using (var messageRepo = new MessageRepository()) {
                     messageRepo.InsertOrUpdate(newMessage);
                 }
+                return Listing(new List<int> { newMessage.Id });
             }
-            return RedirectToAction("Listing");
+            return PartialView("_Create");
         }
 
 
@@ -47,8 +47,14 @@ namespace SdProject.Controllers
                 messages = messageRepo.Messages.Where(message => messageIds.Any(id => id == message.Id)).ToList().Select(message => new DisplayMessageModel(message)).ToList();
             }
             var model = new MessageListingModel { Messages = messages };
-            return View(model);
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_Listing", model);
+            }
+            else
+            {
+                return View("Listing", model);
+            }
         }
-
     }
 }

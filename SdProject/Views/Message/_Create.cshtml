@@ -6,7 +6,7 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) {
+@using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "post", InsertionMode = InsertionMode.Replace, UpdateTargetId = "newMessage"})) {
     @Html.ValidationSummary(true)
 
     <fieldset>
@@ -35,7 +35,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Listing")
+    @Html.ActionLink("Back to List", "Listing", new { messageIds = new[] {1}})
 </div>
 
 @section Scripts {

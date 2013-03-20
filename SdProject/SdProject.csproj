@@ -314,6 +314,7 @@
     <Content Include="Views\Image\UploadImage.cshtml" />
     <Content Include="Views\Account\UploadImage.cshtml" />
     <Content Include="Views\House\UploadImage.cshtml" />
+    <Content Include="Views\Message\Listing.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
