@@ -16,7 +16,7 @@ using System.ComponentModel.DataAnnotations;
         public override bool IsValid(object value)
         {
 
-            if (value. >= maximumRooms)
+            if (rooms >= maximumRooms)
             {
                 return false;
             }
