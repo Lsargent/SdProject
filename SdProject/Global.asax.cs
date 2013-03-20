@@ -22,6 +22,11 @@ namespace SdProject
     {
         protected void Application_Start()
         {
+<<<<<<< HEAD
+=======
+            //Database.Delete(AppConfig.GetActiveConnectionString());
+
+>>>>>>> 425c68d1a3dc1ebf9a8ba4a2a15b6a36f65bf1c9
             AreaRegistration.RegisterAllAreas();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
@@ -47,6 +52,8 @@ namespace SdProject
             {
                 throw new InvalidOperationException("The ASP.NET Simple Membership database could not be initialized. For more information, please see http://go.microsoft.com/fwlink/?LinkId=256588", ex);
             }
+
+            
         }
     }
 }
