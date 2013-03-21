@@ -5,7 +5,7 @@ using Logic;
 namespace SdProject.Models.MessageModels {
     public class DisplayMessageModel 
     {
-        public DisplayMessageModel(Message message) 
+        public DisplayMessageModel(Message message, User currentUser) 
         {
             MessageId = message.Id;
             Author = message.OwnedEntity.OwnedHistory.First().EditedbyUser.UserName;
@@ -14,8 +14,14 @@ namespace SdProject.Models.MessageModels {
             Created = message.OwnedEntity.OwnedHistory.First().EditedOn;
             LastModified = message.OwnedEntity.OwnedHistory.Last().EditedOn;
             LastModifiedBy = message.OwnedEntity.OwnedHistory.Last().EditedbyUser.UserName;
+            HasEditPermision = (message.OwnedEntity.Owners.Any(user => user.Id == currentUser.Id) ? true : false);
+            HasViewPermision = true;
         }
         public int MessageId { get; set; }
+
+        public bool HasEditPermision { get; set; }
+
+        public bool HasViewPermision { get; set; }
 
         public string LastModifiedBy { get; set; }
 

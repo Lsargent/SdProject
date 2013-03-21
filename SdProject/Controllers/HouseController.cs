@@ -49,7 +49,7 @@ namespace SdProject.Controllers
                                             house.bedrooms,
                                             house.bathrooms,
                                             house.extras,
-                                            new BaseComponent( new OwnedEntity(user, new OwnedEntityChange(Request, user))),
+                                            new BaseComponent( new OwnedEntity(user, ViewPolicy.Open, new OwnedEntityChange(Request,  user))),
                                             house.heatingType);
 
             }

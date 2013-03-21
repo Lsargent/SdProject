@@ -7,16 +7,16 @@ using System.ComponentModel.DataAnnotations;
 
 
 
-    public class MaxRoomsAttribute : ValidationAttribute, IClientValidatable
-    {
-        public int maximumRooms { get; set; }
-        public int rooms { get; set; }
-        public int bedrooms { get; set; }
+    //public class MaxRoomsAttribute : ValidationAttribute, IClientValidatable
+    //{
+    //    public int maximumRooms { get; set; }
+    //    public int rooms { get; set; }
+    //    public int bedrooms { get; set; }
 
-        public override bool IsValid(object value, ValidationContext validation)
-        {
-            return true;
-        }
+    //    public override bool IsValid(object value, ValidationContext validation)
+    //    {
+    //        return true;
+    //    }
 
-    }
+    //}
 

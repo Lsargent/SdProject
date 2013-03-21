@@ -6,9 +6,9 @@ using System.Web;
 
 namespace SdProject.Models.MessageModels {
     public class CreateMessageModel {
-        [Required]
+        [Required(ErrorMessage = "Every message needs a subject")]
         public string Subject { get; set; }
-        [Required]
+        [Required(ErrorMessage = "A message cannot be empty")]
         public string MessageBody { get; set; }
     }
 }

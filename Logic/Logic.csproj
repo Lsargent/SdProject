@@ -51,7 +51,7 @@
     <Compile Include="BaseComponent.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="EntityChange.cs" />
-    <Compile Include="Friend.cs" />
+    <Compile Include="Friendship.cs" />
     <Compile Include="Helpers\ContextHelper.cs" />
     <Compile Include="Helpers\ObjectStateHelper.cs" />
     <Compile Include="House.cs" />
