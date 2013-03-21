@@ -30,7 +30,7 @@ namespace SdProject.Controllers
                 }
 
                 var newMessage = new Message(message.Subject,message.MessageBody,
-                                    new OwnedEntity(user, 
+                                    new OwnedEntity(user, ViewPolicy.Open,
                                         new OwnedEntityChange(Request, user)));
                 using (var messageRepo = new MessageRepository()) {
                     messageRepo.InsertOrUpdate(newMessage);
@@ -51,7 +51,7 @@ namespace SdProject.Controllers
             {
                 return PartialView("_Listing", model);
             }
-            else
+            else 
             {
                 return View("Listing", model);
             }

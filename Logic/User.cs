@@ -25,7 +25,7 @@ namespace Logic {
 
         public virtual Address PrimaryAddress { get; set; }
 
-        public virtual List<Friend> Friends { get; set; }
+        public virtual List<Friendship> Friends { get; set; }
 
         public virtual List<Image> Images { get; set; }
 
