@@ -18,6 +18,7 @@ namespace SdProject.Models
             public string city { get; set; }
 
             [Required(ErrorMessage = "Zip code required.")]
+            [RegularExpression(@"^\d{5}(-\d{4})?$", ErrorMessage = "Zip code must be five characters.")]
             [Display(Name = "Zip Code*")]
             public int zipCode { get; set; }
 
