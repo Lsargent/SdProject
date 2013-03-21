@@ -51,9 +51,10 @@ namespace SdProject.Controllers
                                             house.extras,
                                             new BaseComponent( new OwnedEntity(user, new OwnedEntityChange(Request, user))),
                                             house.heatingType);
+                                            return RedirectToAction("UploadImage", "Image");
 
             }
-            return RedirectToAction("UploadImage", "Image");
+            return View("EnterInfo", house);
         }
 
         public ActionResult UploadImage()
