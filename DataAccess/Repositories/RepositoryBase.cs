@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Logic;
 using Logic.Helpers;
+using System.Data;
 
 namespace DataAccess.Repositories {
     public class RepositoryBase<TContextClass> : IDisposable 
@@ -60,7 +61,7 @@ namespace DataAccess.Repositories {
             var opStatus = new OperationStatus<TClass> { WasSuccessful = true };
             try {
                 opStatus.AddEffectedItem(Context.Set<TClass>().Add(item));
-                Context.ApplyStateChanges();
+                //Context.ApplyStateChanges();
                 opStatus.WasSuccessful = SaveChanges() > 0;
             }
             catch (Exception e) {

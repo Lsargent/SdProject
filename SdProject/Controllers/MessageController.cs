@@ -26,13 +26,17 @@ namespace SdProject.Controllers
         public ActionResult Create(CreateMessageModel message) {
             if (ModelState.IsValid) {
                 User user;
+                List<Message> messages;
                 using (var userRepo = new UserRepository()) {
                      user = userRepo.GetUser(WebSecurity.CurrentUserId);
+                     messages = user.Messages; 
                 }
 
                 var newMessage = new Message(message.Subject,message.MessageBody,
                                     new OwnedEntity(user, ViewPolicy.Open,
                                         new OwnedEntityChange(Request, user)));
+                user.Messages.Add(newMessage);
+                user.ObjectState = ObjectState.Modified;
                 using (var messageRepo = new MessageRepository()) {
                     messageRepo.InsertOrUpdate(newMessage);
                 }
@@ -65,15 +69,18 @@ namespace SdProject.Controllers
         
         [HttpPost]
         public ActionResult EditMessageBody(EditMessageBodyModel message) {
-            User user = new UserRepository().GetUser(WebSecurity.CurrentUserId);
             if (ModelState.IsValid) {
+                User user;
+                using (var userRepo = new UserRepository()) {
+                    user = userRepo.GetUser(WebSecurity.CurrentUserId);
+                }
                 Message messageToUpdate;
                 OperationStatus opStatus;
                 using (var messageRepo = new MessageRepository())
                 {
                     messageToUpdate = messageRepo.GetMessage(message.MessageId);
                     messageToUpdate.MessageBody = message.MessageBody;
-                    messageToUpdate.OwnedEntity.AddEntityChange(new OwnedEntityChange(Request, user));
+                    messageToUpdate.ObjectState = ObjectState.Modified;
                     opStatus = messageRepo.InsertOrUpdate(messageToUpdate);
                 }
 
