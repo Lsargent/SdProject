@@ -9,6 +9,7 @@ using WebMatrix.WebData;
 using SdProject.Filters;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using SdProject.Models;
 
 namespace SdProject.Controllers
 {
@@ -35,9 +36,11 @@ namespace SdProject.Controllers
             if (ModelState.IsValid)
             {
                 User user;
+                List<House> Houses;
                 using (var userRepo = new UserRepository())
                 {
                     user = userRepo.GetUser(WebSecurity.CurrentUserId);
+                    Houses = user.Houses;
                 }
                 var newHouse = new House(   house.streetAddress,
                                             house.city,
@@ -51,8 +54,12 @@ namespace SdProject.Controllers
                                             house.extras,
                                             new BaseComponent( new OwnedEntity(user, new OwnedEntityChange(Request, user))),
                                             house.heatingType);
-                                            return RedirectToAction("UploadImage", "Image");
-
+                Houses.Add(newHouse);
+                user.ObjectState = ObjectState.Modified;
+                using(var houseRepo = new HouseRepository()){
+                    houseRepo.InsertOrUpdate(newHouse);
+                }
+                return RedirectToAction("PageView", "Account");
             }
             return View("EnterInfo", house);
         }
@@ -60,6 +67,16 @@ namespace SdProject.Controllers
         public ActionResult UploadImage()
         {
             return View();
+        }
+
+        public ActionResult House(int houseid)
+        {
+            HouseDisplayModel house;
+            using(var houserepo = new HouseRepository())
+            {
+                house = new HouseDisplayModel(houserepo.GetHouse(houseid));
+            }
+            return View("_House", house);
         }
         
     }

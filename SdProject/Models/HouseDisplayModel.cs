@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Logic;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,6 +9,33 @@ namespace SdProject.Models
 {
     public class HouseDisplayModel
     {
+        public HouseDisplayModel(House house)
+        {
+            StreetAddress = house.StreetAddress;
+            City = house.City;
+            ZipCode = house.ZipCode;
+            Style = house.Style;
+            FloorSpace = house.FloorSpace;
+            RoomCount = house.RoomCount;
+            StoryCount = house.StoryCount;
+            Bedrooms = house.Bedrooms;
+            Bathrooms = house.Bathrooms;
+            HeatingType = house.HeatingType;
+            Extras = house.Extras;
+        }
+
+        public string StreetAddress { get; set; }
+        public string City { get; set; }
+        public int ZipCode { get; set; }
+        public string Style { get; set; }
+        public double FloorSpace { get; set; }
+        public int RoomCount { get; set; }
+        public int StoryCount { get; set; }
+        public int Bedrooms { get; set; }
+        public int Bathrooms { get; set; }
+        public string HeatingType { get; set; }
+        public string Extras { get; set; }
+
         public class EnterInfo
         {
             public int maximumRooms{get; set;}
@@ -61,7 +89,6 @@ namespace SdProject.Models
             [DataType(DataType.MultilineText)]
             [Display(Name = "Description/Extras*")]
             public string extras { get; set; }
-
         }
     }
 }
