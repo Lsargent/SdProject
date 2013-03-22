@@ -348,11 +348,12 @@ namespace SdProject.Controllers
         public ActionResult PageView()
         {
             User user;
-            using (var userrepo = new UserRepository()) 
+            using (var userrepo = new UserRepository())
             {
                 user = userrepo.GetUser(WebSecurity.CurrentUserId);
+                return View(new DisplayAccountModel() { User = user, Houses = user.Houses.Select(house => new HouseDisplayModel(house)).ToList() });
+        
             }
-            return View(new DisplayAccountModel() { User = user });
         }
 
         #region Helpers

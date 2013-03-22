@@ -89,11 +89,6 @@ namespace SdProject.Models
             [DataType(DataType.MultilineText)]
             [Display(Name = "Description/Extras*")]
             public string extras { get; set; }
-<<<<<<< HEAD
-        }  
-=======
-
         }
->>>>>>> 3457667a4633897a50ce443626c664fb7be53ffd
     }
 }

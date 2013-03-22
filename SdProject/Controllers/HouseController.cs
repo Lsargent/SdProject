@@ -36,9 +36,11 @@ namespace SdProject.Controllers
             if (ModelState.IsValid)
             {
                 User user;
+                List<House> Houses;
                 using (var userRepo = new UserRepository())
                 {
                     user = userRepo.GetUser(WebSecurity.CurrentUserId);
+                    Houses = user.Houses;
                 }
                 var newHouse = new House(   house.streetAddress,
                                             house.city,
@@ -52,18 +54,14 @@ namespace SdProject.Controllers
                                             house.extras,
                                             new BaseComponent( new OwnedEntity(user, new OwnedEntityChange(Request, user))),
                                             house.heatingType);
-<<<<<<< HEAD
+                Houses.Add(newHouse);
+                user.ObjectState = ObjectState.Modified;
                 using(var houseRepo = new HouseRepository()){
                     houseRepo.InsertOrUpdate(newHouse);
                 }
-            }
-            return RedirectToAction("PageView", "Account");
-=======
-                                            return RedirectToAction("UploadImage", "Image");
-
+                return RedirectToAction("PageView", "Account");
             }
             return View("EnterInfo", house);
->>>>>>> 3457667a4633897a50ce443626c664fb7be53ffd
         }
 
         public ActionResult UploadImage()
@@ -78,7 +76,7 @@ namespace SdProject.Controllers
             {
                 house = new HouseDisplayModel(houserepo.GetHouse(houseid));
             }
-            return View(house);
+            return View("_House", house);
         }
         
     }

@@ -1,4 +1,5 @@
-﻿@model SdProject.Models.AccountModels.DisplayAccountModel
+﻿@using SdProject.Models
+@model SdProject.Models.AccountModels.DisplayAccountModel
 
 
 @{
@@ -6,8 +7,17 @@
 }
 
 <h2>Welcome, @Model.User.UserName!</h2>
-<p>Tell Us about your house!</p>
-@Html.ActionLink("Add your house!", "EnterInfo", "House")
+
+
+@if(Model.Houses.Count() == 0)
+{
+    <p>Tell Us about your house!</p>
+    @Html.ActionLink("Add your house!", "EnterInfo", "House")
+}
+
+ @foreach(HouseDisplayModel house in Model.Houses) {
+        @Html.Partial("~/Views/House/_House.cshtml", house)
+    }
 
 
 @section Scripts {
