@@ -52,11 +52,18 @@ namespace SdProject.Controllers
                                             house.extras,
                                             new BaseComponent( new OwnedEntity(user, new OwnedEntityChange(Request, user))),
                                             house.heatingType);
+<<<<<<< HEAD
                 using(var houseRepo = new HouseRepository()){
                     houseRepo.InsertOrUpdate(newHouse);
                 }
             }
             return RedirectToAction("PageView", "Account");
+=======
+                                            return RedirectToAction("UploadImage", "Image");
+
+            }
+            return View("EnterInfo", house);
+>>>>>>> 3457667a4633897a50ce443626c664fb7be53ffd
         }
 
         public ActionResult UploadImage()
