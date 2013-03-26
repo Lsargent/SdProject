@@ -1,11 +1,7 @@
 ﻿using Logic;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
-namespace SdProject.Models.MessageModels.EditMessageModels
+namespace SdProject.Models.MessageModels
 {
     public class EditMessageModel
     {
@@ -21,6 +17,8 @@ namespace SdProject.Models.MessageModels.EditMessageModels
         public string Subject { get; set; }
         [Required]
         public string MessageBody { get; set; }
+
+        public string UpdateTargetId { get; set; }
     }
 
     public class EditMessageBodyModel {
@@ -38,5 +36,26 @@ namespace SdProject.Models.MessageModels.EditMessageModels
         public int MessageId { get; set; }
         [Required]
         public string MessageBody { get; set; }
+
+        public string UpdateTargetId { get; set; }
+    }
+
+    public class EditMessageSubjectModel {
+        public EditMessageSubjectModel() { }
+        public EditMessageSubjectModel(Message message) {
+            MessageId = message.Id;
+            Subject = message.Subject;
+        }
+        public EditMessageSubjectModel(EditMessageModel message) {
+            MessageId = message.MessageId;
+            Subject = message.Subject;
+        }
+
+        [Required]
+        public int MessageId { get; set; }
+        [Required]
+        public string Subject { get; set; }
+
+        public string UpdateTargetId { get; set; }
     }
 }

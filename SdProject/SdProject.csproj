@@ -323,6 +323,9 @@
     <Content Include="Views\Message\_EditMessageBody.cshtml" />
     <Content Include="Views\Message\Edit.cshtml" />
     <Content Include="Views\House\_House.cshtml" />
+    <Content Include="Views\Message\_DisplayMessageBody.cshtml" />
+    <Content Include="Views\Message\_DisplayMessageSubject.cshtml" />
+    <Content Include="Views\Message\_EditMessageSubject.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

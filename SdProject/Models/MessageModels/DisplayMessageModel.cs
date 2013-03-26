@@ -6,6 +6,8 @@ using Logic;
 namespace SdProject.Models.MessageModels {
     public class DisplayMessageModel 
     {
+        public DisplayMessageModel() {}
+
         public DisplayMessageModel(Message message, User currentUser) 
         {
             MessageId = message.Id;
@@ -35,5 +37,7 @@ namespace SdProject.Models.MessageModels {
         public DateTime Created { get; set; }
 
         public DateTime LastModified { get; set; }
+
+        public string UpdateTargetId { get; set; }
     }
 }
