@@ -1,10 +1,11 @@
 ﻿@model SdProject.Models.MessageModels.EditMessageModels.EditMessageBodyModel
 
 
-@using (Ajax.BeginForm("EditMessageBody", new AjaxOptions { HttpMethod = "post", InsertionMode = InsertionMode.Replace, UpdateTargetId = "message-" + Model.MessageId })) { 
-    <div>
+@using (Ajax.BeginForm("EditMessageBody", new AjaxOptions { HttpMethod = "post", InsertionMode = InsertionMode.Replace, UpdateTargetId = "messageBody-" + Model.MessageId })) { 
+    <div id="messageBody-@Model.MessageBody" class="messageBody">
         @Html.HiddenFor(message => message.MessageId)
-        @Html.EditorFor(message => message.MessageBody)
+        @Html.TextAreaFor(message => message.MessageBody)
+        @Html.ValidationMessageFor(message => message.MessageBody)
     </div>
     <div>
         <input type="submit" value="Save" />

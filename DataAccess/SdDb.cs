@@ -25,5 +25,18 @@ namespace DataAccess
         protected override void OnModelCreating(DbModelBuilder modelBuilder) {
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
         }
+
+        public class DatabaseInitializer : CreateDatabaseIfNotExists<SdDb> {
+            protected override void Seed(SdDb context) {
+                base.Seed(context);
+                var database = context.Database;
+                //Create Unique fields that are not keys
+                //Users Table
+                database.ExecuteSqlCommand("ALTER TABLE USERS " +
+                                           "ADD Constraint UC_UserName UNIQUE (UserName)");
+                database.ExecuteSqlCommand("ALTER TABLE USERS " +
+                                           "ADD Constraint UC_Email UNIQUE (Email)");
+            }
+        }
     }
 }

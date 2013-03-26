@@ -18,8 +18,9 @@ namespace SdProject.Controllers
     public class MessageController : Controller {
 
         [HttpGet]
-        public ActionResult Create() {
-            return (Request.IsAjaxRequest() ? (ActionResult)PartialView("_Create") : View("Create"));               
+        public ActionResult Create(string updateTargetId) {
+            var model = new CreateMessageModel() { UpdateTargetId = updateTargetId };
+            return (Request.IsAjaxRequest() ? (ActionResult)PartialView("_Create", model) : View("Create", model));               
         }     
         
         [HttpPost]
@@ -27,20 +28,29 @@ namespace SdProject.Controllers
             if (ModelState.IsValid) {
                 User user;
                 List<Message> messages;
+                List<OwnedEntity> ownedEntities;
+                List<OwnedEntityChange> ownedEntityChanges;
                 using (var userRepo = new UserRepository()) {
                      user = userRepo.GetUser(WebSecurity.CurrentUserId);
-                     messages = user.Messages; 
+                     messages = user.Messages;
+                     ownedEntities = user.OwnedEntities;
+                     ownedEntityChanges = user.OwnedEntityChanges;
                 }
 
                 var newMessage = new Message(message.Subject,message.MessageBody,
                                     new OwnedEntity(user, ViewPolicy.Open,
                                         new OwnedEntityChange(Request, user)));
                 user.Messages.Add(newMessage);
+                user.OwnedEntities.Add(newMessage.OwnedEntity);
+                user.OwnedEntityChanges.Add(newMessage.OwnedEntity.OwnedHistory.First());
                 user.ObjectState = ObjectState.Modified;
+                OperationStatus opStatus;
                 using (var messageRepo = new MessageRepository()) {
-                    messageRepo.InsertOrUpdate(newMessage);
+                    opStatus = messageRepo.InsertOrUpdate(newMessage);
                 }
-                return Listing(new List<int> { newMessage.Id });
+                if(opStatus.WasSuccessful) {
+                    return Listing(new List<int> { newMessage.Id });
+                }
             }
             return (Request.IsAjaxRequest() ? (ActionResult)PartialView("_Create", message) : View("Create", message));
         }
@@ -71,16 +81,23 @@ namespace SdProject.Controllers
         public ActionResult EditMessageBody(EditMessageBodyModel message) {
             if (ModelState.IsValid) {
                 User user;
+                List<Message> userMessages;
                 using (var userRepo = new UserRepository()) {
                     user = userRepo.GetUser(WebSecurity.CurrentUserId);
                 }
+
                 Message messageToUpdate;
                 OperationStatus opStatus;
+
                 using (var messageRepo = new MessageRepository())
-                {
-                    messageToUpdate = messageRepo.GetMessage(message.MessageId);
-                    messageToUpdate.MessageBody = message.MessageBody;
-                    messageToUpdate.ObjectState = ObjectState.Modified;
+                {  
+                    messageToUpdate = messageRepo.GetMessage(message.MessageId);                             
+                }
+
+                messageToUpdate.MessageBody = message.MessageBody;
+                messageToUpdate.ObjectState = ObjectState.Modified;
+
+                using (var messageRepo = new MessageRepository()) {
                     opStatus = messageRepo.InsertOrUpdate(messageToUpdate);
                 }
 

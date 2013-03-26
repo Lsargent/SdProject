@@ -179,7 +179,10 @@
     </Compile>
     <Compile Include="Models\AccountModels\AccountModels.cs" />
     <Compile Include="Models\AccountModels\DisplayAccountModel.cs" />
-    <Compile Include="Models\HouseDisplayModel.cs" />
+    <Compile Include="Models\AccountModels\EditAddressModels.cs" />
+    <Compile Include="Models\AddressModels\CreateAddressModel.cs" />
+    <Compile Include="Models\AddressModels\DisplayAddressModel.cs" />
+    <Compile Include="Models\HouseModels\HouseDisplayModel.cs" />
     <Compile Include="Models\ImageModel\UploadImage.cs" />
     <Compile Include="Models\MessageModels\CreateMessageModel.cs" />
     <Compile Include="Models\MessageModels\EditMessageModels.cs" />

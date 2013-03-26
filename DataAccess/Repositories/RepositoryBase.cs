@@ -60,8 +60,8 @@ namespace DataAccess.Repositories {
         public virtual OperationStatus<TClass> InsertOrUpdate<TClass>(TClass item) where TClass : class, IObjectState, new() {
             var opStatus = new OperationStatus<TClass> { WasSuccessful = true };
             try {
-                opStatus.AddEffectedItem(Context.Set<TClass>().Add(item));
-                //Context.ApplyStateChanges();
+                opStatus.AddEffectedItem(Context.Set<TClass>().Attach(item));
+                Context.ApplyStateChanges();
                 opStatus.WasSuccessful = SaveChanges() > 0;
             }
             catch (Exception e) {

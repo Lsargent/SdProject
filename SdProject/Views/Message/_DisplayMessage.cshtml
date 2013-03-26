@@ -9,9 +9,9 @@
             <div> @Model.Subject </div>
             <div> Created: @Model.Created</div>
         </div>
-        <div class="messageBody" id="messageBody-@Model.MessageId">
-            <div>
-                @Model.MessageBody
+        <div id="messageBody-@Model.MessageId">
+            <div class="messageBody">
+                @Html.Raw(Html.Encode(Model.MessageBody).Replace(Environment.NewLine, "<br />"))
             </div>
             <div>
                 @if (Model.HasEditPermision) {

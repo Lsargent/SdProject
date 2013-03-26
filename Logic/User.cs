@@ -17,8 +17,10 @@ namespace Logic {
         public int Id { get; set; }
 
         [EmailAddress]
+        [MaxLength(100, ErrorMessage = "Username cannot be longer that 100 characters")]
         public string Email { get; set; }
 
+        [MaxLength(100, ErrorMessage = "Username cannot be longer that 100 characters")]
         public string UserName { get; set; }
 
         public virtual List<House> Houses { get; set; }
