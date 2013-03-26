@@ -172,7 +172,7 @@
     <Compile Include="Controllers\HouseController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
-    <Compile Include="CustomValidators\CustomValidator.cs" />
+    <Compile Include="CustomValidators\RoomsValidator.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -319,6 +319,7 @@
     <Content Include="Views\Message\Create.cshtml" />
     <Content Include="Views\Message\_EditMessageBody.cshtml" />
     <Content Include="Views\Message\Edit.cshtml" />
+    <Content Include="Views\House\_House.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

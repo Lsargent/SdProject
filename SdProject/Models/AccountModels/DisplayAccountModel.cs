@@ -9,5 +9,6 @@ namespace SdProject.Models.AccountModels
     public class DisplayAccountModel 
     {
         public User User { get; set; }
+        public List<HouseDisplayModel> Houses { get; set; }
     }
 }
