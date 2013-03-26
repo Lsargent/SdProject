@@ -8,10 +8,10 @@
 
 <h2>Welcome, @Model.User.UserName!</h2>
 
-
+<h1>Your Houses:</h1>
 @if(Model.Houses.Count() == 0)
 {
-    <p>Tell Us about your house!</p>
+    <p>You have not yet added a home.  Click the link to add your house!</p>
     @Html.ActionLink("Add your house!", "EnterInfo", "House")
 }
 
