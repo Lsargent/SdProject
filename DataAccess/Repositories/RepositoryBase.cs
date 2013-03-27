@@ -34,7 +34,17 @@ namespace DataAccess.Repositories {
         public virtual IQueryable<TClass> GetAllWithIncludes<TClass>(params Expression<Func<TClass, object>>[] includes) where TClass : class, new() {
             IQueryable<TClass> query = Context.Set<TClass>();
             foreach (var include in includes) {
-                query.Include(include);
+                query = query.Include(include);
+            }
+            return query;
+        }
+
+        public virtual IQueryable<TClass> GetAllWithIncludes<TClass>(Expression<Func<TClass, bool>> predicate, params Expression<Func<TClass, object>>[] includes) where TClass : class, new()
+        {
+            IQueryable<TClass> query = Context.Set<TClass>().Where(predicate);
+            foreach (var include in includes)
+            {
+                query = query.Include(include);
             }
             return query;
         }

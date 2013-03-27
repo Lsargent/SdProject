@@ -21,14 +21,9 @@ namespace SdProject.Controllers
         public ActionResult Create(CreateMessageModel message) {
             if (ModelState.IsValid) {
                 User user;
-                List<Message> messages;
-                List<OwnedEntity> ownedEntities;
-                List<OwnedEntityChange> ownedEntityChanges;
+                
                 using (var userRepo = new UserRepository()) {
-                     user = userRepo.GetUser(WebSecurity.CurrentUserId);
-                     messages = user.Messages;
-                     ownedEntities = user.OwnedEntities;
-                     ownedEntityChanges = user.OwnedEntityChanges;
+                     user = userRepo.GetUserWithIncludes(WebSecurity.CurrentUserId, x => x.Messages, x => x.OwnedEntities, x => x.OwnedEntityChanges);
                 }
 
                 var newMessage = new Message(message.Subject,message.MessageBody,
@@ -147,7 +142,7 @@ namespace SdProject.Controllers
             List<DisplayMessageModel> messages;
             User user = new UserRepository().GetUser(WebSecurity.CurrentUserId);
             using (var messageRepo = new MessageRepository()) {
-                messages = messageRepo.Messages.Where(message => messageIds.Any(id => id == message.Id)).ToList().Select(message => new DisplayMessageModel(message, user)).ToList();
+                messages = messageRepo.GetAllWithIncludes<Message>(message => messageIds.Any(id => id == message.Id), x => x.OwnedEntity, x => x.OwnedEntity.OwnedHistory).ToList().Select(message => new DisplayMessageModel(message, user)).ToList();
             }
             var model = new MessageListingModel { Messages = messages };
 
