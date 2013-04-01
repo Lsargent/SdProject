@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using SdProject.Models.HouseModels;
 
 namespace SdProject.Models.AccountModels 
 {
