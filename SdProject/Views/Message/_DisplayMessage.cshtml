@@ -1,28 +1,31 @@
-﻿@model SdProject.Models.MessageModels.MessageModel
+﻿@model SdProject.Models.MessageModels.DisplayMessageModel
 
-
-
-<div>
+<div id="message-@Model.MessageId"class="messageWrapper">
+    <div class="authorSummery">
+        <div> Author: @Model.Author</div>         
+    </div> 
     <div>
-        <div>
-            <div> Author: @Model.Author</div>         
-        </div> 
-        <div>
-            <div>
-                <div> @Model.Subject </div>
-                <div> Created: @Model.Created</div>
+        @{ Model.UpdateTargetId = "message-" + Model.MessageId + "-Subject"; }
+        <div class="messageHeadline">
+            <div id="@Model.UpdateTargetId">
+                @Html.Partial("_DisplayMessageSubject", Model)
             </div>
             <div>
-                @Model.MessageBody
+                @Html.LabelFor(message => message.Created)
+                @Html.DisplayFor(message => message.Created)
             </div>
-            <div>
-                @if(@Model.LastModified != @Model.Created) {
-                    <div>LastModified: @Model.LastModified</div>
-                }
-                @if(@Model.LastModifiedBy != @Model.Author) {
-                    <div>Last Modified By: @Model.LastModifiedBy</div>
-                }
-            </div>
-        </div>         
-    </div>    
-</div>
+        </div>
+        @{ Model.UpdateTargetId = "message-" + Model.MessageId + "-Body"; }
+        <div id="@Model.UpdateTargetId">         
+            @Html.Partial("_DisplayMessageBody", Model)
+        </div>
+        <div class="messageRevision">
+            @if(@Model.LastModified != @Model.Created) {
+                <div>LastModified: @Model.LastModified</div>
+            }
+            @if(@Model.LastModifiedBy != @Model.Author) {
+                <div>Last Modified By: @Model.LastModifiedBy</div>
+            }
+        </div>
+    </div>         
+</div>    

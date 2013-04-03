@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using DataAccess;
 using Logic;
-using SdProject.Filters;
-using System.Data.Entity.Infrastructure;
 using WebMatrix.WebData;
 
 namespace SdProject
@@ -21,7 +16,8 @@ namespace SdProject
     public class MvcApplication : System.Web.HttpApplication
     {
         protected void Application_Start()
-        { 
+        {
+            //Database.Delete(AppConfig.GetActiveConnectionString())
             AreaRegistration.RegisterAllAreas();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
@@ -29,16 +25,13 @@ namespace SdProject
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
+            Database.SetInitializer(new SdDb.DatabaseInitializer());
 
             try
             {
-                using (var context = new SdDb())
-                {
-                    if (!context.Database.Exists())
-                    {
-                        // Create the SimpleMembership database without Entity Framework migration schema
-                        ((IObjectContextAdapter)context).ObjectContext.CreateDatabase();
-                    }
+                using (var context = new SdDb()) {
+                    
+                    context.Database.Initialize(false);
                 }
 
                 WebSecurity.InitializeDatabaseConnection(AppConfig.GetActiveConnectionString(), "Users", "Id", "UserName", autoCreateTables: true);
@@ -47,6 +40,8 @@ namespace SdProject
             {
                 throw new InvalidOperationException("The ASP.NET Simple Membership database could not be initialized. For more information, please see http://go.microsoft.com/fwlink/?LinkId=256588", ex);
             }
+
+            
         }
     }
 }

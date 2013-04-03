@@ -1,0 +1,12 @@
+﻿@using SdProject.Models.MessageModels
+@model SdProject.Models.MessageModels.MessageListingModel
+
+@{
+    ViewBag.Title = "MessageListing";
+}
+
+<div>
+    @foreach(DisplayMessageModel message in Model.Messages) {
+        @Html.Partial("_DisplayMessage", message)
+    }
+</div>

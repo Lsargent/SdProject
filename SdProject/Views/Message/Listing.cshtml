@@ -1,19 +1,11 @@
-﻿@using SdProject.Models.MessageModels
-@model SdProject.Models.MessageModels.MessageListingModel
+﻿@model SdProject.Models.MessageModels.MessageListingModel
 
 @{
-    ViewBag.Title = "MessageListing";
+    ViewBag.Title = "Listing";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<h2>Listing</h2>
 <div>
-    <h2>Messages</h2>
-    @foreach(MessageModel message in Model.Messages) {
-        @Html.Partial("_DisplayMessage", message)
-    }
-
-    <div id="newMessage">
-         @Ajax.ActionLink("New Message", "Create", new AjaxOptions(){ HttpMethod = "Get", InsertionMode = InsertionMode.Replace, UpdateTargetId = "newMessage" })
-    </div>
-   
+    @Html.Partial("_Listing", Model)
 </div>
