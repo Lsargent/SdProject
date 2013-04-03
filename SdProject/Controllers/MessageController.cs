@@ -81,7 +81,6 @@ namespace SdProject.Controllers
                 }
 
                 messageToUpdate.Subject = message.Subject;
-                messageToUpdate.ObjectState = ObjectState.Modified;
 
                 using (var messageRepo = new MessageRepository()) {
                     opStatus = messageRepo.InsertOrUpdate(messageToUpdate);

@@ -56,6 +56,7 @@
     <Compile Include="Friendship.cs" />
     <Compile Include="Helpers\ContextHelper.cs" />
     <Compile Include="Helpers\ObjectStateHelper.cs" />
+    <Compile Include="Helpers\ChangeTracker.cs" />
     <Compile Include="House.cs" />
     <Compile Include="Image.cs" />
     <Compile Include="IObjectState.cs" />
