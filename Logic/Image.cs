@@ -6,9 +6,10 @@ namespace Logic {
         public Image() {}
 
         public Image(string url, OwnedEntity ownedEntity) {
-            Url = url;
-            OwnedEntity = ownedEntity;
+            TrackingEnabled = true;
             ObjectState = ObjectState.Added;
+            Url = url;
+            OwnedEntity = ownedEntity;         
         }
 
         public int Id { get; set; }
@@ -21,5 +22,8 @@ namespace Logic {
 
         [NotMapped]
         public ObjectState ObjectState { get; set; }
+
+        [NotMapped]
+        public bool TrackingEnabled { get; set; }
     }
 }

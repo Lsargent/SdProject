@@ -6,6 +6,7 @@ namespace Logic {
         public MessageThread() {}
 
         public MessageThread(string subject, Message message, User author, BaseComponent baseComponent, OwnedEntity ownedEntity) {
+            
             Subject = subject;
             Messages = new List<Message> { message };
             Author = author;
@@ -18,7 +19,7 @@ namespace Logic {
 
         public string Subject { get; set; }
 
-        public virtual List<Message> Messages { get; set; }
+        public virtual ICollection<Message> Messages { get; set; }
 
         public virtual User Author { get; set; }
 
@@ -28,5 +29,8 @@ namespace Logic {
 
         [NotMapped]
         public ObjectState ObjectState { get; set; }
+
+        [NotMapped]
+        public bool TrackingEnabled { get; set; }
     }
 }

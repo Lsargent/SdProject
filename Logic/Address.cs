@@ -3,18 +3,24 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Logic {
     public class Address : IObjectState {
+        
         public Address() {}
 
         public Address(string streetAddress, string streetAddress2, string city, string state, string zipCode,
                              OwnedEntity ownedEntity) {
+            TrackingEnabled = true;
+            ObjectState = ObjectState.Added;          
             StreetAddress = streetAddress;
             StreetAddress2 = streetAddress2;
             City = city;
             State = state;
             ZipCode = zipCode;
-            OwnedEntity = ownedEntity;
-            ObjectState = ObjectState.Added;
+            OwnedEntity = ownedEntity;           
         }
+
+        #region Backing Fields
+
+        #endregion
 
         [Key]
         public int Id { get; set; }
@@ -34,5 +40,8 @@ namespace Logic {
 
         [NotMapped]
         public ObjectState ObjectState { get; set; }
+
+        [NotMapped]
+        public bool TrackingEnabled { get; set; }
     }
 }

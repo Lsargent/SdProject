@@ -4,14 +4,22 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Logic {
     public class BaseComponent : IObjectState {
+        
         public BaseComponent() {}
 
         public BaseComponent(OwnedEntity ownedEntity) {
+            TrackingEnabled = true;
+            ObjectState = ObjectState.Added;
             Threads = new List<MessageThread>();
             Images = new List<Image>();
             OEntity = ownedEntity;
-            ObjectState = ObjectState.Added;
+            
         }
+
+        #region Backing Fields
+
+        #endregion
+
 
         [Key]
         public int Id { get; set; }
@@ -25,5 +33,8 @@ namespace Logic {
 
         [NotMapped]
         public ObjectState ObjectState { get; set; }
+
+        [NotMapped]
+        public bool TrackingEnabled { get; set; }
     }
 }

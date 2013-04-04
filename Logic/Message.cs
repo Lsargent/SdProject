@@ -8,10 +8,12 @@ namespace Logic {
         public Message() {}
 
         public Message(string subject, string messageBody, OwnedEntity ownedEntity) {
+            TrackingEnabled = true;
+            ObjectState = ObjectState.Added;
             Subject = subject;
             MessageBody = messageBody;
             OwnedEntity = ownedEntity;
-            ObjectState = ObjectState.Added;
+            
         }
 
         public int Id { get; set; }
@@ -39,5 +41,8 @@ namespace Logic {
 
         [NotMapped]
         public ObjectState ObjectState { get; set; }
+
+        [NotMapped]
+        public bool TrackingEnabled { get; set; }
     }
 }

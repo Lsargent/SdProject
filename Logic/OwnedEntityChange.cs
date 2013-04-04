@@ -5,18 +5,15 @@ using System.Web;
 
 namespace Logic {
     public class OwnedEntityChange : IObjectState {
-        public OwnedEntityChange() {
-        }
+        public OwnedEntityChange() {}
 
         public OwnedEntityChange(HttpRequestBase request, User user) {
+            TrackingEnabled = true;
+            ObjectState = ObjectState.Added;
             IpAddress = request.UserHostAddress;
             UserAgent = request.UserAgent;
             EditedOn = DateTime.Now;
-            EditedbyUser = user;
-            ObjectState = ObjectState.Added;
-            if (user.ObjectState == ObjectState.Unchanged) {
-                user.ObjectState = ObjectState.Modified;
-            }
+            EditedbyUser = user;          
         }
 
         [Key]
@@ -39,5 +36,8 @@ namespace Logic {
 
         [NotMapped]
         public ObjectState ObjectState { get; set; }
+
+        [NotMapped]
+        public bool TrackingEnabled { get; set; }
     }
 }

@@ -138,12 +138,17 @@ namespace SdProject.Controllers
         }
 
         public ActionResult Listing(IList<int> messageIds) {
-            List<DisplayMessageModel> messages;
+            ICollection<Message> messages;
             User user = new UserRepository().GetUser(WebSecurity.CurrentUserId);
             using (var messageRepo = new MessageRepository()) {
-                messages = messageRepo.GetAllWithIncludes<Message>(message => messageIds.Any(id => id == message.Id), x => x.OwnedEntity, x => x.OwnedEntity.OwnedHistory).ToList().Select(message => new DisplayMessageModel(message, user)).ToList();
+                messages = messageRepo.GetAllWithIncludes<Message>(message => messageIds.Any(id => id == message.Id), 
+                    x => x.OwnedEntity, 
+                    x => x.OwnedEntity.OwnedHistory, 
+                    x => x.OwnedEntity.Owners, 
+                    x => x.OwnedEntity.OwnedHistory.Select(y => y.EditedbyUser)
+                    ).ToList();
             }
-            var model = new MessageListingModel { Messages = messages };
+            var model = new MessageListingModel { Messages = messages.Select(message => new DisplayMessageModel(message, user)).ToList() };
 
             return (Request.IsAjaxRequest() ? (ActionResult)PartialView("_Listing", model) : View("Listing", model));
         }

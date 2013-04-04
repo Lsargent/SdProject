@@ -9,11 +9,12 @@ namespace Logic {
         public EntityChange() {}
 
         public EntityChange(HttpRequestBase request) {
+            TrackingEnabled = true;
+            ObjectState = ObjectState.Added;
             Editedby = request.UserHostName;
             IpAddress = request.UserHostAddress;
             UserAgent = request.UserAgent;
-            EditedOn = DateTime.Now;
-            ObjectState = ObjectState.Added;
+            EditedOn = DateTime.Now;        
         }
 
         [Key]
@@ -36,5 +37,8 @@ namespace Logic {
 
         [NotMapped]
         public ObjectState ObjectState { get; set; }
+
+        [NotMapped]
+        public bool TrackingEnabled { get; set; }
     }
 }

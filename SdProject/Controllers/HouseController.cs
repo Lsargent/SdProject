@@ -30,11 +30,9 @@ namespace SdProject.Controllers
             if (ModelState.IsValid)
             {
                 User user;
-                List<House> Houses;
                 using (var userRepo = new UserRepository())
                 {
-                    user = userRepo.GetUser(WebSecurity.CurrentUserId);
-                    Houses = user.Houses;
+                    user = userRepo.GetUserWithIncludes(WebSecurity.CurrentUserId, x => x.Houses);
                 }
                 var newHouse = new House(   house.StreetAddress,
                                             house.City,
@@ -48,7 +46,7 @@ namespace SdProject.Controllers
                                             house.Extras,
                                             new BaseComponent( new OwnedEntity(user, ViewPolicy.Open, new OwnedEntityChange(Request,  user))),
                                             house.HeatingType);
-                Houses.Add(newHouse);
+                user.Houses.Add(newHouse);
                 user.ObjectState = ObjectState.Modified;
                 using(var houseRepo = new HouseRepository()){
                     houseRepo.InsertOrUpdate(newHouse);

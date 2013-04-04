@@ -8,26 +8,31 @@ namespace Logic {
         public OwnedEntity(){}
 
         public OwnedEntity(User user, ViewPolicy viewPolicy, OwnedEntityChange ownedEntityChange) {
+            TrackingEnabled = true;
+            ObjectState = ObjectState.Added;
             OwnedHistory = new List<OwnedEntityChange>();
             Owners = new List<User>();
             ViewPolicy = viewPolicy;
             AddEntityChange(ownedEntityChange);
             AddOwner(user);
-            ObjectState = ObjectState.Added;
         }
 
         public int Id { get; set; }
 
-        public virtual List<User> Owners { get; set; }
+        public virtual ICollection<User> Owners { get; set; }
 
         public ViewPolicy ViewPolicy { get; set; }
 
-        public virtual List<OwnedEntityChange> OwnedHistory { get; set; }
+        public virtual ICollection<OwnedEntityChange> OwnedHistory { get; set; }
 
         [NotMapped]
         public ObjectState ObjectState { get; set; }
 
+        [NotMapped]
+        public bool TrackingEnabled { get; set; }
+
         public void AddEntityChange(OwnedEntityChange change) {
+
             OwnedHistory.Add(change);
         }
 
@@ -35,6 +40,7 @@ namespace Logic {
             Owners.Add(user);
         }
     }
+
     public enum ViewPolicy { 
         Open,
         Closed,

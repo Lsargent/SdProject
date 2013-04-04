@@ -6,11 +6,12 @@ namespace Logic {
         public Friendship() {}
 
         public Friendship(User initiator, User reciever, OwnedEntity ownedEntity) {
+            TrackingEnabled = true;
+            ObjectState = ObjectState.Added;
             Initiator = initiator;
             Reciever = reciever;
             Status = FriendshipStatus.Pending;
-            OwnedEntity = ownedEntity;
-            ObjectState = ObjectState.Added;
+            OwnedEntity = ownedEntity;           
         }
 
         [Key]
@@ -30,6 +31,9 @@ namespace Logic {
 
         [NotMapped]
         public ObjectState ObjectState { get; set; }
+
+        [NotMapped]
+        public bool TrackingEnabled { get; set; }
     }
     public enum FriendshipStatus { 
         Confirmed,

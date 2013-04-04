@@ -6,8 +6,9 @@ namespace Logic {
     public class House : IObjectState {
         public House() {}
 
-        public House(string streetAddress, string city, int zipCode, string style, double floorSpace, int roomCount, int storyCount, int bedrooms, int bathrooms, string extras, BaseComponent baseComponent, string heatingType = "None")
-        {
+        public House(string streetAddress, string city, int zipCode, string style, double floorSpace, int roomCount, int storyCount, int bedrooms, int bathrooms, string extras, BaseComponent baseComponent, string heatingType = "None") {
+            TrackingEnabled = true;
+            ObjectState = ObjectState.Added;
             StreetAddress = streetAddress;
             City = city;
             ZipCode = zipCode;
@@ -19,8 +20,7 @@ namespace Logic {
             Bedrooms = bedrooms;
             Bathrooms = bathrooms;
             Extras = extras;
-            BaseComponent = baseComponent;
-            ObjectState = ObjectState.Added;
+            BaseComponent = baseComponent;           
         }
 
         
@@ -68,5 +68,8 @@ namespace Logic {
 
         [NotMapped]
         public ObjectState ObjectState { get; set; }
+
+        [NotMapped]
+        public bool TrackingEnabled { get; set; }
     }
 }
