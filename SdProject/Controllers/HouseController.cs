@@ -4,6 +4,8 @@ using Logic;
 using DataAccess.Repositories;
 using SdProject.Models.HouseModels;
 using WebMatrix.WebData;
+using System.Web;
+using System.Linq;
 
 namespace SdProject.Controllers
 {
@@ -67,6 +69,57 @@ namespace SdProject.Controllers
             }
             return View("_House", house);
         }
+
+        //[HttpPost]
+        //public ActionResult UploadImage(HttpPostedFileBase photo)
+        //{
+        //    if (photo != null)
+        //    {
+        //        string path = @"D:\Temp\";
+
+        //        if (photo.ContentLength > 10240)
+        //        {
+        //            ModelState.AddModelError("photo", "The size of the file should not exceed 10 KB");
+        //            return View();
+        //        }
+
+        //        var supportedTypes = new[] { "jpg", "jpeg", "png" };
+
+        //        var fileExt = System.IO.Path.GetExtension(photo.FileName).Substring(1);
+
+        //        if (!supportedTypes.Contains(fileExt))
+        //        {
+        //            ModelState.AddModelError("photo", "Invalid type. Only the following types (jpg, jpeg, png) are supported.");
+        //            return View();
+        //        }
+
+        //        photo.SaveAs(path + photo.FileName);
+        //    }
+
+        //    return RedirectToAction("PageView", "Account");
+        //}
+
+        public ActionResult UploadImage()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult UploadImage(UploadImageModel fileModel)
+        {
+            string path = @"Desktop";
+
+            if (ModelState.IsValid)
+            {
+                if (fileModel != null && fileModel.File != null)
+                    fileModel.File.SaveAs(path + fileModel.File.FileName);
+
+                return RedirectToAction("PageView", "Account");
+            }
+
+            return View();
+        }
+
         
     }
 }
