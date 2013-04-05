@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Logic;
+using System.Web;
+using SdProject.CustomValidators;
 
 namespace SdProject.Models.HouseModels {
     public class HouseDisplayModel {
@@ -82,4 +84,13 @@ namespace SdProject.Models.HouseModels {
         [Display(Name = "Description/Extras*")]
         public string Extras { get; set; }
     }
+
+    
+    public class UploadImageModel
+    {
+        [FileSize(10240)]
+        [FileTypes("jpg,jpeg,png")]
+        public HttpPostedFileBase File { get; set; }
+    }
+
 }

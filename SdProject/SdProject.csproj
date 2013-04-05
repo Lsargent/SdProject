@@ -172,6 +172,8 @@
     <Compile Include="Controllers\HouseController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
+    <Compile Include="CustomValidators\FileSizeAttribute.cs" />
+    <Compile Include="CustomValidators\FileTypesAttribute.cs" />
     <Compile Include="CustomValidators\RoomsValidator.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -317,7 +319,6 @@
     <Content Include="Views\Account\_DisplayAccountInfo.cshtml" />
     <Content Include="Views\Image\UploadImage.cshtml" />
     <Content Include="Views\Account\UploadImage.cshtml" />
-    <Content Include="Views\House\UploadImage.cshtml" />
     <Content Include="Views\Message\Listing.cshtml" />
     <Content Include="Views\Message\Create.cshtml" />
     <Content Include="Views\Message\_EditMessageBody.cshtml" />
@@ -327,6 +328,7 @@
     <Content Include="Views\Message\_DisplayMessageSubject.cshtml" />
     <Content Include="Views\Message\_EditMessageSubject.cshtml" />
     <Content Include="Views\Message\_DisplayMessage.cshtml" />
+    <Content Include="Views\House\UploadImage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
