@@ -1,9 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Logic.Helpers;
 
 namespace Logic {
-    public class Address : IObjectState {
+    public class Address : IObjectState, IEquatable<Address> {
         
+
         public Address() {}
 
         public Address(string streetAddress, string streetAddress2, string city, string state, string zipCode,
@@ -20,28 +23,61 @@ namespace Logic {
 
         #region Backing Fields
 
+        private string _streetAddress;
+        private string _streetAddress2;
+        private string _city;
+        private string _state;
+        private string _zipCode;
+        private OwnedEntity _ownedEntity;
+
         #endregion
 
         [Key]
         public int Id { get; set; }
+        
+        [Required]
+        public string StreetAddress {
+            get { return _streetAddress; }
+            set { _streetAddress = ChangeTracker.SetChange(this, StreetAddress, value); }
+        }
 
-        public string StreetAddress { get; set; }
-
-        public string StreetAddress2 { get; set; }
-
-        public string City { get; set; }
-
-        public string State { get; set; }
-
-        public string ZipCode { get; set; }
+        public string StreetAddress2 {
+            get { return _streetAddress2; }
+            set { _streetAddress2 = ChangeTracker.SetChange(this, StreetAddress2, value); }
+        }
 
         [Required]
-        public  virtual OwnedEntity OwnedEntity { get; set; }
+        public string City {
+            get { return _city; }
+            set { _city = ChangeTracker.SetChange(this, City, value); }
+        }
+
+        [Required]
+        public string State {
+            get { return _state; }
+            set { _state = ChangeTracker.SetChange(this, State, value); }
+        }
+
+        [Required]
+        public string ZipCode {
+            get { return _zipCode; }
+            set { _zipCode = ChangeTracker.SetChange(this, ZipCode, value); }
+        }
+
+        [Required]
+        public  virtual OwnedEntity OwnedEntity {
+            get { return _ownedEntity; }
+            set { _ownedEntity = ChangeTracker.SetChange(this, OwnedEntity, value); }
+        }
 
         [NotMapped]
         public ObjectState ObjectState { get; set; }
 
         [NotMapped]
         public bool TrackingEnabled { get; set; }
+
+        public bool Equals(Address other) {
+            return Id == other.Id;
+        }
     }
 }

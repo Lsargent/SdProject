@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Logic {
-    public class BaseComponent : IObjectState {
+    public class BaseComponent : IObjectState, IEquatable<BaseComponent> {
         
         public BaseComponent() {}
 
@@ -24,9 +25,9 @@ namespace Logic {
         [Key]
         public int Id { get; set; }
 
-        public virtual List<MessageThread> Threads { get; set; }
+        public virtual ICollection<MessageThread> Threads { get; set; }
 
-        public virtual List<Image> Images { get; set; }
+        public virtual ICollection<Image> Images { get; set; }
 
         [Required]
         public virtual OwnedEntity OEntity { get; set; }
@@ -36,5 +37,9 @@ namespace Logic {
 
         [NotMapped]
         public bool TrackingEnabled { get; set; }
+
+        public bool Equals(BaseComponent other) {
+            Id = other.Id;
+        }
     }
 }
