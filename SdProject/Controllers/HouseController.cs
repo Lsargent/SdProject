@@ -36,9 +36,7 @@ namespace SdProject.Controllers
                 {
                     user = userRepo.GetUserWithIncludes(WebSecurity.CurrentUserId, x => x.Houses);
                 }
-                var newHouse = new House(   house.StreetAddress,
-                                            house.City,
-                                            house.ZipCode,
+                var newHouse = new House(   new Address(house.StreetAddress, "", house.City, "Wyoming", house.ZipCode.ToString(), new OwnedEntity(user, ViewPolicy.Open, new OwnedEntityChange(Request, user))), 
                                             house.Style,
                                             house.FloorSpace,
                                             house.RoomCount,

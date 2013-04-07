@@ -26,13 +26,10 @@ namespace SdProject.Controllers
                      user = userRepo.GetUserWithIncludes(WebSecurity.CurrentUserId, x => x.Messages, x => x.OwnedEntities, x => x.OwnedEntityChanges);
                 }
 
-                var newMessage = new Message(message.Subject,message.MessageBody,
+                var newMessage = new Message(message.Subject,message.MessageBody, user,
                                     new OwnedEntity(user, ViewPolicy.Open,
                                         new OwnedEntityChange(Request, user)));
-                user.Messages.Add(newMessage);
-                user.OwnedEntities.Add(newMessage.OwnedEntity);
-                user.OwnedEntityChanges.Add(newMessage.OwnedEntity.OwnedHistory.First());
-                user.ObjectState = ObjectState.Modified;
+
                 OperationStatus opStatus;
                 using (var messageRepo = new MessageRepository()) {
                     opStatus = messageRepo.InsertOrUpdate(newMessage);
@@ -68,7 +65,6 @@ namespace SdProject.Controllers
         public ActionResult EditMessageSubject(EditMessageSubjectModel message) {
             if (ModelState.IsValid) {
                 User user;
-                List<Message> userMessages;
                 using (var userRepo = new UserRepository()) {
                     user = userRepo.GetUser(WebSecurity.CurrentUserId);
                 }
@@ -80,6 +76,7 @@ namespace SdProject.Controllers
                     messageToUpdate = messageRepo.GetMessage(message.MessageId);
                 }
 
+                messageToUpdate.TrackingEnabled = true;
                 messageToUpdate.Subject = message.Subject;
 
                 using (var messageRepo = new MessageRepository()) {
@@ -110,7 +107,6 @@ namespace SdProject.Controllers
         public ActionResult EditMessageBody(EditMessageBodyModel message) {
             if (ModelState.IsValid) {
                 User user;
-                List<Message> userMessages;
                 using (var userRepo = new UserRepository()) {
                     user = userRepo.GetUser(WebSecurity.CurrentUserId);
                 }
@@ -123,8 +119,8 @@ namespace SdProject.Controllers
                     messageToUpdate = messageRepo.GetMessage(message.MessageId);                             
                 }
 
+                messageToUpdate.TrackingEnabled = true;
                 messageToUpdate.MessageBody = message.MessageBody;
-                messageToUpdate.ObjectState = ObjectState.Modified;
 
                 using (var messageRepo = new MessageRepository()) {
                     opStatus = messageRepo.InsertOrUpdate(messageToUpdate);

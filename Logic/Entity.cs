@@ -1,13 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using Logic.Helpers;
 
 namespace Logic {
-    public class Entity : IObjectState {
-        
-
+    public class Entity : IObjectState, IEquatable<Entity> {    
+ 
         public Entity() {
         }
 
@@ -15,16 +16,12 @@ namespace Logic {
             TrackingEnabled = true;
             ObjectState = ObjectState.Added;
             History = new List<EntityChange>();
-            AddEntityChange(entityChange);
-            
+            AddEntityChange(entityChange);          
         }
 
         #region Backing Fields
 
-        private bool _trackingEnabled;
-
         #endregion
-
 
         [Key]
         public int Id { get; set; }
@@ -35,14 +32,15 @@ namespace Logic {
         public ObjectState ObjectState { get; set; }
 
         [NotMapped]
-        public bool TrackingEnabled {
-            get { return _trackingEnabled; }
-            set { _trackingEnabled = value; }
-        }
+        public bool TrackingEnabled { get; set; }
 
 
         public void AddEntityChange(EntityChange change) {
-            History.Add(change);
+            ChangeTracker.AddToCollection(this, History, change);
+        }
+
+        public bool Equals(Entity other) {
+            return Id == other.Id;
         }
     }
 }
