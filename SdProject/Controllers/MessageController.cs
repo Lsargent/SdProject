@@ -6,6 +6,7 @@ using Logic;
 using Logic.Helpers;
 using SdProject.Models.MessageModels;
 using WebMatrix.WebData;
+using System;
 
 namespace SdProject.Controllers
 {
@@ -14,8 +15,9 @@ namespace SdProject.Controllers
 
         [HttpGet]
         public ActionResult Create(string updateTargetId) {
+            updateTargetId = String.IsNullOrEmpty(updateTargetId) ? "newMessage" : updateTargetId;
             var model = new CreateMessageModel { UpdateTargetId = updateTargetId };
-            return (Request.IsAjaxRequest() ? (ActionResult)PartialView("_Create", model) : View("Create", model));               
+            return (Request.IsAjaxRequest() ? (ActionResult)PartialView("_CreateMessage", model) : View("Create", model));               
         }     
         
         [HttpPost]
@@ -36,7 +38,7 @@ namespace SdProject.Controllers
                     opStatus = messageRepo.InsertOrUpdate(newMessage);
                 }
                 if(opStatus.WasSuccessful) {
-                    return Listing(new List<int> { newMessage.Id });
+                    return Create(message.UpdateTargetId);
                 }
             }
             return (Request.IsAjaxRequest() ? (ActionResult)PartialView("_Create", message) : View("Create", message));
@@ -74,18 +76,23 @@ namespace SdProject.Controllers
                 OperationStatus opStatus;
 
                 using (var messageRepo = new MessageRepository()) {
-                    messageToUpdate = messageRepo.Get();
-                }
-                if(PermissionHelper.HasEditPermission(messageToUpdate.OwnedEntity))
-                messageToUpdate.TrackingEnabled = true;
-                messageToUpdate.Subject = message.Subject;
-
-                using (var messageRepo = new MessageRepository()) {
-                    opStatus = messageRepo.InsertOrUpdate(messageToUpdate);
+                    messageToUpdate = messageRepo.Get<Message>(x => x.Id == message.MessageId, x => x.OwnedEntity.Owners.Select(owner => owner.Friends));
                 }
 
-                if (opStatus.WasSuccessful) {
-                    return PartialView("_DisplayMessageSubject", new DisplayMessageModel { MessageId = message.MessageId, UpdateTargetId = message.UpdateTargetId, Subject = message.Subject, HasEditPermision = true });
+                if (PermissionHelper.HasEditPermission(messageToUpdate.OwnedEntity, user))
+                {
+                    messageToUpdate.TrackingEnabled = true;
+                    messageToUpdate.Subject = message.Subject;
+
+                    using (var messageRepo = new MessageRepository())
+                    {
+                        opStatus = messageRepo.InsertOrUpdate(messageToUpdate);
+                    }
+
+                    if (opStatus.WasSuccessful)
+                    {
+                        return PartialView("_DisplayMessageSubject", new DisplayMessageModel { MessageId = message.MessageId, UpdateTargetId = message.UpdateTargetId, Subject = message.Subject, HasEditPermision = true });
+                    }
                 }
             }
             return PartialView("_EditMessageSubject", message);
@@ -116,24 +123,27 @@ namespace SdProject.Controllers
                 OperationStatus opStatus;
 
                 using (var messageRepo = new MessageRepository())
-                {  
-                    messageToUpdate = messageRepo.GetMessage(message.MessageId);                             
+                {
+                    messageToUpdate = messageRepo.Get<Message>(x => x.Id == message.MessageId, x => x.OwnedEntity.Owners);                             
                 }
 
-                messageToUpdate.TrackingEnabled = true;
-                messageToUpdate.MessageBody = message.MessageBody;
+                if(PermissionHelper.HasEditPermission(messageToUpdate.OwnedEntity, user)) {
+                    messageToUpdate.TrackingEnabled = true;
+                    messageToUpdate.MessageBody = message.MessageBody;
 
-                using (var messageRepo = new MessageRepository()) {
-                    opStatus = messageRepo.InsertOrUpdate(messageToUpdate);
-                }
+                    using (var messageRepo = new MessageRepository()) {
+                        opStatus = messageRepo.InsertOrUpdate(messageToUpdate);
+                    }
 
-                if (opStatus.WasSuccessful) { 
-                    return PartialView("_DisplayMessageBody", new DisplayMessageModel { MessageId = message.MessageId, UpdateTargetId = message.UpdateTargetId, MessageBody = message.MessageBody, HasEditPermision = true });
+                    if (opStatus.WasSuccessful) { 
+                        return PartialView("_DisplayMessageBody", new DisplayMessageModel { MessageId = message.MessageId, UpdateTargetId = message.UpdateTargetId, MessageBody = message.MessageBody, HasEditPermision = true });
+                    }
                 }
             }
             return PartialView("_EditMessageBody", message);
         }
 
+        [ChildActionOnly]
         public ActionResult Listing(IList<int> messageIds) {
             ICollection<Message> messages;
             User user = new UserRepository().GetUser(WebSecurity.CurrentUserId);
@@ -148,6 +158,22 @@ namespace SdProject.Controllers
             var model = new MessageListingModel { Messages = messages.Select(message => new DisplayMessageModel(message, user)).ToList() };
 
             return (Request.IsAjaxRequest() ? (ActionResult)PartialView("_Listing", model) : View("Listing", model));
+        }
+
+        public ActionResult Display(int messageId) {
+            Message message;
+            User user = new UserRepository().GetUser(WebSecurity.CurrentUserId);
+            using (var messageRepo = new MessageRepository())
+            {
+                message = messageRepo.Get<Message>(x => x.Id == messageId,
+                    x => x.OwnedEntity,
+                    x => x.OwnedEntity.OwnedHistory,
+                    x => x.OwnedEntity.Owners,
+                    x => x.OwnedEntity.OwnedHistory.Select(y => y.EditedbyUser));
+            }
+            var model = new DisplayMessageModel(message, user);
+
+            return (Request.IsAjaxRequest() ? (ActionResult)PartialView("_DisplayMessageRoot", model) : View("DisplayMessage", model)); 
         }
     }
 }

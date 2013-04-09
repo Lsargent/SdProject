@@ -1,0 +1,20 @@
+﻿@model SdProject.Models.MessageModels.CreateMessageModel
+
+@using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "post", InsertionMode = InsertionMode.Replace, UpdateTargetId = Model.UpdateTargetId })) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>New Message</legend>
+
+        @Html.Partial("_CreateMessageFormContent", Model)
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

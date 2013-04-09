@@ -311,9 +311,9 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Message\_DisplayMessageRoot.cshtml" />
+    <Content Include="Views\Message\_DisplayMessage.cshtml" />
     <Content Include="Views\Message\_Listing.cshtml" />
-    <Content Include="Views\Message\_Create.cshtml" />
+    <Content Include="Views\Message\_CreateMessage.cshtml" />
     <Content Include="Views\House\EnterInfo.cshtml" />
     <Content Include="Views\Account\PageView.cshtml" />
     <Content Include="Views\Account\_DisplayAccountInfo.cshtml" />
@@ -327,8 +327,10 @@
     <Content Include="Views\Message\_DisplayMessageBody.cshtml" />
     <Content Include="Views\Message\_DisplayMessageSubject.cshtml" />
     <Content Include="Views\Message\_EditMessageSubject.cshtml" />
-    <Content Include="Views\Message\_DisplayMessage.cshtml" />
+    <Content Include="Views\Message\_DisplayMessageRoot.cshtml" />
     <Content Include="Views\House\UploadImage.cshtml" />
+    <Content Include="Views\Message\DisplayMessage.cshtml" />
+    <Content Include="Views\Message\_CreateMessageFormContent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

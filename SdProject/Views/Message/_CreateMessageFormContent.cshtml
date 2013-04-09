@@ -1,0 +1,17 @@
+﻿@model SdProject.Models.MessageModels.CreateMessageModel
+
+<div class="editor-label">
+    @Html.LabelFor(m => m.Subject)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(m=> m.Subject)
+    @Html.ValidationMessageFor(model => model.Subject)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.MessageBody)
+</div>
+<div class="editor-field">
+    @Html.TextAreaFor(model => model.MessageBody)
+    @Html.ValidationMessageFor(model => model.MessageBody)
+</div>

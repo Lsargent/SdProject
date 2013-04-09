@@ -60,7 +60,8 @@ namespace DataAccess.Repositories {
             try {
                 opStatus.AddEffectedItem(Context.Set<TClass>().Attach(item));
                 Context.ApplyStateChanges();
-                opStatus.WasSuccessful = SaveChanges() > 0;
+                SaveChanges();
+                opStatus.WasSuccessful = true;
             }
             catch (Exception e) {
                 opStatus.WasSuccessful = false;

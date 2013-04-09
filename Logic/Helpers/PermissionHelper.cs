@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Logic.Helpers {
     public static class PermissionHelper {
         public static bool HasEditPermission(OwnedEntity entity, User user) {
-             return entity.Owners.Any(u => u == user);
+             return entity.Owners.Any(u => u.Equals(user));
         }
         public static bool HasViewPermission(OwnedEntity entity, User user) {
             var viewPolicy = entity.ViewPolicy;
@@ -25,9 +25,10 @@ namespace Logic.Helpers {
                 hasPermission = hasPermission ||
                                 owner.Friends.Any(
                                     friend =>
-                                    (friend.Initiator == user || friend.Reciever == user) &&
+                                    (friend.Initiator.Equals(user) || friend.Reciever.Equals(user)) &&
                                     friend.Status == FriendshipStatus.Confirmed);
             }
+            return hasPermission;
         }
     }
 }
