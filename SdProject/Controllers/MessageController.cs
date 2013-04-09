@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using DataAccess.Repositories;
 using Logic;
+using Logic.Helpers;
 using SdProject.Models.MessageModels;
 using WebMatrix.WebData;
 
@@ -73,9 +74,9 @@ namespace SdProject.Controllers
                 OperationStatus opStatus;
 
                 using (var messageRepo = new MessageRepository()) {
-                    messageToUpdate = messageRepo.GetMessage(message.MessageId);
+                    messageToUpdate = messageRepo.Get();
                 }
-
+                if(PermissionHelper.HasEditPermission(messageToUpdate.OwnedEntity))
                 messageToUpdate.TrackingEnabled = true;
                 messageToUpdate.Subject = message.Subject;
 

@@ -17,14 +17,10 @@ namespace DataAccess.Repositories {
             }
         }
 
-        public virtual TClass Get<TClass>(Expression<Func<TClass, bool>> predicate) where TClass : class, new() {
-            if (predicate != null) {
-                    return Context.Set<TClass>().Where(predicate).SingleOrDefault();
-            }
-            throw new ApplicationException("a predicate value must be passed.");          
+        public virtual TClass Get<TClass>(Expression<Func<TClass, bool>> predicate, params Expression<Func<TClass, object>>[] includes) where TClass : class, new() {
+            var query = Context.Set<TClass>().Where(predicate);
+            return includes.Aggregate(query, (current, include) => current.Include(include)).FirstOrDefault();
         }
-
-        
 
         public virtual IQueryable<TClass> GetAll<TClass>() where TClass : class, new() {
             return Context.Set<TClass>();
