@@ -341,11 +341,6 @@ namespace SdProject.Controllers
             return PartialView("_RemoveExternalLoginsPartial", externalLogins);
         }
 
-        public ActionResult UploadImage()
-        {
-            return View();
-        }
-
         public ActionResult PageView()
         {
             User user;

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using Logic;
 using DataAccess.Repositories;
@@ -15,11 +16,7 @@ namespace SdProject.Controllers
         //
         // GET: /House/
 
-        public ActionResult Index()
-        {
-            return View();
-        }
-
+        
         [AllowAnonymous]
         public ActionResult EnterInfo()
         {
@@ -56,7 +53,24 @@ namespace SdProject.Controllers
             return View("EnterInfo", house);
         }
 
-        public ActionResult House(int houseid)
+        [HttpGet]
+        public ActionResult Edit(int houseId) {
+            //Finds a house using the house repo and then returns a form with the elements of the house in the form.
+            //The EnterInfo model/view can be reused, but a house id property needs to be added to both the model and the form.
+            //Renaming EnterInfo to a more descriptive name would be nice.
+            throw new NotImplementedException();
+        }
+
+        [HttpPost]
+        public ActionResult Edit() {
+            //Take in the form input
+            //Get a house from the house respository and update the properties based on input
+            //Save the updated house using the repository
+            //Be sure to use ModelState.IsValid and to validate whether or not the current user has permission to edit the house
+            throw new NotImplementedException();
+        }
+
+        public ActionResult Display(int houseid)
         {
             HouseDisplayModel house;
             using(var houserepo = new HouseRepository())
@@ -95,8 +109,10 @@ namespace SdProject.Controllers
         //    return RedirectToAction("PageView", "Account");
         //}
 
+        //UploadImage needs to be moved to the image controller
         public ActionResult UploadImage()
         {
+            
             return View();
         }
 
