@@ -9,7 +9,6 @@
 </hgroup>
 
 <section id="loginForm">
-@*<h2>If you dont have an acount, f**k you!</h2>*@
 @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
@@ -58,6 +57,8 @@
     </li>
 </ol>
 </section>
+
+    
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
