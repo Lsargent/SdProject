@@ -33,6 +33,12 @@ namespace SdProject.Models.HouseModels {
     }
 
     public class EnterInfo {
+
+        //public 
+
+
+        public int houseId { get; set;}
+
         public int MaximumRooms { get; set; }
 
         [Display(Name = "Street Address")]
