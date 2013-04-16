@@ -91,10 +91,12 @@ Released   : 20130217
 		</div>
 		<div id="menu">
 			<ul>
-				<li class="first active"><a href="#" accesskey="1" title="">@Html.ActionLink("Home", "Index", "Home")</a></li>
-				<li><a href="#" accesskey="2" title="">@Html.ActionLink("About Us", "About", "Home")</a></li>
-				<li><a href="#" accesskey="3" title="">@Html.ActionLink("Login", "Login", "Account")</a></li>
-				<li><a href="#" accesskey="4" title="">@Html.ActionLink("Register", "Register", "Account")</a></li>
+				<li>@Html.ActionLink("Home", "Index", "Home")</li>
+				<li>@Html.ActionLink("About Us", "About", "Home")</li>
+				@*<li><a href="#" accesskey="4" title="">@Html.ActionLink("Register", "Register", "Account")</a></li>*@
+                <section id="login">
+                        @Html.Partial("_LoginPartial")
+                    </section>
 			</ul>
 		</div>
 	</div>

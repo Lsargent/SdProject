@@ -16,7 +16,11 @@ namespace SdProject
                         "~/Scripts/jquery-ui-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.slidertron*",
+                        "~/Scripts/jquery.unobtrusive*",
+                        "~/Scripts/jquery.validate*"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jqueryslider").Include(
+                         "~/Scripts/jquery.slidertron*",
                         "~/Scripts/SlideFeature.js",
                         "~/Scripts/jquery.unobtrusive*",
                         "~/Scripts/jquery.validate*"));
