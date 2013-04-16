@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Data;
 using System.Data.Entity;
+using System.Data.Objects;
 using System.Linq;
 using System.Linq.Expressions;
 using Logic;
@@ -58,9 +60,11 @@ namespace DataAccess.Repositories {
         public virtual OperationStatus<TClass> InsertOrUpdate<TClass>(TClass item) where TClass : class, IObjectState, new() {
             var opStatus = new OperationStatus<TClass> { WasSuccessful = true };
             try {
-                opStatus.AddEffectedItem(Context.Set<TClass>().Attach(item));
+                opStatus.AddEffectedItem(Context.Set<TClass>().Add(item));
                 Context.ApplyStateChanges();
-                SaveChanges();
+
+                SaveChanges();  
+
                 opStatus.WasSuccessful = true;
             }
             catch (Exception e) {
@@ -71,7 +75,7 @@ namespace DataAccess.Repositories {
         }
 
         public virtual int SaveChanges() {
-            return Context.SaveChanges();
+                return Context.SaveChanges();     
         }
 
         public void Dispose()

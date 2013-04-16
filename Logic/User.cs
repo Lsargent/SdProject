@@ -7,7 +7,9 @@ using Logic.Helpers;
 namespace Logic {
     public class User : IObjectState, IEquatable<User> {
         
-        public User() {}
+        public User() {
+            OwnedEntities = new List<OwnedEntity>();
+        }
 
         public User(string email, string userName, Entity entity, Address address = null) {
             TrackingEnabled = true;
@@ -15,7 +17,8 @@ namespace Logic {
             Email = email;
             UserName = userName;
             Entity = entity;
-            PrimaryAddress = address;            
+            PrimaryAddress = address;
+            ViewPolicy = ViewPolicy.Open;
         }
 
         #region Backing Fields
@@ -23,6 +26,8 @@ namespace Logic {
         private string _userName;
         private Entity _entity;
         private Address _primaryAddress;
+        private ViewPolicy _viewPolicy;
+
         #endregion
 
         public int Id { get; set; }
@@ -62,6 +67,16 @@ namespace Logic {
         public virtual Entity Entity {
             get { return _entity; }
             set { _entity = ChangeTracker.Set(this, Entity, value); }
+        }
+
+        public ViewPolicy ViewPolicy {
+            get { return _viewPolicy; }
+            set {
+                if (TrackingEnabled && ObjectState == ObjectState.Unchanged && ViewPolicy != value) {
+                    ObjectState = ObjectState.Modified;
+                }
+                _viewPolicy = value;
+            }
         }
 
         [NotMapped]

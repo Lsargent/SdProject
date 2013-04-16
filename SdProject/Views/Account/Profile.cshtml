@@ -1,0 +1,24 @@
+﻿@model SdProject.Models.AccountModels.ProfileModel
+
+@{
+    ViewBag.Title = "DisplayProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.ProfileHeading()</h2>
+
+<div>
+    <div>
+        Houses
+    </div>
+    <div>
+        @if (Model.Houses.Any()) {
+            foreach (var house in Model.Houses) {
+                @Html.Partial("~/Views/House/_HousePreview.cshtml", house)
+            }
+        }
+        else {
+            @:@Model.UserName does not have any houses.
+        }
+    </div>
+</div>

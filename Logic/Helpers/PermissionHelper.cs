@@ -30,5 +30,23 @@ namespace Logic.Helpers {
             }
             return hasPermission;
         }
+
+        public static bool HasProfileViewPermision(User profileUser, User requestingUser) {
+            var viewPolicy = profileUser.ViewPolicy;
+            if (viewPolicy == ViewPolicy.Open) {
+                return true;
+            }
+            if (profileUser.Equals(requestingUser)) {
+                return true;
+            }
+            if (viewPolicy == ViewPolicy.Closed) {
+                return false;
+            }
+            var hasPermission = profileUser.Friends.Any(
+                                   friend =>
+                                      (friend.Initiator.Equals(requestingUser) || friend.Reciever.Equals(requestingUser)) &&
+                                      friend.Status == FriendshipStatus.Confirmed);
+            return hasPermission;
+        }
     }
 }

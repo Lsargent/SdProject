@@ -28,7 +28,7 @@ namespace SdProject.Controllers
                 using (var userRepo = new UserRepository()) {
                      user = userRepo.GetUserWithIncludes(WebSecurity.CurrentUserId, x => x.Messages, x => x.OwnedEntities, x => x.OwnedEntityChanges);
                 }
-
+                user.TrackingEnabled = true;
                 var newMessage = new Message(message.Subject,message.MessageBody, user,
                                     new OwnedEntity(user, ViewPolicy.Open,
                                         new OwnedEntityChange(Request, user)));
@@ -91,7 +91,7 @@ namespace SdProject.Controllers
 
                     if (opStatus.WasSuccessful)
                     {
-                        return PartialView("_DisplayMessageSubject", new DisplayMessageModel { MessageId = message.MessageId, UpdateTargetId = message.UpdateTargetId, Subject = message.Subject, HasEditPermision = true });
+                        return PartialView("_DisplayMessageSubject", new MessageDisplayModel { MessageId = message.MessageId, UpdateTargetId = message.UpdateTargetId, Subject = message.Subject, HasEditPermision = true });
                     }
                 }
             }
@@ -136,7 +136,7 @@ namespace SdProject.Controllers
                     }
 
                     if (opStatus.WasSuccessful) { 
-                        return PartialView("_DisplayMessageBody", new DisplayMessageModel { MessageId = message.MessageId, UpdateTargetId = message.UpdateTargetId, MessageBody = message.MessageBody, HasEditPermision = true });
+                        return PartialView("_DisplayMessageBody", new MessageDisplayModel { MessageId = message.MessageId, UpdateTargetId = message.UpdateTargetId, MessageBody = message.MessageBody, HasEditPermision = true });
                     }
                 }
             }
@@ -155,7 +155,7 @@ namespace SdProject.Controllers
                     x => x.OwnedEntity.OwnedHistory.Select(y => y.EditedbyUser)
                     ).ToList();
             }
-            var model = new MessageListingModel { Messages = messages.Select(message => new DisplayMessageModel(message, user)).ToList() };
+            var model = new MessageListingModel { Messages = messages.Select(message => new MessageDisplayModel(message, user)).ToList() };
 
             return (Request.IsAjaxRequest() ? (ActionResult)PartialView("_Listing", model) : View("Listing", model));
         }
@@ -171,7 +171,7 @@ namespace SdProject.Controllers
                     x => x.OwnedEntity.Owners,
                     x => x.OwnedEntity.OwnedHistory.Select(y => y.EditedbyUser));
             }
-            var model = new DisplayMessageModel(message, user);
+            var model = new MessageDisplayModel(message, user);
 
             return (Request.IsAjaxRequest() ? (ActionResult)PartialView("_DisplayMessageRoot", model) : View("DisplayMessage", model)); 
         }

@@ -15,7 +15,8 @@ namespace Logic {
             IpAddress = request.UserHostAddress;
             UserAgent = request.UserAgent;
             EditedOn = DateTime.Now;
-            EditedbyUser = user;          
+            EditedbyUser = user;
+            user.AddOwnedEntityChange(this);
         }
 
         #region Backing Fields
@@ -47,13 +48,17 @@ namespace Logic {
             set { _editedOn = ChangeTracker.Set(this, EditedOn, value); }
         }
 
-        [Required]
+        public int EditedbyUserId { get; set; }
+
+        [ForeignKey("EditedbyUserId")]
         public virtual User EditedbyUser {
             get { return _editedbyUser; }
             set { _editedbyUser = ChangeTracker.Set(this, EditedbyUser, value); }
         }
 
-        [Required]
+        public int OwnedEntityId { get; set; }
+
+        [ForeignKey("OwnedEntityId")]
         public virtual OwnedEntity OwnedEntity {
             get { return _ownedEntity; }
             set { _ownedEntity = ChangeTracker.Set(this, OwnedEntity, value); }

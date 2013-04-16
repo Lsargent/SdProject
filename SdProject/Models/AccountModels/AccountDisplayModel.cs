@@ -7,7 +7,7 @@ using SdProject.Models.HouseModels;
 
 namespace SdProject.Models.AccountModels 
 {
-    public class DisplayAccountModel 
+    public class AccountDisplayModel 
     {
         public User User { get; set; }
         public List<HouseDisplayModel> Houses { get; set; }

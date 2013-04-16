@@ -24,6 +24,7 @@ namespace DataAccess
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder) {
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            
         }
 
         public class DatabaseInitializer : CreateDatabaseIfNotExists<SdDb> {

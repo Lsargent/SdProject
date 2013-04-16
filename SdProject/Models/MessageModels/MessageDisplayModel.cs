@@ -5,11 +5,11 @@ using Logic;
 using Logic.Helpers;
 
 namespace SdProject.Models.MessageModels {
-    public class DisplayMessageModel 
+    public class MessageDisplayModel 
     {
-        public DisplayMessageModel() {}
+        public MessageDisplayModel() {}
 
-        public DisplayMessageModel(Message message, User currentUser) 
+        public MessageDisplayModel(Message message, User currentUser) 
         {
             MessageId = message.Id;
             Author = message.OwnedEntity.OwnedHistory.First().EditedbyUser.UserName;

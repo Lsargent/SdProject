@@ -18,6 +18,11 @@ namespace SdProject
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+                "Profile",
+                "Account/{userName}",
+                new {controller = "Account", action = "ProfileDisplay"}
+            );
         }
     }
 }

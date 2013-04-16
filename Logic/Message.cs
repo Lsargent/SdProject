@@ -8,13 +8,13 @@ namespace Logic {
        
         public Message() {}
 
-        public Message(string subject, string messageBody, User author ,OwnedEntity ownedEntity) {
+        public Message(string subject, string messageBody, User author, OwnedEntity ownedEntity) {
             TrackingEnabled = true;
             ObjectState = ObjectState.Added;
             Subject = subject;
             author.AddMessage(this);
             MessageBody = messageBody;
-            OwnedEntity = ownedEntity;     
+            OwnedEntity = ownedEntity;
         }
 
         #region Backing Fields

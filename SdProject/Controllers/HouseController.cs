@@ -31,8 +31,9 @@ namespace SdProject.Controllers
                 User user;
                 using (var userRepo = new UserRepository())
                 {
-                    user = userRepo.GetUserWithIncludes(WebSecurity.CurrentUserId, x => x.Houses);
+                    user = userRepo.GetUserWithIncludes(WebSecurity.CurrentUserId, u => u.Houses, u => u.OwnedEntities, u => u.OwnedEntityChanges);
                 }
+                user.TrackingEnabled = true;
                 var newHouse = new House(   new Address(house.StreetAddress, "", house.City, "Wyoming", house.ZipCode.ToString(), new OwnedEntity(user, ViewPolicy.Open, new OwnedEntityChange(Request, user))), 
                                             house.Style,
                                             house.FloorSpace,
@@ -43,8 +44,7 @@ namespace SdProject.Controllers
                                             house.Extras,
                                             new BaseComponent( new OwnedEntity(user, ViewPolicy.Open, new OwnedEntityChange(Request,  user))),
                                             house.HeatingType);
-                user.Houses.Add(newHouse);
-                user.ObjectState = ObjectState.Modified;
+
                 using(var houseRepo = new HouseRepository()){
                     houseRepo.InsertOrUpdate(newHouse);
                 }

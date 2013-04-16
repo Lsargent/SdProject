@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using Logic.Helpers;
 
 namespace Logic {
@@ -20,7 +22,8 @@ namespace Logic {
             Bedrooms = bedrooms;
             Bathrooms = bathrooms;
             Extras = extras;
-            BaseComponent = baseComponent;           
+            BaseComponent = baseComponent;
+            OwnerId = address.OwnedEntity.Owners.FirstOrDefault().Id;
         }
 
         #region Backing Fields
@@ -101,6 +104,11 @@ namespace Logic {
             get { return _baseComponent; }
             set { _baseComponent = ChangeTracker.Set(this, BaseComponent, value); }
         }
+
+        public int OwnerId { get; set; }
+
+        [ForeignKey("OwnerId")]
+        public virtual User Owner { get; set; }
 
         [NotMapped]
         public ObjectState ObjectState { get; set; }
