@@ -56,15 +56,16 @@
 @{
     ViewBag.Title = "Home Page";
 }
+
 @section featured {
      <section class="featured">
 <div id="slider">
 		<div class="viewer">
 			<div class="reel">
 				<div class="slide">
-					 <img src="images/pic09.jpg" alt="" /><p>Share your home with us.</p> </div>
+					 <img src="../images/pic09.jpg" alt="" /><p>Share your home with us.</p> </div>
 				<div class="slide">
-					<img src="images/pic10.jpg" alt="" /><p>And we'll share our home with you.</p> </div>
+					<img src="../images/pic10.jpg" alt="" /><p>And we'll share our home with you.</p> </div>
 			</div>
 		</div>
 		<div class="indicator">
@@ -79,7 +80,7 @@
     
     }
 @section scripts {
-             @Scripts.Render("~/bundles/jqueryval")
+             @Scripts.Render("~/bundles/jqueryslider")
              }
 
 @section bottom{
