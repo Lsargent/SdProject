@@ -168,10 +168,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AddressController.cs" />
+    <Compile Include="Controllers\BaseComponentController.cs" />
+    <Compile Include="Controllers\FriendsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HouseController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
+    <Compile Include="Controllers\MessageTreadController.cs" />
     <Compile Include="CustomValidators\FileSizeAttribute.cs" />
     <Compile Include="CustomValidators\FileTypesAttribute.cs" />
     <Compile Include="CustomValidators\RoomsValidator.cs" />
@@ -180,16 +184,20 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels\AccountModels.cs" />
-    <Compile Include="Models\AccountModels\DisplayAccountModel.cs" />
+    <Compile Include="Models\AccountModels\AccountDisplayModel.cs" />
     <Compile Include="Models\AccountModels\EditAddressModels.cs" />
+    <Compile Include="Models\AccountModels\ProfileModel.cs" />
     <Compile Include="Models\AddressModels\CreateAddressModel.cs" />
-    <Compile Include="Models\AddressModels\DisplayAddressModel.cs" />
+    <Compile Include="Models\AddressModels\AddressDisplayModel.cs" />
+    <Compile Include="Models\FriendshipModels\FriendshipDisplayModel.cs" />
     <Compile Include="Models\HouseModels\HouseDisplayModel.cs" />
-    <Compile Include="Models\ImageModel\UploadImage.cs" />
+    <Compile Include="Models\HouseModels\HousePreviewModel.cs" />
+    <Compile Include="Models\ImageModels\ImageDisplayModel.cs" />
+    <Compile Include="Models\ImageModels\UploadImage.cs" />
     <Compile Include="Models\MessageModels\CreateMessageModel.cs" />
     <Compile Include="Models\MessageModels\EditMessageModels.cs" />
     <Compile Include="Models\MessageModels\MessageListingModel.cs" />
-    <Compile Include="Models\MessageModels\DisplayMessageModel.cs" />
+    <Compile Include="Models\MessageModels\MessageDisplayModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -321,10 +329,9 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Message\_DisplayMessage.cshtml" />
     <Content Include="Views\Message\_Listing.cshtml" />
-    <Content Include="Views\Message\_Create.cshtml" />
+    <Content Include="Views\Message\_CreateMessage.cshtml" />
     <Content Include="Views\House\EnterInfo.cshtml" />
     <Content Include="Views\Account\PageView.cshtml" />
-    <Content Include="Views\Account\_DisplayAccountInfo.cshtml" />
     <Content Include="Views\Image\UploadImage.cshtml" />
     <Content Include="Views\Account\UploadImage.cshtml" />
     <Content Include="Views\Message\Listing.cshtml" />
@@ -335,7 +342,16 @@
     <Content Include="Views\Message\_DisplayMessageBody.cshtml" />
     <Content Include="Views\Message\_DisplayMessageSubject.cshtml" />
     <Content Include="Views\Message\_EditMessageSubject.cshtml" />
+    <Content Include="Views\Message\_DisplayMessageRoot.cshtml" />
     <Content Include="Views\House\UploadImage.cshtml" />
+    <Content Include="Views\Message\DisplayMessage.cshtml" />
+    <Content Include="Views\Message\_CreateMessageFormContent.cshtml" />
+    <Content Include="Views\Account\ProfileNotFound.cshtml" />
+    <Content Include="Views\Account\Profile.cshtml" />
+    <Content Include="Views\House\_HousePreview.cshtml" />
+    <Content Include="Views\House\_HousePreviewRoot.cshtml" />
+    <Content Include="Views\Image\_ImageDisplay.cshtml" />
+    <Content Include="Views\Address\_SmallAddressDisplay.cshtml" />
     <Content Include="Views\Test.cshtml" />
     <Content Include="Views\Test2.cshtml" />
   </ItemGroup>

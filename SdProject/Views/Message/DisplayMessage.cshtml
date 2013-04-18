@@ -1,0 +1,12 @@
+﻿@model SdProject.Models.MessageModels.MessageDisplayModel
+
+@{
+    ViewBag.Title = "DisplayMessage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>DisplayMessage</h2>
+
+<div>
+    @Html.Partial("_DisplayMessageRoot", Model)
+</div>
