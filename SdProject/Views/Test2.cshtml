@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+
+Name       : Refreshen 
+Description: A two-column, fixed-width design with dark color scheme.
+Version    : 1.0
+Released   : 20130217
+
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="jquery.slidertron-1.1.js"></script>
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600|Archivo+Narrow:400,700" rel="stylesheet" type="text/css" />
+<link href="default.css" rel="stylesheet" type="text/css" media="all" />
+<!--[if IE 6]>
+<link href="default_ie6.css" rel="stylesheet" type="text/css" />
+<![endif]-->
+</head>
+<body>
+<div id="header-wrapper">
+	<div id="header" class="container">
+		<div id="logo">
+			<h1><a href="#">Homefront</a></h1>
+		</div>
+		<div id="menu">
+			<ul>
+				<li class="first active"><a href="#" accesskey="1" title="">Homepage</a></li>
+				<li><a href="#" accesskey="2" title="">About Us</a></li>
+				<li><a href="#" accesskey="3" title="">Login</a></li>
+				<li><a href="#" accesskey="4" title="">Register</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div id="banner">
+	<div id="slider">
+		<div class="viewer">
+			<div class="reel">
+				<div class="slide">
+					 <img src="images/pic09.jpg" alt="" /><p>Share your home with us.</p> </div>
+				<div class="slide">
+					<img src="images/pic10.jpg" alt="" /><p>And we'll share our home with you.</p> </div>
+			</div>
+		</div>
+		<div class="indicator">
+			<ul>
+				<li class="active">1</li>
+				<li>2</li>
+			</ul>
+		</div>
+	</div>
+	<script type="text/javascript">
+	    $('#slider').slidertron({
+	        viewerSelector: '.viewer',
+	        reelSelector: '.viewer .reel',
+	        slidesSelector: '.viewer .reel .slide',
+	        advanceDelay: 10000,
+	        speed: 'slow',
+	        navPreviousSelector: '.previous-button',
+	        navNextSelector: '.next-button',
+	        indicatorSelector: '.indicator ul li',
+	        slideLinkSelector: '.link'
+	    });
+	</script> 
+</div>
+<div id="wrapper">
+	<div id="page" class="container">
+		<div id="content"> <img src="images/pic11.jpg" width="235" height="235" alt="" />
+			<h2>What is HomeFront?</h2>
+			<p><strong>HomeFront</strong> is one of the first social networks designed specifically for home owners.  Here you will be able to network with peers and show off the special home you have worked so hard to obtain.  Just register and begin entering information about your home, the sooner you share with us, the sooner you can share with friends!</p>
+		</div>
+		<div id="sidebar">
+			<div>
+				<h2>About Us</h2>
+				<ul class="style1">
+					<li class="first">
+						<p><strong>HomeFront</strong> was built and designed to showcase the abilities to create an extremely dynamic and safe web application using ASP.NET MVC4.  Click the link to learn more about the developers and the design of this application.  <a href="#">About Us</a></p>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="footer">
+	<p>CSS template created by <a href="http://www.freecsstemplates.org">FreeCssTemplates.org</a>.</p>
+</div>
+</body>
+</html>

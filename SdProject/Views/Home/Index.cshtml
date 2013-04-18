@@ -1,4 +1,6 @@
-﻿@{
+﻿@*OLD CODE*@
+
+@*@{
     ViewBag.Title = "Home Page";
 }
 @section featured {
@@ -42,4 +44,60 @@
         and price for your applications.
         <a href="http://go.microsoft.com/fwlink/?LinkId=245157">Learn more…</a>
     </li>
-</ol>
+</ol>*@
+
+
+
+
+
+
+@*NEW CODE*@
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@section featured {
+     <section class="featured">
+<div id="slider">
+		<div class="viewer">
+			<div class="reel">
+				<div class="slide">
+					 <img src="../images/pic09.jpg" alt="" /><p>Share your home with us.</p> </div>
+				<div class="slide">
+					<img src="../images/pic10.jpg" alt="" /><p>And we'll share our home with you.</p> </div>
+			</div>
+		</div>
+		<div class="indicator">
+			<ul>
+				<li class="active">1</li>
+				<li>2</li>
+			</ul>
+		</div>
+	</div>
+         
+         </section>
+    
+    }
+@section scripts {
+             @Scripts.Render("~/bundles/jqueryslider")
+             }
+
+@section bottom{
+
+<div id="content"> <img src="images/pic11.jpg" width="235" height="235" alt="" />
+			<h2>What is HomeFront?</h2>
+			<p><strong>HomeFront</strong> is one of the first social networks designed specifically for home owners.  Here you will be able to network with peers and show off the special home you have worked so hard to obtain.  Just register and begin entering information about your home, the sooner you share with us, the sooner you can share with friends!</p>
+		</div>
+		<div id="sidebar">
+			<div>
+				<h2>About Us</h2>
+				<ul class="style1">
+					<li class="first">
+						<p><strong>HomeFront</strong> was built and designed to showcase the abilities to create an extremely dynamic and safe web application using ASP.NET MVC4.  Click the link to learn more about the developers and the design of this application.  <a href="#">About Us</a></p>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+    }

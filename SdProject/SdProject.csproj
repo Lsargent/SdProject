@@ -201,6 +201,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Pics\pic09.jpg" />
+    <Content Include="Content\Pics\pic10.jpg" />
+    <Content Include="Content\Pics\pic11.jpg" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -255,9 +258,14 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\default.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
+    <Content Include="Images\logo.jpg" />
+    <Content Include="Images\pic09.jpg" />
+    <Content Include="Images\pic10.jpg" />
+    <Content Include="Images\pic11.jpg" />
     <Content Include="Scripts\jquery.imagedialog.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -268,6 +276,7 @@
     <Content Include="Scripts\jquery.imgareaselect.min.js" />
     <Content Include="Scripts\jquery.imgareaselect.pack.js" />
     <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\jquery.slidertron-1.1.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -277,6 +286,7 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\SlideFeature.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -289,9 +299,7 @@
     </Content>
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Images\accent.png" />
     <Content Include="Images\bullet.png" />
-    <Content Include="Images\heroAccent.png" />
     <Content Include="Images\orderedList0.png" />
     <Content Include="Images\orderedList1.png" />
     <Content Include="Images\orderedList2.png" />
@@ -344,12 +352,16 @@
     <Content Include="Views\House\_HousePreviewRoot.cshtml" />
     <Content Include="Views\Image\_ImageDisplay.cshtml" />
     <Content Include="Views\Address\_SmallAddressDisplay.cshtml" />
+    <Content Include="Views\Test.cshtml" />
+    <Content Include="Views\Test2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">
@@ -377,7 +389,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>52983</DevelopmentServerPort>
+          <DevelopmentServerPort>11751</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:1088/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
