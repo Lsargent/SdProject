@@ -3,5 +3,5 @@
 @{ Model.UpdateTargetId = "housePreview-" + Model.HouseId; }
 
 <div id="@Model.UpdateTargetId">
-    @Html.Partial("_HousePreview", Model);
+    @Html.Partial("~/Views/House/_HousePreview.cshtml", Model)
 </div>

@@ -350,7 +350,7 @@ namespace SdProject.Controllers
 
             using (var userRepo = new UserRepository()) {
                 currentUser = userRepo.Get<User>(u => u.Id == WebSecurity.CurrentUserId);
-                profileUser = userRepo.Get<User>(u => u.UserName == userName, u => u.Houses, u => u.Friends, u => u.Images, u => u.PrimaryAddress);
+                profileUser = userRepo.Get<User>(u => u.UserName == userName, u => u.Houses.Select(h => h.Address), u => u.Friends.Select(f => f.Initiator), u => u.Friends.Select(f => f.Reciever), u => u.Images, u => u.PrimaryAddress);
             }
 
             if (profileUser != null) {

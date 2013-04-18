@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Logic.Helpers {
     public static class PermissionHelper {
         public static bool HasEditPermission(OwnedEntity entity, User user) {
-             return entity.Owners.Any(u => u.Equals(user));
+             return entity.UserOwnedEntities.Any(uoe => uoe.User.Equals(user));
         }
         public static bool HasViewPermission(OwnedEntity entity, User user) {
             var viewPolicy = entity.ViewPolicy;
@@ -21,9 +21,9 @@ namespace Logic.Helpers {
                 return false;
             }
             var hasPermission = false;
-            foreach (var owner in entity.Owners) {
+            foreach (var uoe in entity.UserOwnedEntities) {
                 hasPermission = hasPermission ||
-                                owner.Friends.Any(
+                                uoe.User.Friends.Any(
                                     friend =>
                                     (friend.Initiator.Equals(user) || friend.Reciever.Equals(user)) &&
                                     friend.Status == FriendshipStatus.Confirmed);
@@ -31,7 +31,7 @@ namespace Logic.Helpers {
             return hasPermission;
         }
 
-        public static bool HasProfileViewPermision(User profileUser, User requestingUser) {
+        public static bool HasProfileViewPermission(User profileUser, User requestingUser) {
             var viewPolicy = profileUser.ViewPolicy;
             if (viewPolicy == ViewPolicy.Open) {
                 return true;
@@ -47,6 +47,10 @@ namespace Logic.Helpers {
                                       (friend.Initiator.Equals(requestingUser) || friend.Reciever.Equals(requestingUser)) &&
                                       friend.Status == FriendshipStatus.Confirmed);
             return hasPermission;
+        }
+
+        public static bool HasProfileEditPermission(User profileUser, User requestingUser) {
+            return profileUser.Equals(requestingUser);
         }
     }
 }

@@ -26,7 +26,7 @@ namespace SdProject.Controllers
                 User user;
                 
                 using (var userRepo = new UserRepository()) {
-                     user = userRepo.GetUserWithIncludes(WebSecurity.CurrentUserId, x => x.Messages, x => x.OwnedEntities, x => x.OwnedEntityChanges);
+                     user = userRepo.GetUserWithIncludes(WebSecurity.CurrentUserId, x => x.Messages, x => x.UserOwnedEntities, x => x.OwnedEntityChanges);
                 }
                 user.TrackingEnabled = true;
                 var newMessage = new Message(message.Subject,message.MessageBody, user,
@@ -76,7 +76,7 @@ namespace SdProject.Controllers
                 OperationStatus opStatus;
 
                 using (var messageRepo = new MessageRepository()) {
-                    messageToUpdate = messageRepo.Get<Message>(x => x.Id == message.MessageId, x => x.OwnedEntity.Owners.Select(owner => owner.Friends));
+                    messageToUpdate = messageRepo.Get<Message>(x => x.Id == message.MessageId, x => x.OwnedEntity.UserOwnedEntities.Select(uoe => uoe.User.Friends));
                 }
 
                 if (PermissionHelper.HasEditPermission(messageToUpdate.OwnedEntity, user))
@@ -124,7 +124,7 @@ namespace SdProject.Controllers
 
                 using (var messageRepo = new MessageRepository())
                 {
-                    messageToUpdate = messageRepo.Get<Message>(x => x.Id == message.MessageId, x => x.OwnedEntity.Owners);                             
+                    messageToUpdate = messageRepo.Get<Message>(x => x.Id == message.MessageId, x => x.OwnedEntity.UserOwnedEntities);                             
                 }
 
                 if(PermissionHelper.HasEditPermission(messageToUpdate.OwnedEntity, user)) {
@@ -151,7 +151,7 @@ namespace SdProject.Controllers
                 messages = messageRepo.GetAllWithIncludes<Message>(message => messageIds.Any(id => id == message.Id), 
                     x => x.OwnedEntity, 
                     x => x.OwnedEntity.OwnedHistory, 
-                    x => x.OwnedEntity.Owners, 
+                    x => x.OwnedEntity.UserOwnedEntities, 
                     x => x.OwnedEntity.OwnedHistory.Select(y => y.EditedbyUser)
                     ).ToList();
             }
@@ -168,7 +168,7 @@ namespace SdProject.Controllers
                 message = messageRepo.Get<Message>(x => x.Id == messageId,
                     x => x.OwnedEntity,
                     x => x.OwnedEntity.OwnedHistory,
-                    x => x.OwnedEntity.Owners,
+                    x => x.OwnedEntity.UserOwnedEntities,
                     x => x.OwnedEntity.OwnedHistory.Select(y => y.EditedbyUser));
             }
             var model = new MessageDisplayModel(message, user);

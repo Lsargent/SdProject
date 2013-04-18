@@ -12,7 +12,7 @@ namespace Logic {
             TrackingEnabled = true;
             ObjectState = ObjectState.Added;
             OwnedHistory = new List<OwnedEntityChange>();
-            Owners = new List<User>();
+            UserOwnedEntities = new List<UserOwnedEntity>();
             ViewPolicy = viewPolicy;
             AddEntityChange(ownedEntityChange);
             AddOwner(user);
@@ -24,7 +24,7 @@ namespace Logic {
 
         public int Id { get; set; }
 
-        public virtual ICollection<User> Owners { get; set; }
+        public virtual ICollection<UserOwnedEntity> UserOwnedEntities { get; set; }
 
         public ViewPolicy ViewPolicy {
             get { return _viewPolicy; }
@@ -49,8 +49,9 @@ namespace Logic {
         }
 
         public void AddOwner(User user) {
-            ChangeTracker.AddToCollection(this, Owners, user);
-            user.AddOwnedEntity(this);
+            var uoe = new UserOwnedEntity(user, this);
+            ChangeTracker.AddToCollection(this, UserOwnedEntities, uoe);      
+            user.AddUserOwnedEntity(uoe);
         }
 
         public bool Equals(OwnedEntity other) {

@@ -13,6 +13,7 @@ namespace Logic {
         public House(Address address, string style, double floorSpace, int roomCount, int storyCount, int bedrooms, int bathrooms, string extras, BaseComponent baseComponent, string heatingType = "None") {
             TrackingEnabled = true;
             ObjectState = ObjectState.Added;
+            AddressId = address.Id;
             Address = address;
             Style = style;
             FloorSpace = floorSpace;
@@ -22,8 +23,9 @@ namespace Logic {
             Bedrooms = bedrooms;
             Bathrooms = bathrooms;
             Extras = extras;
+            BaseComponentId = baseComponent.Id;
             BaseComponent = baseComponent;
-            OwnerId = address.OwnedEntity.Owners.FirstOrDefault().Id;
+            OwnerId = address.OwnedEntity.UserOwnedEntities.FirstOrDefault().UserId;
         }
 
         #region Backing Fields
@@ -37,12 +39,21 @@ namespace Logic {
         private int _bathrooms;
         private string _extras;
         private BaseComponent _baseComponent;
+        private int _baseComponentId;
+        private int _addressId;
+
         #endregion
 
 
         [Key]
         public int Id { get; set; }
 
+        public int AddressId {
+            get { return _addressId; }
+            set { _addressId = ChangeTracker.Set(this, AddressId, value); }
+        }
+
+        [ForeignKey("AddressId")]
         public Address Address {
             get { return _address; }
             set { _address = ChangeTracker.Set(this, Address, value); }
@@ -99,7 +110,12 @@ namespace Logic {
             set { _extras = ChangeTracker.Set(this, Extras, value); }
         }
 
-        [Required]
+        public int BaseComponentId {
+            get { return _baseComponentId; }
+            set { _baseComponentId = ChangeTracker.Set(this, BaseComponentId, value); }
+        }
+
+        [ForeignKey("BaseComponentId")]
         public virtual BaseComponent BaseComponent {
             get { return _baseComponent; }
             set { _baseComponent = ChangeTracker.Set(this, BaseComponent, value); }

@@ -31,7 +31,7 @@ namespace SdProject.Controllers
                 User user;
                 using (var userRepo = new UserRepository())
                 {
-                    user = userRepo.GetUserWithIncludes(WebSecurity.CurrentUserId, u => u.Houses, u => u.OwnedEntities, u => u.OwnedEntityChanges);
+                    user = userRepo.GetUserWithIncludes(WebSecurity.CurrentUserId, u => u.Houses, u => u.UserOwnedEntities, u => u.OwnedEntityChanges);
                 }
                 user.TrackingEnabled = true;
                 var newHouse = new House(   new Address(house.StreetAddress, "", house.City, "Wyoming", house.ZipCode.ToString(), new OwnedEntity(user, ViewPolicy.Open, new OwnedEntityChange(Request, user))), 
@@ -70,14 +70,14 @@ namespace SdProject.Controllers
             throw new NotImplementedException();
         }
 
-        public ActionResult Display(int houseid)
+        public ActionResult Display(int houseId)
         {
             HouseDisplayModel house;
             using(var houserepo = new HouseRepository())
             {
-                house = new HouseDisplayModel(houserepo.GetHouse(houseid));
+                house = new HouseDisplayModel(houserepo.Get<House>(h => h.Id == houseId, h => h.Address, h => h.BaseComponent.MessageThreads));
             }
-            return View("_House", house);
+            return Request.IsAjaxRequest() ? (ActionResult)PartialView("_House", house) : View("_House", house);
         }
 
         //[HttpPost]

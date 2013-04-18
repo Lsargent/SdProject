@@ -7,9 +7,7 @@ using Logic.Helpers;
 namespace Logic {
     public class User : IObjectState, IEquatable<User> {
         
-        public User() {
-            OwnedEntities = new List<OwnedEntity>();
-        }
+        public User() {}
 
         public User(string email, string userName, Entity entity, Address address = null) {
             TrackingEnabled = true;
@@ -60,7 +58,7 @@ namespace Logic {
 
         public virtual ICollection<Message> Messages { get; set; }
 
-        public virtual ICollection<OwnedEntity> OwnedEntities { get; set; }
+        public virtual ICollection<UserOwnedEntity> UserOwnedEntities { get; set; }
 
         public virtual ICollection<OwnedEntityChange> OwnedEntityChanges { get; set; }
 
@@ -105,8 +103,8 @@ namespace Logic {
             ChangeTracker.AddToCollection(this, Messages, message);
         }
 
-        public void AddOwnedEntity(OwnedEntity entity) {
-            ChangeTracker.AddToCollection(this, OwnedEntities, entity);
+        public void AddUserOwnedEntity(UserOwnedEntity entity) {
+            ChangeTracker.AddToCollection(this, UserOwnedEntities, entity);
         }
 
         public void AddOwnedEntityChange(OwnedEntityChange entityChange) {

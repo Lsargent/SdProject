@@ -18,9 +18,9 @@ namespace SdProject.Models.HouseModels {
             Bedrooms = house.Bedrooms;
             Bathrooms = house.Bathrooms;
             Address = new AddressDisplayModel(house.Address);
-            if(house.BaseComponent.Images != null) {
-                Image = new ImageDisplayModel(house.BaseComponent.Images.First());
-            }
+            //if(house.BaseComponent.Images != null) {
+            //    Image = new ImageDisplayModel(house.BaseComponent.Images.First());
+            //}
             //default the image.
         }
 

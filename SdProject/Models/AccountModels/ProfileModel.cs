@@ -22,7 +22,8 @@ namespace SdProject.Models.AccountModels {
             Friends = profileUser.Friends.Select(f => new FriendshipDisplayModel(f)).ToList();
             Houses = profileUser.Houses.Select(h => new HousePreviewModel(h)).ToList();
             Images = profileUser.Images.Select(i => new ImageDisplayModel(i)).ToList();
-            HasViewPermission = PermissionHelper.HasProfileViewPermision(profileUser, requestingUser);
+            HasViewPermision = PermissionHelper.HasProfileViewPermission(profileUser, requestingUser);
+            HasEditPermision = PermissionHelper.HasProfileEditPermission(profileUser, requestingUser);
             IsProfileOwner = profileUser.Equals(requestingUser);
         }
 
@@ -34,7 +35,9 @@ namespace SdProject.Models.AccountModels {
 
         public bool IsProfileOwner { get; set; }
 
-        public bool HasViewPermission { get; set; }
+        public bool HasViewPermision { get; set; }
+
+        public bool HasEditPermision { get; set; }
 
         public AddressDisplayModel PrimaryAddress { get; set; }
 
