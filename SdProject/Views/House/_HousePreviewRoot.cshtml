@@ -1,0 +1,7 @@
+﻿@model SdProject.Models.HouseModels.HousePreviewModel
+
+@{ Model.UpdateTargetId = "housePreview-" + Model.HouseId; }
+
+<div id="@Model.UpdateTargetId">
+    @Html.Partial("~/Views/House/_HousePreview.cshtml", Model)
+</div>

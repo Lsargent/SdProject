@@ -4,6 +4,6 @@ namespace SdProject.Models.MessageModels
 {
     public class MessageListingModel 
     {
-        public List<DisplayMessageModel> Messages { get; set; }
+        public ICollection<MessageDisplayModel> Messages { get; set; }
     }
 }

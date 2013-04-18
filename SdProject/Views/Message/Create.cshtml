@@ -3,11 +3,10 @@
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    Model.UpdateTargetId = "messageContainer";
 }
 
 <h2>Create</h2>
 
 <div id="@Model.UpdateTargetId">
-    @Html.Partial("_Create", Model)
+    @Html.Partial("_CreateMessage", Model)
 </div>
