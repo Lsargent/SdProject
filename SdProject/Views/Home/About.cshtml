@@ -2,10 +2,15 @@
     ViewBag.Title = "About";
 }
 
-<hgroup class="title">
+
+@*<hgroup class="title">*@
+<div id="slider">
+    <div class="viewer">
     <h1>@ViewBag.Title.</h1>
     <h2>@ViewBag.Message</h2>
-</hgroup>
+
+@*</hgroup>*@
+
 
 <article>
     <p>
@@ -32,3 +37,6 @@
         <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
     </ul>
 </aside>
+
+            </div>
+    </div>

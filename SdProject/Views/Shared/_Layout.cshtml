@@ -87,14 +87,18 @@ Released   : 20130217
 <div id="header-wrapper">
 	<div id="header" class="container">
 		<div id="logo">
-			<h1><img src="http://images6.fanpop.com/image/forum/155000/155912_1349666722807_full.jpg" height="20" width="50" /></h1>
+			<h1><a><img src="../images/logo.jpg" height="75" width="75" /> HomeFront</a></h1>
 		</div>
 		<div id="menu">
 			<ul>
-				<li class="first active"><a href="#" accesskey="1" title="">@Html.ActionLink("Home", "Index", "Home")</a></li>
-				<li><a href="#" accesskey="2" title="">@Html.ActionLink("About Us", "About", "Home")</a></li>
-				<li><a href="#" accesskey="3" title="">@Html.ActionLink("Login", "Login", "Account")</a></li>
-				<li><a href="#" accesskey="4" title="">@Html.ActionLink("Register", "Register", "Account")</a></li>
+				<li>@Html.ActionLink("Home", "Index", "Home")</li>
+				<li>@Html.ActionLink("About Us", "About", "Home")</li>
+                    <li>           
+                        <section id="login">
+                            @Html.Partial("_LoginPartial")
+                        </section>
+                    </li>
+               
 			</ul>
 		</div>
 	</div>

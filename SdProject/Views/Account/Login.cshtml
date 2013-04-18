@@ -4,14 +4,14 @@
     ViewBag.Title = "Log-in";
 }
 
+@*<hgroup class="title">*@
+<div id="slider">
+    <div class="viewer">
+    <h1>@ViewBag.Title.</h1>
+
+@*</hgroup>*@
+
 <section id="loginForm">
-    <div id="page" class="container">
-
-<hgroup class="title">
-    <h2>@ViewBag.Title</h2>
-</hgroup>
-
-
 @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
