@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using Logic;
 using DataAccess.Repositories;
@@ -15,11 +16,7 @@ namespace SdProject.Controllers
         //
         // GET: /House/
 
-        public ActionResult Index()
-        {
-            return View();
-        }
-
+        
         [AllowAnonymous]
         public ActionResult EnterInfo()
         {
@@ -32,15 +29,12 @@ namespace SdProject.Controllers
             if (ModelState.IsValid)
             {
                 User user;
-                List<House> Houses;
                 using (var userRepo = new UserRepository())
                 {
-                    user = userRepo.GetUser(WebSecurity.CurrentUserId);
-                    Houses = user.Houses;
+                    user = userRepo.GetUserWithIncludes(WebSecurity.CurrentUserId, u => u.Houses, u => u.UserOwnedEntities, u => u.OwnedEntityChanges);
                 }
-                var newHouse = new House(   house.StreetAddress,
-                                            house.City,
-                                            house.ZipCode,
+                user.TrackingEnabled = true;
+                var newHouse = new House(   new Address(house.StreetAddress, "", house.City, "Wyoming", house.ZipCode.ToString(), new OwnedEntity(user, ViewPolicy.Open, new OwnedEntityChange(Request, user))), 
                                             house.Style,
                                             house.FloorSpace,
                                             house.RoomCount,
@@ -50,8 +44,7 @@ namespace SdProject.Controllers
                                             house.Extras,
                                             new BaseComponent( new OwnedEntity(user, ViewPolicy.Open, new OwnedEntityChange(Request,  user))),
                                             house.HeatingType);
-                Houses.Add(newHouse);
-                user.ObjectState = ObjectState.Modified;
+
                 using(var houseRepo = new HouseRepository()){
                     houseRepo.InsertOrUpdate(newHouse);
                 }
@@ -60,14 +53,46 @@ namespace SdProject.Controllers
             return View("EnterInfo", house);
         }
 
-        public ActionResult House(int houseid)
+        [HttpGet]
+        public ActionResult Edit(int houseId) {
+            //Finds a house using the house repo and then returns a form with the elements of the house in the form.
+            //The EnterInfo model/view can be reused, but a house id property needs to be added to both the model and the form.
+            //Renaming EnterInfo to a more descriptive name would be nice.
+            throw new NotImplementedException();
+        }
+
+        [HttpPost]
+        public ActionResult Edit() {
+            //Take in the form input
+            //Get a house from the house respository and update the properties based on input
+            //Save the updated house using the repository
+            //Be sure to use ModelState.IsValid and to validate whether or not the current user has permission to edit the house
+            throw new NotImplementedException();
+        }
+
+        public ActionResult Display(int houseId)
         {
             HouseDisplayModel house;
             using(var houserepo = new HouseRepository())
             {
-                house = new HouseDisplayModel(houserepo.GetHouse(houseid));
+                house = new HouseDisplayModel(houserepo.Get<House>(h => h.Id == houseId, h => h.Address, h => h.BaseComponent.MessageThreads));
             }
-            return View("_House", house);
+            return Request.IsAjaxRequest() ? (ActionResult)PartialView("_House", house) : View("_House", house);
+        }
+
+        public ActionResult EditHouse(int houseId)
+        {
+            EnterInfo houseModel;
+            using (var houserepo = new HouseRepository())
+            {
+                houseModel = new EnterInfo(houserepo.GetHouse(houseId));
+            }
+            return View();
+        }
+
+        public ActionResult EditInfo(EnterInfo house)
+        {
+            
         }
 
         //[HttpPost]
@@ -99,8 +124,10 @@ namespace SdProject.Controllers
         //    return RedirectToAction("PageView", "Account");
         //}
 
+        //UploadImage needs to be moved to the image controller
         public ActionResult UploadImage()
         {
+            
             return View();
         }
 

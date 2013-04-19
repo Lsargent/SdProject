@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Transactions;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using DataAccess;
@@ -11,15 +10,8 @@ using Logic;
 using Microsoft.Web.WebPages.OAuth;
 using SdProject.Models.HouseModels;
 using WebMatrix.WebData;
-using SdProject.Filters;
 using SdProject.Models.AccountModels;
 using DataAccess.Repositories;
-using SdProject.Models;
-using System.Drawing;
-using System.Net;
-using System.IO;
-using System.Drawing.Drawing2D;
-using System.Linq.Expressions;
 
 namespace SdProject.Controllers
 {
@@ -341,19 +333,33 @@ namespace SdProject.Controllers
             return PartialView("_RemoveExternalLoginsPartial", externalLogins);
         }
 
-        public ActionResult UploadImage()
-        {
-            return View();
-        }
-
         public ActionResult PageView()
         {
             User user;
             using (var userrepo = new UserRepository())
             {
                 user = userrepo.GetUser(WebSecurity.CurrentUserId);
-                return View(new DisplayAccountModel() { User = user, Houses = user.Houses.Select(house => new HouseDisplayModel(house)).ToList() });
+                return View(new AccountDisplayModel() { User = user, Houses = user.Houses.Select(house => new HouseDisplayModel(house)).ToList() });
         
+            }
+        }
+
+        public ActionResult ProfileDisplay(string userName) {
+            User currentUser;
+            User profileUser;
+
+            using (var userRepo = new UserRepository()) {
+                currentUser = userRepo.Get<User>(u => u.Id == WebSecurity.CurrentUserId);
+                profileUser = userRepo.Get<User>(u => u.UserName == userName, u => u.Houses.Select(h => h.Address), u => u.Friends.Select(f => f.Initiator), u => u.Friends.Select(f => f.Reciever), u => u.Images, u => u.PrimaryAddress);
+            }
+
+            if (profileUser != null) {
+                var model = new ProfileModel(profileUser, currentUser);
+                return View("Profile", model);
+            }
+            else {
+                ViewBag.UserName = userName;
+                return View("ProfileNotFound");
             }
         }
 

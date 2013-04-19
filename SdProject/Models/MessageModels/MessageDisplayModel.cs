@@ -2,13 +2,14 @@
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Logic;
+using Logic.Helpers;
 
 namespace SdProject.Models.MessageModels {
-    public class DisplayMessageModel 
+    public class MessageDisplayModel 
     {
-        public DisplayMessageModel() {}
+        public MessageDisplayModel() {}
 
-        public DisplayMessageModel(Message message, User currentUser) 
+        public MessageDisplayModel(Message message, User currentUser) 
         {
             MessageId = message.Id;
             Author = message.OwnedEntity.OwnedHistory.First().EditedbyUser.UserName;
@@ -17,8 +18,8 @@ namespace SdProject.Models.MessageModels {
             Created = message.OwnedEntity.OwnedHistory.First().EditedOn;
             LastModified = message.OwnedEntity.OwnedHistory.Last().EditedOn;
             LastModifiedBy = message.OwnedEntity.OwnedHistory.Last().EditedbyUser.UserName;
-            HasEditPermision = (message.OwnedEntity.Owners.Any(user => user.Id == currentUser.Id) ? true : false);
-            HasViewPermision = true;
+            HasEditPermision = PermissionHelper.HasEditPermission(message.OwnedEntity, currentUser);
+            HasViewPermision = PermissionHelper.HasViewPermission(message.OwnedEntity, currentUser);
         }
         public int MessageId { get; set; }
 

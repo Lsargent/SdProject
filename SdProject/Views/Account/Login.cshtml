@@ -1,7 +1,7 @@
 ﻿@model SdProject.Models.AccountModels.LoginModel
 
 @{
-    ViewBag.Title = "Log in";
+    ViewBag.Title = "Log-in";
 }
 
 @*<hgroup class="title">*@
@@ -16,53 +16,37 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    <fieldset>
         <legend>Log in Form</legend>
+        <br />
         <ol>
             <li>
-                @Html.LabelFor(m => m.UserName)
+                <h3>@Html.LabelFor(m => m.UserName)</h3>
                 @Html.TextBoxFor(m => m.UserName)
                 @Html.ValidationMessageFor(m => m.UserName)
             </li>
+            <br />
             <li>
-                @Html.LabelFor(m => m.Password)
+               <h3>@Html.LabelFor(m => m.Password)</h3>
                 @Html.PasswordFor(m => m.Password)
                 @Html.ValidationMessageFor(m => m.Password)
             </li>
+            <br />
             <li>
-                @Html.CheckBoxFor(m => m.RememberMe)
-                @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
+                <h3>@Html.CheckBoxFor(m => m.RememberMe)@Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })</h3>
             </li>
         </ol>
+    <br />
         <input type="submit" value="Log in" />
-    </fieldset>
-    <p>
-        @Html.ActionLink("Register", "Register") if you don't have an account.
-    </p>
+    <br />
+    <br />
+    <br />
+    <h2>
+       No account? @Html.ActionLink("Register", "Register") here.
+    </h2>
 }
 </section>
 
-<section class="social" id="socialLoginForm">
-    <ol class="round">
-    <li class="one">
-        <h5>Prolly put something excited to say here!</h5>  
-        Text
-    </li>
 
-    <li class="two">
-        <h5>And here!</h5>
-        Text
-    </li>
-
-    <li class="three">
-        <h5>And Here!</h5>
-        Text
-    </li>
-</ol>
-</section>
-
-        </div>
-    </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

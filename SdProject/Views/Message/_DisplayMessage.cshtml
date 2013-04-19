@@ -1,31 +1,29 @@
-﻿@model SdProject.Models.MessageModels.DisplayMessageModel
+﻿@model SdProject.Models.MessageModels.MessageDisplayModel
 
-<div id="message-@Model.MessageId"class="messageWrapper">
-    <div class="authorSummery">
-        <div> Author: @Model.Author</div>         
-    </div> 
-    <div>
-        @{ Model.UpdateTargetId = "message-" + Model.MessageId + "-Subject"; }
-        <div class="messageHeadline">
-            <div id="@Model.UpdateTargetId">
-                @Html.Partial("_DisplayMessageSubject", Model)
-            </div>
-            <div>
-                @Html.LabelFor(message => message.Created)
-                @Html.DisplayFor(message => message.Created)
-            </div>
+<div class="authorSummery">
+    <div> Author: @Model.Author</div>         
+</div> 
+<div>
+    @{ Model.UpdateTargetId = "message-" + Model.MessageId + "-Subject"; }
+    <div class="messageHeadline">
+        <div id="@Model.UpdateTargetId">
+            @Html.Partial("_DisplayMessageSubject", Model)
         </div>
-        @{ Model.UpdateTargetId = "message-" + Model.MessageId + "-Body"; }
-        <div id="@Model.UpdateTargetId">         
-            @Html.Partial("_DisplayMessageBody", Model)
+        <div>
+            @Html.LabelFor(message => message.Created)
+            @Html.DisplayFor(message => message.Created)
         </div>
-        <div class="messageRevision">
-            @if(@Model.LastModified != @Model.Created) {
-                <div>LastModified: @Model.LastModified</div>
-            }
-            @if(@Model.LastModifiedBy != @Model.Author) {
-                <div>Last Modified By: @Model.LastModifiedBy</div>
-            }
-        </div>
-    </div>         
-</div>    
+    </div>
+    @{ Model.UpdateTargetId = "message-" + Model.MessageId + "-Body"; }
+    <div id="@Model.UpdateTargetId">         
+        @Html.Partial("_DisplayMessageBody", Model)
+    </div>
+    <div class="messageRevision">
+        @if(@Model.LastModified != @Model.Created) {
+            <div>LastModified: @Model.LastModified</div>
+        }
+        @if(@Model.LastModifiedBy != @Model.Author) {
+            <div>Last Modified By: @Model.LastModifiedBy</div>
+        }
+    </div>
+</div>       

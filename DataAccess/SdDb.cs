@@ -24,6 +24,7 @@ namespace DataAccess
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder) {
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            modelBuilder.Entity<UserOwnedEntity>().HasKey(uoe => new {uoe.UserId, uoe.OwnedEntityId});
         }
 
         public class DatabaseInitializer : CreateDatabaseIfNotExists<SdDb> {

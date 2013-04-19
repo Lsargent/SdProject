@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using Logic;
 using System.Web;
 using SdProject.CustomValidators;
@@ -6,9 +7,9 @@ using SdProject.CustomValidators;
 namespace SdProject.Models.HouseModels {
     public class HouseDisplayModel {
         public HouseDisplayModel(House house) {
-            StreetAddress = house.StreetAddress;
-            City = house.City;
-            ZipCode = house.ZipCode;
+            StreetAddress = house.Address.StreetAddress;
+            City = house.Address.City;
+            ZipCode = Convert.ToInt32(house.Address.ZipCode);
             Style = house.Style;
             FloorSpace = house.FloorSpace;
             RoomCount = house.RoomCount;
@@ -33,6 +34,12 @@ namespace SdProject.Models.HouseModels {
     }
 
     public class EnterInfo {
+
+        //public 
+
+
+        public int houseId { get; set;}
+
         public int MaximumRooms { get; set; }
 
         [Display(Name = "Street Address")]
