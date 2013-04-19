@@ -80,20 +80,20 @@ namespace SdProject.Controllers
             return Request.IsAjaxRequest() ? (ActionResult)PartialView("_House", house) : View("_House", house);
         }
 
-        public ActionResult EditHouse(int houseId)
-        {
+        //public ActionResult EditHouse(int houseId)
+        //{
             EnterInfo houseModel;
-            using (var houserepo = new HouseRepository())
-            {
-                houseModel = new EnterInfo(houserepo.GetHouse(houseId));
-            }
-            return View();
-        }
+            //using (var houserepo = new HouseRepository())
+            //{
+                //houseModel = new EnterInfo(houserepo.GetHouse(houseId));
+            //}
+            //return View();
+        //}
 
-        public ActionResult EditInfo(EnterInfo house)
-        {
+        //public ActionResult EditInfo(EnterInfo house)
+        //{
             
-        }
+        //}
 
         //[HttpPost]
         //public ActionResult UploadImage(HttpPostedFileBase photo)
