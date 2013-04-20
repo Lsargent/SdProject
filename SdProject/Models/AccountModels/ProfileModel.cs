@@ -7,7 +7,6 @@ using Logic.Helpers;
 using SdProject.Models.AddressModels;
 using SdProject.Models.FriendshipModels;
 using SdProject.Models.HouseModels;
-using SdProject.Models.ImageModel;
 using SdProject.Models.ImageModels;
 
 namespace SdProject.Models.AccountModels {

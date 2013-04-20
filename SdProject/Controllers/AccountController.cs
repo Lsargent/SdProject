@@ -338,7 +338,7 @@ namespace SdProject.Controllers
             User user;
             using (var userrepo = new UserRepository())
             {
-                user = userrepo.GetUser(WebSecurity.CurrentUserId);
+                user = userrepo.Get<User>(u => u.Id == WebSecurity.CurrentUserId, u => u.Houses.Select(h => h.Address));
                 return View(new AccountDisplayModel() { User = user, Houses = user.Houses.Select(house => new HouseDisplayModel(house)).ToList() });
         
             }

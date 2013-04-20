@@ -80,20 +80,20 @@ namespace SdProject.Controllers
             return Request.IsAjaxRequest() ? (ActionResult)PartialView("_House", house) : View("_House", house);
         }
 
-        public ActionResult EditHouse(int houseId)
-        {
-            EnterInfo houseModel;
-            using (var houserepo = new HouseRepository())
-            {
-                houseModel = new EnterInfo(houserepo.GetHouse(houseId));
-            }
-            return View();
-        }
+        //public ActionResult EditHouse(int houseId)
+        //{
+        //    EnterInfo houseModel;
+        //    using (var houserepo = new HouseRepository())
+        //    {
+        //        houseModel = new EnterInfo(houserepo.GetHouse(houseId));
+        //    }
+        //    return View();
+        //}
 
-        public ActionResult EditInfo(EnterInfo house)
-        {
+        //public ActionResult EditInfo(EnterInfo house)
+        //{
             
-        }
+        //}
 
         //[HttpPost]
         //public ActionResult UploadImage(HttpPostedFileBase photo)
@@ -124,28 +124,7 @@ namespace SdProject.Controllers
         //    return RedirectToAction("PageView", "Account");
         //}
 
-        //UploadImage needs to be moved to the image controller
-        public ActionResult UploadImage()
-        {
-            
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult UploadImage(UploadImageModel fileModel)
-        {
-            string path = @"Desktop";
-
-            if (ModelState.IsValid)
-            {
-                if (fileModel != null && fileModel.File != null)
-                    fileModel.File.SaveAs(path + fileModel.File.FileName);
-
-                return RedirectToAction("PageView", "Account");
-            }
-
-            return View();
-        }
+        
 
         
     }
