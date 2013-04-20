@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using Logic;
 using SdProject.Models.AddressModels;
-using SdProject.Models.ImageModel;
+using SdProject.Models.ImageModels;
 using SdProject.Models.ImageModels;
 
 namespace SdProject.Models.HouseModels {

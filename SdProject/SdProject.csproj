@@ -343,7 +343,6 @@
     <Content Include="Views\Message\_DisplayMessageSubject.cshtml" />
     <Content Include="Views\Message\_EditMessageSubject.cshtml" />
     <Content Include="Views\Message\_DisplayMessageRoot.cshtml" />
-    <Content Include="Views\House\UploadImage.cshtml" />
     <Content Include="Views\Message\DisplayMessage.cshtml" />
     <Content Include="Views\Message\_CreateMessageFormContent.cshtml" />
     <Content Include="Views\Account\ProfileNotFound.cshtml" />

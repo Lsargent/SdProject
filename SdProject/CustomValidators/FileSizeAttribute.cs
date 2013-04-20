@@ -19,7 +19,7 @@ namespace SdProject.CustomValidators
         {
             if (value == null) return true;
 
-            return _maxSize > (value as HttpPostedFile).ContentLength;
+            return _maxSize > (value as HttpPostedFileBase).ContentLength;
         }
 
         public override string FormatErrorMessage(string name)
