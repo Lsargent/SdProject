@@ -34,7 +34,9 @@ namespace SdProject.Controllers
                     user = userRepo.GetUserWithIncludes(WebSecurity.CurrentUserId, u => u.Houses, u => u.UserOwnedEntities, u => u.OwnedEntityChanges);
                 }
                 user.TrackingEnabled = true;
-                var newHouse = new House(   new Address(house.StreetAddress, "", house.City, "Wyoming", house.ZipCode.ToString(), new OwnedEntity(user, ViewPolicy.Open, new OwnedEntityChange(Request, user))), 
+                var newHouse = new House(   new Address(house.StreetAddress, "", house.City, "Wyoming", house.ZipCode.ToString(), 
+                                                new OwnedEntity(user, ViewPolicy.Open, 
+                                                    new OwnedEntityChange(Request, user))), 
                                             house.Style,
                                             house.FloorSpace,
                                             house.RoomCount,
@@ -42,7 +44,9 @@ namespace SdProject.Controllers
                                             house.Bedrooms,
                                             house.Bathrooms,
                                             house.Extras,
-                                            new BaseComponent( new OwnedEntity(user, ViewPolicy.Open, new OwnedEntityChange(Request,  user))),
+                                            new BaseComponent( 
+                                                new OwnedEntity(user, ViewPolicy.Open, 
+                                                    new OwnedEntityChange(Request,  user))),
                                             house.HeatingType);
 
                 using(var houseRepo = new HouseRepository()){
@@ -80,20 +84,20 @@ namespace SdProject.Controllers
             return Request.IsAjaxRequest() ? (ActionResult)PartialView("_House", house) : View("_House", house);
         }
 
-        public ActionResult EditHouse(int houseId)
-        {
-            EnterInfo houseModel;
-            using (var houserepo = new HouseRepository())
-            {
-                houseModel = new EnterInfo(houserepo.GetHouse(houseId));
-            }
-            return View();
-        }
+        //public ActionResult EditHouse(int houseId)
+        //{
+        //    EnterInfo houseModel;
+        //    using (var houserepo = new HouseRepository())
+        //    {
+        //        houseModel = new EnterInfo(houserepo.GetHouse(houseId));
+        //    }
+        //    return View();
+        //}
 
-        public ActionResult EditInfo(EnterInfo house)
-        {
+        //public ActionResult EditInfo(EnterInfo house)
+        //{
             
-        }
+        //}
 
         //[HttpPost]
         //public ActionResult UploadImage(HttpPostedFileBase photo)

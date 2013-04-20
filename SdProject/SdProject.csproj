@@ -190,6 +190,7 @@
     <Compile Include="Models\AddressModels\CreateAddressModel.cs" />
     <Compile Include="Models\AddressModels\AddressDisplayModel.cs" />
     <Compile Include="Models\FriendshipModels\FriendshipDisplayModel.cs" />
+    <Compile Include="Models\HouseModels\EnterInfoModel.cs" />
     <Compile Include="Models\HouseModels\HouseDisplayModel.cs" />
     <Compile Include="Models\HouseModels\HousePreviewModel.cs" />
     <Compile Include="Models\ImageModels\ImageDisplayModel.cs" />

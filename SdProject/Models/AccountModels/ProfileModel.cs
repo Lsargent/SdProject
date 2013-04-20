@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Globalization;
 using Logic;
+using Logic.Extensions;
 using Logic.Helpers;
 using SdProject.Models.AddressModels;
 using SdProject.Models.FriendshipModels;
 using SdProject.Models.HouseModels;
-using SdProject.Models.ImageModel;
 using SdProject.Models.ImageModels;
 
 namespace SdProject.Models.AccountModels {
@@ -16,7 +17,7 @@ namespace SdProject.Models.AccountModels {
 
         public ProfileModel(User profileUser, User requestingUser) {
             UserId = profileUser.Id;
-            UserName = profileUser.UserName;
+            UserName = profileUser.UserName.ToTitleCase();
             Email = profileUser.Email;
             PrimaryAddress = new AddressDisplayModel(profileUser.PrimaryAddress);
             Friends = profileUser.Friends.Select(f => new FriendshipDisplayModel(f)).ToList();
