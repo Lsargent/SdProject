@@ -1,29 +1,36 @@
 ﻿@model SdProject.Models.HouseModels.HousePreviewModel
 
-<div class="previewImage">
-    @*@Html.Partial("~/Views/Image/_ImageDisplay.cshtml", Model.Image)*@
-</div>
-<div class="previewDetails">
-    <div>
-        @Html.LabelFor(m => m.RoomCount)
-        @Html.DisplayFor(m => m.RoomCount)
+@if (Model.HasViewPermission) {
+    <div class="previewImage">
+        @*@Html.Partial("~/Views/Image/_ImageDisplay.cshtml", Model.Image)*@
+    </div>
+    <div class="previewDetails">
+        <div>
+            @Html.LabelFor(m => m.RoomCount)
+            @Html.DisplayFor(m => m.RoomCount)
+        </div>
+        <div>
+            @Html.LabelFor(m => m.Bedrooms)
+            @Html.DisplayFor(m => m.Bedrooms)
+        </div>
+        <div>
+            @Html.LabelFor(m => m.Bathrooms)
+            @Html.DisplayFor(m => m.Bathrooms)
+        </div>
+        <div>
+            @Html.LabelFor(m => m.FloorSpace)
+            @Html.DisplayFor(m => m.FloorSpace)
+        </div>
+    </div>
+    <div class="previewAddress">
+        @Html.Partial("~/Views/Address/_SmallAddressDisplay.cshtml", Model.Address)
     </div>
     <div>
-        @Html.LabelFor(m => m.Bedrooms)
-        @Html.DisplayFor(m => m.Bedrooms)
+        @Ajax.ActionLink("Expand", "Display", "House", new {houseId = Model.HouseId}, new AjaxOptions() {HttpMethod = "get", InsertionMode = InsertionMode.Replace, UpdateTargetId = Model.UpdateTargetId}) 
     </div>
+}
+else {
     <div>
-        @Html.LabelFor(m => m.Bathrooms)
-        @Html.DisplayFor(m => m.Bathrooms)
+        This house is private.
     </div>
-    <div>
-        @Html.LabelFor(m => m.FloorSpace)
-        @Html.DisplayFor(m => m.FloorSpace)
-    </div>
-</div>
-<div class="previewAddress">
-    @Html.Partial("~/Views/Address/_SmallAddressDisplay.cshtml", Model.Address)
-</div>
-<div>
-    @Ajax.ActionLink("Expand", "Display", "House" , new { houseId = Model.HouseId } ,new AjaxOptions() {HttpMethod = "get", InsertionMode = InsertionMode.Replace, UpdateTargetId = Model.UpdateTargetId}) 
-</div> 
+}

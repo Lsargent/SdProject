@@ -19,9 +19,9 @@ namespace SdProject.Models.AccountModels {
             UserId = profileUser.Id;
             UserName = profileUser.UserName.ToTitleCase();
             Email = profileUser.Email;
-            PrimaryAddress = new AddressDisplayModel(profileUser.PrimaryAddress);
+            //PrimaryAddress = new AddressModel(profileUser.PrimaryAddress, requestingUser);
             Friends = profileUser.Friends.Select(f => new FriendshipDisplayModel(f)).ToList();
-            Houses = profileUser.Houses.Select(h => new HousePreviewModel(h)).ToList();
+            Houses = profileUser.Houses.Select(h => new HousePreviewModel(h, requestingUser)).ToList();
             Images = profileUser.Images.Select(i => new ImageDisplayModel(i)).ToList();
             HasViewPermision = PermissionHelper.HasProfileViewPermission(profileUser, requestingUser);
             HasEditPermision = PermissionHelper.HasProfileEditPermission(profileUser, requestingUser);
@@ -40,7 +40,7 @@ namespace SdProject.Models.AccountModels {
 
         public bool HasEditPermision { get; set; }
 
-        public AddressDisplayModel PrimaryAddress { get; set; }
+        public AddressModel PrimaryAddress { get; set; }
 
         public ICollection<FriendshipDisplayModel> Friends { get; set; }
 
@@ -49,7 +49,11 @@ namespace SdProject.Models.AccountModels {
         public ICollection<ImageDisplayModel> Images { get; set; }
  
         public string ProfileHeading() {
-            return IsProfileOwner ? "Your Profile" : UserName + "'s Profile";
+            return IsProfileOwner ? ProfileName() + " Profile" : ProfileName().ToTitleCase();
+        }
+
+        public string ProfileName() {
+            return IsProfileOwner ? "Your" : UserName;
         }
     }
 }

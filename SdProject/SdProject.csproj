@@ -171,6 +171,7 @@
     <Compile Include="Controllers\AddressController.cs" />
     <Compile Include="Controllers\BaseComponentController.cs" />
     <Compile Include="Controllers\FriendsController.cs" />
+    <Compile Include="Controllers\HfController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HouseController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
@@ -185,10 +186,8 @@
     </Compile>
     <Compile Include="Models\AccountModels\AccountModels.cs" />
     <Compile Include="Models\AccountModels\AccountDisplayModel.cs" />
-    <Compile Include="Models\AccountModels\EditAddressModels.cs" />
     <Compile Include="Models\AccountModels\ProfileModel.cs" />
-    <Compile Include="Models\AddressModels\CreateAddressModel.cs" />
-    <Compile Include="Models\AddressModels\AddressDisplayModel.cs" />
+    <Compile Include="Models\AddressModels\AddressModel.cs" />
     <Compile Include="Models\FriendshipModels\FriendshipDisplayModel.cs" />
     <Compile Include="Models\HouseModels\EnterInfoModel.cs" />
     <Compile Include="Models\HouseModels\HouseDisplayModel.cs" />
@@ -355,6 +354,10 @@
     <Content Include="Views\Address\_SmallAddressDisplay.cshtml" />
     <Content Include="Views\Test.cshtml" />
     <Content Include="Views\Test2.cshtml" />
+    <Content Include="Views\Address\Display.cshtml" />
+    <Content Include="Views\Address\Edit.cshtml" />
+    <Content Include="Views\Shared\NoEditPermission.cshtml" />
+    <Content Include="Views\Address\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IRepositories\IAddressRepository.cs" />
+    <Compile Include="Repositories\AddressRepository.cs" />
     <Compile Include="Repositories\HouseRepository.cs" />
     <Compile Include="IRepositories\IBaseRepository.cs" />
     <Compile Include="IRepositories\IHouseRepository.cs" />
