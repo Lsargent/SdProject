@@ -1,9 +1,20 @@
-﻿
+﻿@model SdProject.Models.ImageModels.UploadImageModel
 
 
 @{
     ViewBag.Title = "UploadImage";
 }
+
+
+<h2>UploadImage</h2>
+
+<form action="/Image/UploadImage"  method="post" enctype="multipart/form-data">
+
+	<label for="photo">Photo:</label>
+	<input type="file" name="file" id="file" />
+
+	<input type="submit" value="Upload" />
+</form>
 
 @section Scripts{
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
