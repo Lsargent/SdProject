@@ -20,7 +20,7 @@ namespace SdProject.Models.AccountModels {
             UserName = profileUser.UserName.ToTitleCase();
             Email = profileUser.Email;
             //PrimaryAddress = new AddressModel(profileUser.PrimaryAddress, requestingUser);
-            Friends = profileUser.Friends.Select(f => new FriendshipDisplayModel(f)).ToList();
+            Friends = profileUser.Friends.Select(f => new ProfileFriendshipModel(f, profileUser, requestingUser)).ToList();
             Houses = profileUser.Houses.Select(h => new HousePreviewModel(h, requestingUser)).ToList();
             Images = profileUser.Images.Select(i => new ImageDisplayModel(i)).ToList();
             HasViewPermision = PermissionHelper.HasProfileViewPermission(profileUser, requestingUser);
@@ -42,7 +42,7 @@ namespace SdProject.Models.AccountModels {
 
         public AddressModel PrimaryAddress { get; set; }
 
-        public ICollection<FriendshipDisplayModel> Friends { get; set; }
+        public ICollection<ProfileFriendshipModel> Friends { get; set; }
 
         public ICollection<HousePreviewModel> Houses { get; set; }
 

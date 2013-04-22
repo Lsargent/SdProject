@@ -367,8 +367,10 @@ namespace SdProject.Controllers
                 currentUser = userRepo.Get<User>(u => u.Id == WebSecurity.CurrentUserId);
                 profileUser = userRepo.Get<User>(where, u => u.Houses.Select(h => h.Address.OwnedEntity.UserOwnedEntities.Select(au => au.User)),
                                                         u => u.Houses.Select(h => h.BaseComponent.OEntity.UserOwnedEntities.Select(hu => hu.User)),
-                                                        u => u.Friends.Select(f => f.Initiator), 
-                                                        u => u.Friends.Select(f => f.Reciever), 
+                                                        u => u.FriendInitiations.Select(f => f.Initiator),
+                                                        u => u.FriendReceptions.Select(f => f.Initiator),
+                                                        u => u.FriendInitiations.Select(f => f.Initiator),
+                                                        u => u.FriendInitiations.Select(f => f.Reciever),
                                                         u => u.Images, u => u.PrimaryAddress);
             }
 
