@@ -35,6 +35,16 @@
 }
 
 
+@*@if (User.Identity.IsAuthenticated)
+{
+    <h2>feed to come</h2>
+}
+else
+{
+    <h2>login to view feed</h2>   
+}*@
+
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
