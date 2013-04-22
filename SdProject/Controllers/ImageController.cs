@@ -19,15 +19,15 @@ namespace SdProject.Controllers
         public ActionResult UploadImage(SdProject.Models.ImageModels.UploadImageModel fileModel)
         {
             string path = @"C:\Users\kholiway\Documents\GitHub\SdProject\SdProject\App_Data\";
-            int userid = WebSecurity.CurrentUserId;
+            string user = WebSecurity.CurrentUserName;
             
 
             if (ModelState.IsValid)
             {
                 if (fileModel != null && fileModel.File != null)
-                    fileModel.File.SaveAs(path + userid + "\\1.jpeg");
+                    fileModel.File.SaveAs(path + "2.jpeg");
 
-                return RedirectToAction("ProfileDisplay", "Account", new { username = "n2" });
+                return RedirectToAction("ProfileDisplay", "Account", new { username = user });
             }
 
             return View();

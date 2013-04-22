@@ -29,6 +29,7 @@ namespace SdProject.Controllers
             if (ModelState.IsValid)
             {
                 User user;
+                string name = WebSecurity.CurrentUserName;
                 using (var userRepo = new UserRepository())
                 {
                     user = userRepo.GetUserWithIncludes(WebSecurity.CurrentUserId, u => u.Houses, u => u.UserOwnedEntities, u => u.OwnedEntityChanges);
@@ -48,7 +49,7 @@ namespace SdProject.Controllers
                 using(var houseRepo = new HouseRepository()){
                     houseRepo.InsertOrUpdate(newHouse);
                 }
-                return RedirectToAction("PageView", "Account");
+                return RedirectToAction("ProfileDisplay", "Account", new { username = name });
             }
             return View("EnterInfo", house);
         }
