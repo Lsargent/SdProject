@@ -53,6 +53,7 @@
     <Compile Include="BaseComponent.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="EntityChange.cs" />
+    <Compile Include="Extensions\StringExtension.cs" />
     <Compile Include="Friendship.cs" />
     <Compile Include="Helpers\ContextHelper.cs" />
     <Compile Include="Helpers\ObjectStateHelper.cs" />

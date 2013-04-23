@@ -6,10 +6,10 @@ using System.Web.Mvc;
 
 namespace SdProject.Controllers
 {
-    public class FriendsController : Controller
+    public class MessageThreadController : Controller
     {
         //
-        // GET: /Friends/
+        // GET: /MessageTread/
 
         public ActionResult Index()
         {

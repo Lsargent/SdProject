@@ -6,7 +6,6 @@ using Logic.Helpers;
 namespace Logic {
     public class Address : IObjectState, IEquatable<Address> {
         
-
         public Address() {}
 
         public Address(string streetAddress, string streetAddress2, string city, string state, string zipCode,
@@ -18,6 +17,7 @@ namespace Logic {
             City = city;
             State = state;
             ZipCode = zipCode;
+            OwnedEntityId = ownedEntity.Id;
             OwnedEntity = ownedEntity;           
         }
 
@@ -28,6 +28,7 @@ namespace Logic {
         private string _state;
         private string _zipCode;
         private OwnedEntity _ownedEntity;
+        private int _ownedEntityId;
         #endregion
 
         [Key]
@@ -62,7 +63,12 @@ namespace Logic {
             set { _zipCode = ChangeTracker.Set(this, ZipCode, value); }
         }
 
-        [Required]
+        public int OwnedEntityId {
+            get { return _ownedEntityId; }
+            set { _ownedEntityId = ChangeTracker.Set(this, OwnedEntityId, value); }
+        }
+
+        [ForeignKey("OwnedEntityId")]
         public  virtual OwnedEntity OwnedEntity {
             get { return _ownedEntity; }
             set { _ownedEntity = ChangeTracker.Set(this, OwnedEntity, value); }

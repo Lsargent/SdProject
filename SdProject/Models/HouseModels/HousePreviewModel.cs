@@ -4,20 +4,21 @@ using System.ComponentModel;
 using System.Linq;
 using System.Web;
 using Logic;
+using Logic.Helpers;
 using SdProject.Models.AddressModels;
-using SdProject.Models.ImageModels;
 using SdProject.Models.ImageModels;
 
 namespace SdProject.Models.HouseModels {
     public class HousePreviewModel {
         public HousePreviewModel() {}
 
-        public HousePreviewModel(House house) {
+        public HousePreviewModel(House house, User user) {
             HouseId = house.Id;
             RoomCount = house.RoomCount;
             Bedrooms = house.Bedrooms;
             Bathrooms = house.Bathrooms;
-            Address = new AddressDisplayModel(house.Address);
+            Address = new AddressModel(house.Address, user);
+            HasViewPermission = PermissionHelper.HasViewPermission(house.BaseComponent.OEntity, user);
             //if(house.BaseComponent.Images != null) {
             //    Image = new ImageDisplayModel(house.BaseComponent.Images.First());
             //}
@@ -26,7 +27,7 @@ namespace SdProject.Models.HouseModels {
 
         public int HouseId { get; set; }
 
-        public AddressDisplayModel Address { get; set; }
+        public AddressModel Address { get; set; }
 
         [DisplayName("Room Count")]
         public int RoomCount { get; set; }
@@ -41,5 +42,6 @@ namespace SdProject.Models.HouseModels {
 
         public string UpdateTargetId { get; set; }
 
+        public bool HasViewPermission { get; set; }
     }
 }

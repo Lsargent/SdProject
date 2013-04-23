@@ -22,11 +22,13 @@ namespace Logic.Helpers {
             }
             var hasPermission = false;
             foreach (var uoe in entity.UserOwnedEntities) {
-                hasPermission = hasPermission ||
-                                uoe.User.Friends.Any(
+                hasPermission =  uoe.User.Friends.Any(
                                     friend =>
                                     (friend.Initiator.Equals(user) || friend.Reciever.Equals(user)) &&
                                     friend.Status == FriendshipStatus.Confirmed);
+                if (hasPermission) {
+                    break;
+                }
             }
             return hasPermission;
         }

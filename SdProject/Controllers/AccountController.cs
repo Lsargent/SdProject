@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Transactions;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -350,9 +351,31 @@ namespace SdProject.Controllers
             User currentUser;
             User profileUser;
 
+            Expression<Func<User,bool>> where = u => u.UserName == userName;
+            try {
+                var userId = Convert.ToInt32(userName);
+                if (Convert.ToString(userId) == userName) {
+                    where = u => u.Id == userId;
+                }
+            }
+            catch (FormatException e) {
+                //Convert.ToInt32 didnt find a number in the string
+            }
+            catch (OverflowException e) {
+                //Convert.ToInt32 converted a number larger/smaller than the max/min value of an int
+            } 
+
             using (var userRepo = new UserRepository()) {
                 currentUser = userRepo.Get<User>(u => u.Id == WebSecurity.CurrentUserId);
-                profileUser = userRepo.Get<User>(u => u.UserName == userName, u => u.Houses.Select(h => h.Address), u => u.Friends.Select(f => f.Initiator), u => u.Friends.Select(f => f.Reciever), u => u.Images, u => u.PrimaryAddress);
+                profileUser = userRepo.Get<User>(where, u => u.Houses.Select(h => h.Address.OwnedEntity.UserOwnedEntities.Select(au => au.User)),
+                                                        u => u.Houses.Select(h => h.BaseComponent.OEntity.UserOwnedEntities.Select(hu => hu.User)),
+                                                        u => u.FriendInitiations.Select(f => f.Initiator),
+                                                        u => u.FriendReceptions.Select(f => f.Initiator),
+                                                        u => u.FriendInitiations.Select(f => f.Initiator),
+                                                        u => u.FriendInitiations.Select(f => f.Reciever),
+                                                        u => u.FriendInitiations.Select(f => f.OwnedEntity.UserOwnedEntities),
+                                                        u => u.FriendReceptions.Select(f => f.OwnedEntity.UserOwnedEntities),
+                                                        u => u.Images, u => u.PrimaryAddress);
             }
 
             if (profileUser != null) {
