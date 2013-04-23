@@ -10,9 +10,6 @@
 <h2>Welcome, @Model.User.UserName!</h2>
 
 <br />
-<h2>
-@Html.ActionLink("Add another house", "EnterInfo", "House")
- </h2>
 
 <h3>Your Houses:</h3>
 @if(Model.Houses.Count() == 0)
@@ -28,6 +25,24 @@
         <br />
         <br />
     }
+
+@if(Model.Houses.Count() >= 1)
+{
+<h2>
+@Html.ActionLink("Add another house", "EnterInfo", "House")
+ </h2>
+
+}
+
+
+@*@if (User.Identity.IsAuthenticated)
+{
+    <h2>feed to come</h2>
+}
+else
+{
+    <h2>login to view feed</h2>   
+}*@
 
 
 @section Scripts {

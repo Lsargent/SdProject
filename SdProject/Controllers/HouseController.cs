@@ -29,6 +29,7 @@ namespace SdProject.Controllers
             if (ModelState.IsValid)
             {
                 User user;
+                string name = WebSecurity.CurrentUserName;
                 using (var userRepo = new UserRepository())
                 {
                     user = userRepo.GetUserWithIncludes(WebSecurity.CurrentUserId, u => u.Houses, u => u.UserOwnedEntities, u => u.OwnedEntityChanges);
@@ -52,7 +53,7 @@ namespace SdProject.Controllers
                 using(var houseRepo = new HouseRepository()){
                     houseRepo.InsertOrUpdate(newHouse);
                 }
-                return RedirectToAction("PageView", "Account");
+                return RedirectToAction("ProfileDisplay", "Account", new { username = name });
             }
             return View("EnterInfo", house);
         }
@@ -128,28 +129,7 @@ namespace SdProject.Controllers
         //    return RedirectToAction("PageView", "Account");
         //}
 
-        //UploadImage needs to be moved to the image controller
-        public ActionResult UploadImage()
-        {
-            
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult UploadImage(UploadImageModel fileModel)
-        {
-            string path = @"Desktop";
-
-            if (ModelState.IsValid)
-            {
-                if (fileModel != null && fileModel.File != null)
-                    fileModel.File.SaveAs(path + fileModel.File.FileName);
-
-                return RedirectToAction("PageView", "Account");
-            }
-
-            return View();
-        }
+        
 
         
     }

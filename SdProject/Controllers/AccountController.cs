@@ -21,6 +21,7 @@ namespace SdProject.Controllers
     {
         //
         // GET: /Account/Login
+        string user = WebSecurity.CurrentUserName;
 
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
@@ -37,9 +38,10 @@ namespace SdProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
+            string name = model.UserName;
             if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
             {
-                return RedirectToAction("PageView", "Account");
+                return RedirectToAction("ProfileDisplay", "Account", new { username = name });
             }
 
             // If we got this far, something failed, redisplay form
@@ -339,7 +341,7 @@ namespace SdProject.Controllers
             User user;
             using (var userrepo = new UserRepository())
             {
-                user = userrepo.GetUser(WebSecurity.CurrentUserId);
+                user = userrepo.Get<User>(u => u.Id == WebSecurity.CurrentUserId, u => u.Houses.Select(h => h.Address));
                 return View(new AccountDisplayModel() { User = user, Houses = user.Houses.Select(house => new HouseDisplayModel(house)).ToList() });
         
             }
