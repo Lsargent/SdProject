@@ -10,7 +10,7 @@
     </div>
     <div>
         <input type="submit" value="Save" />
-        @Ajax.ActionLink("Cancel", "Listing", new { messageIds = Model.MessageId }, new AjaxOptions { HttpMethod = "get", InsertionMode = InsertionMode.Replace, UpdateTargetId = "message-" + Model.MessageId })
+        @Ajax.ActionLink("Cancel", "Display", new { messageId = Model.MessageId }, new AjaxOptions { HttpMethod = "get", InsertionMode = InsertionMode.Replace, UpdateTargetId = "message-" + Model.MessageId })
     </div>
 }
 

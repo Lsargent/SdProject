@@ -10,9 +10,9 @@ namespace Logic {
             EffectedItems = new List<TClass>();
             ItemsObjectState = new List<ObjectState>();
         }
-        public List<TClass> EffectedItems { get; set; }
+        public ICollection<TClass> EffectedItems { get; set; }
         // The ObjectState before the opertation
-        public List<ObjectState> ItemsObjectState { get; set; }
+        public ICollection<ObjectState> ItemsObjectState { get; set; }
 
         public void AddEffectedItem(TClass itemToAdd) {
             EffectedItems.Add(itemToAdd);

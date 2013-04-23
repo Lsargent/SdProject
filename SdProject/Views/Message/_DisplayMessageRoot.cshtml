@@ -1,0 +1,5 @@
+﻿@model SdProject.Models.MessageModels.MessageDisplayModel
+
+<div id="message-@Model.MessageId"class="messageWrapper">
+   @Html.Partial("_DisplayMessage", Model)  
+</div>

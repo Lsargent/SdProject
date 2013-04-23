@@ -1,0 +1,27 @@
+﻿@model SdProject.Models.AccountModels.ProfileModel
+
+@{
+    ViewBag.Title = Model.ProfileHeading();
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.ProfileHeading()</h2>
+
+<div>
+    <div>
+        Houses
+    </div>
+    <div>
+        @if (Model.Houses.Any()) {
+            foreach (var house in Model.Houses) {
+                @Html.Partial("~/Views/House/_HousePreviewRoot.cshtml", house)
+            }
+        }
+        else {
+            @:@Model.UserName does not have any houses.
+        }
+        @if (Model.HasEditPermision) {
+            @Html.ActionLink("Add A House", "EnterInfo", "House")
+        }
+    </div>
+</div>
