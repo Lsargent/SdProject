@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using Logic.Helpers;
 
 namespace Logic {
@@ -50,7 +51,14 @@ namespace Logic {
             set { _primaryAddress = ChangeTracker.Set(this, PrimaryAddress, value); }
         }
 
-        public virtual ICollection<Friendship> Friends { get; set; }
+        public virtual ICollection<Friendship> FriendInitiations { get; set; }
+
+        public virtual ICollection<Friendship> FriendReceptions { get; set; }
+            
+        [NotMapped]
+        public virtual ICollection<Friendship> Friends {
+            get { return FriendInitiations.Union(FriendReceptions).ToList(); }
+        }
 
         public virtual ICollection<Image> Images { get; set; }
 
@@ -85,10 +93,6 @@ namespace Logic {
 
         public void AddHouse(House house) {
             ChangeTracker.AddToCollection(this, Houses, house);
-        }
-
-        public void AddFriendship(Friendship friend) {
-            ChangeTracker.AddToCollection(this, Friends, friend);
         }
 
         public void AddImage(Image image) {

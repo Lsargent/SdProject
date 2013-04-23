@@ -1,0 +1,38 @@
+﻿@model SdProject.Models.AddressModels.AddressModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <h2>Create Address</h2>
+</div>
+<div>    
+    @using (Html.BeginForm("Create", "Address", FormMethod.Post)) {
+        @Html.HiddenFor(m => m.AddressId)
+        <div>
+            @Html.LabelFor(m => m.StreetAddress)
+            @Html.EditorFor(m => m.StreetAddress)
+        </div>
+        <div>
+            @Html.LabelFor(m => m.StreetAddress2)
+            @Html.EditorFor(m => m.StreetAddress2)
+        </div>
+        <div>
+            @Html.LabelFor(m => m.City)
+            @Html.EditorFor(m => m.City)
+        </div>
+        <div>
+            @Html.LabelFor(m => m.State)
+            @Html.EditorFor(m => m.State)
+        </div>
+        <div>
+            @Html.LabelFor(m => m.ZipCode)
+            @Html.EditorFor(m => m.ZipCode)
+        </div>
+        <div>
+            <input type="submit" value="Save"/>
+        </div>
+    }
+</div>
