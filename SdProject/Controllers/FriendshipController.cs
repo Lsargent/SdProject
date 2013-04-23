@@ -36,8 +36,8 @@ namespace SdProject.Controllers
                     reciever = userRepo.Get<User>(u => u.Id == friendship.RecieverId, 
                                                     u => u.OwnedEntityChanges,
                                                     u => u.UserOwnedEntities,
-                                                    u => u.FriendInitiations,
-                                                    u => u.FriendReceptions);
+                                                    u => u.FriendInitiations.Select(f => f.OwnedEntity),
+                                                    u => u.FriendReceptions.Select(f => f.OwnedEntity));
                 }
                 if (friendship.InitiatorId == CurrentUser.Id && !CurrentUser.Friends.Any(f => f.InitiatorId == reciever.Id || f.RecieverId == reciever.Id)) {   
                     CurrentUser.TrackingEnabled = true;

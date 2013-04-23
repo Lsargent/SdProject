@@ -373,6 +373,8 @@ namespace SdProject.Controllers
                                                         u => u.FriendReceptions.Select(f => f.Initiator),
                                                         u => u.FriendInitiations.Select(f => f.Initiator),
                                                         u => u.FriendInitiations.Select(f => f.Reciever),
+                                                        u => u.FriendInitiations.Select(f => f.OwnedEntity.UserOwnedEntities),
+                                                        u => u.FriendReceptions.Select(f => f.OwnedEntity.UserOwnedEntities),
                                                         u => u.Images, u => u.PrimaryAddress);
             }
 
