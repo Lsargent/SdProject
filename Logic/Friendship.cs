@@ -11,10 +11,8 @@ namespace Logic {
         public Friendship(User initiator, User reciever, OwnedEntity ownedEntity) {
             TrackingEnabled = true;
             ObjectState = ObjectState.Added;
-            Initiator = initiator;    
-            Initiator.AddFriendship(this);         
-            Reciever = reciever;
-            Reciever.AddFriendship(this);
+            InitiatorId = initiator.Id;  
+            RecieverId = reciever.Id;
             Status = FriendshipStatus.Pending;
             OwnedEntity = ownedEntity;                 
         }
@@ -24,18 +22,25 @@ namespace Logic {
         private User _reciever;
         private FriendshipStatus _status;
         private OwnedEntity _ownedEntity;
+        private int _initiatorId;
+        private int _recieverId;
         #endregion
 
-        [Key]
-        public int Id { get; set; }
+        public int InitiatorId {
+            get { return _initiatorId; }
+            set { _initiatorId = ChangeTracker.Set(this, InitiatorId, value); }
+        }
 
-        [Required]
         public virtual User Initiator {
             get { return _initiator; }
             set { _initiator = ChangeTracker.Set(this, Initiator, value); }
         }
 
-        [Required]
+        public int RecieverId {
+            get { return _recieverId; }
+            set { _recieverId = ChangeTracker.Set(this, RecieverId, value); }
+        }
+
         public virtual User Reciever {
             get { return _reciever; }
             set { _reciever = ChangeTracker.Set(this, Reciever, value); }
@@ -65,12 +70,11 @@ namespace Logic {
         public bool TrackingEnabled { get; set; }
 
         public bool Equals(Friendship other) {
-            return Id == other.Id;
+            return  (InitiatorId == other.InitiatorId && RecieverId == other.RecieverId) || (InitiatorId == other.RecieverId && RecieverId == other.InitiatorId);
         }
     }
     public enum FriendshipStatus { 
-        Confirmed,
         Pending,
-        Blocked
+        Confirmed      
     }
 }
