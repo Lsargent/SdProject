@@ -75,6 +75,7 @@ namespace Logic {
     }
     public enum FriendshipStatus { 
         Pending,
-        Confirmed      
+        Confirmed,
+        Removed
     }
 }
