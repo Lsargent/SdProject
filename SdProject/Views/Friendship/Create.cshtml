@@ -1,0 +1,26 @@
+﻿@model SdProject.Models.FriendshipModels.CreateFriendshipModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Friend Request</h1>
+
+<div>
+    @if (Model.CandidateUsers.Any()) {
+        foreach (var user in Model.CandidateUsers) {
+            using (Html.BeginForm("Create", "Friendship", FormMethod.Post)) {
+                @Html.HiddenFor(m => m.InitiatorId)
+                @Html.Hidden("RecieverId", user.UserId)
+                <div>
+                    @Html.Partial("~/Views/Account/_ProfilePreview.cshtml", user)
+                </div>
+                <input type="submit" value="Send Request"/>
+            }
+        }
+    }
+    else {
+        @:There are no other users to send friend requests to.
+    }
+</div>

@@ -1,0 +1,34 @@
+﻿@model SdProject.Models.AddressModels.AddressModel
+
+@{
+    ViewBag.Title = "Display";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="addressTitle">
+    <h1>Address</h1>
+</div>  
+<div class="addressBody">
+    <div>
+        @Html.DisplayFor(m => m.StreetAddress)
+    </div>
+    @if (!String.IsNullOrEmpty(Model.StreetAddress2)) {
+        <div>
+            @Html.DisplayFor(m => m.StreetAddress2)
+        </div>
+    }
+    <div>
+        @Html.DisplayFor(m => m.City)  
+    </div>
+    <div>
+        @Html.DisplayFor(m => m.State)
+    </div>
+    <div>
+        @Html.DisplayFor(m => m.ZipCode)
+    </div>
+</div>
+
+
+<div>
+    @Html.ActionLink("Edit", "Edit", new { addressId = Model.AddressId }) 
+</div>

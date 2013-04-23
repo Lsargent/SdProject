@@ -25,6 +25,13 @@ namespace DataAccess
         protected override void OnModelCreating(DbModelBuilder modelBuilder) {
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             modelBuilder.Entity<UserOwnedEntity>().HasKey(uoe => new {uoe.UserId, uoe.OwnedEntityId});
+            modelBuilder.Entity<Friendship>().HasKey(f => new {f.InitiatorId, f.RecieverId});
+            modelBuilder.Entity<Friendship>().HasRequired(f => f.Initiator)
+                                             .WithMany(u => u.FriendInitiations)
+                                             .HasForeignKey(x => x.InitiatorId);
+            modelBuilder.Entity<Friendship>().HasRequired(f => f.Reciever)
+                                             .WithMany(u => u.FriendReceptions)
+                                             .HasForeignKey(x => x.RecieverId);
         }
 
         public class DatabaseInitializer : CreateDatabaseIfNotExists<SdDb> {

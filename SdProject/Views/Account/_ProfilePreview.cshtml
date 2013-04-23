@@ -1,0 +1,11 @@
+﻿@model SdProject.Models.AccountModels.ProfilePreviewModel
+
+
+<div>
+    <img src="" alt="ProfileImage"/>
+</div>
+<div>
+    <a href="@Url.Action("ProfileDisplay", "Account", new { userName = Model.UserName })">
+        @Html.DisplayFor(m => m.UserName)
+    </a>
+</div>
