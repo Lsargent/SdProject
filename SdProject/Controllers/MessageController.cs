@@ -38,7 +38,7 @@ namespace SdProject.Controllers
                     opStatus = messageRepo.InsertOrUpdate(newMessage);
                 }
                 if(opStatus.WasSuccessful) {
-                    return Create(message.UpdateTargetId);
+                    return Display(newMessage.Id);
                 }
             }
             return (Request.IsAjaxRequest() ? (ActionResult)PartialView("_Create", message) : View("Create", message));
@@ -76,7 +76,9 @@ namespace SdProject.Controllers
                 OperationStatus opStatus;
 
                 using (var messageRepo = new MessageRepository()) {
-                    messageToUpdate = messageRepo.Get<Message>(x => x.Id == message.MessageId, x => x.OwnedEntity.UserOwnedEntities.Select(uoe => uoe.User.Friends));
+                    messageToUpdate = messageRepo.Get<Message>(x => x.Id == message.MessageId, 
+                                                               x => x.OwnedEntity.UserOwnedEntities.Select(uoe => uoe.User.FriendReceptions), 
+                                                               x => x.OwnedEntity.UserOwnedEntities.Select(uoe => uoe.User.FriendInitiations));
                 }
 
                 if (PermissionHelper.HasEditPermission(messageToUpdate.OwnedEntity, user))
