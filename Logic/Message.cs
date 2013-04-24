@@ -14,6 +14,7 @@ namespace Logic {
             Subject = subject;
             author.AddMessage(this);
             MessageBody = messageBody;
+            OwnedEntityId = ownedEntity.Id;
             OwnedEntity = ownedEntity;
         }
 
@@ -21,6 +22,8 @@ namespace Logic {
         private string _messageBody;
         private string _subject;
         private OwnedEntity _ownedEntity;
+        private int _ownedEntityId;
+
         #endregion
 
         public int Id { get; set; }
@@ -37,6 +40,12 @@ namespace Logic {
             set { _subject = ChangeTracker.Set(this, Subject, value); }
         }
 
+        public int OwnedEntityId {
+            get { return _ownedEntityId; }
+            set { _ownedEntityId = ChangeTracker.Set(this, OwnedEntityId, value); }
+        }
+
+        [ForeignKey("OwnedEntityId")]
         public virtual OwnedEntity OwnedEntity {
             get { return _ownedEntity; }
             set { _ownedEntity = ChangeTracker.Set(this, OwnedEntity, value); }

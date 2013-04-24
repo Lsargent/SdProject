@@ -1,0 +1,9 @@
+﻿@model SdProject.Models.PermissionModel
+
+@{
+    Layout = null;
+}
+
+<div id="permission-@Model.OwnedEntityId">
+    @Html.Partial("_PermissionDisplay", Model);
+</div>

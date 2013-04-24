@@ -49,11 +49,11 @@ namespace SdProject.Models.AccountModels {
         public ICollection<ImageDisplayModel> Images { get; set; }
  
         public string ProfileHeading() {
-            return IsProfileOwner ? ProfileName() + " Profile" : ProfileName().ToTitleCase();
+            return IsProfileOwner ? ProfileName() + "r Profile" : ProfileName().ToTitleCase();
         }
 
         public string ProfileName() {
-            return IsProfileOwner ? "Your" : UserName;
+            return IsProfileOwner ? "You" : UserName;
         }
     }
 }

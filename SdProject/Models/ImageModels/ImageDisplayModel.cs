@@ -6,7 +6,12 @@ namespace SdProject.Models.ImageModels {
         }
 
         public ImageDisplayModel(Image image) {
-            
+            ImageId = image.Id;
+            Url = image.Url;
         }
+
+        public int ImageId { get; set; }
+
+        public string Url { get; set; }
     }
 }
