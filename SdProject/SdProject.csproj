@@ -367,9 +367,10 @@
     <Content Include="Views\Address\Create.cshtml" />
     <Content Include="Views\Friendship\Create.cshtml" />
     <Content Include="Views\Account\_ProfilePreview.cshtml" />
-    <Content Include="Views\Permission\_DisplayPermissionRoot.cshtml" />
-    <Content Include="Views\Permission\_DisplayPermission.cshtml" />
+    <Content Include="Views\Permission\_PermissionDisplayRoot.cshtml" />
+    <Content Include="Views\Permission\_PermissionDisplay.cshtml" />
     <Content Include="Views\Permission\EditPermission.cshtml" />
+    <Content Include="Views\Permission\PermissionDisplay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

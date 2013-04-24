@@ -41,10 +41,11 @@ namespace SdProject.Controllers
                     }
                 }
             }
+            throw new NotImplementedException();
         }
 
         public ActionResult Display(int ownedEntityId) {
-            
+            throw new NotImplementedException();
         } 
     }
 }
