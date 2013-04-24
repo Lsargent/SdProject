@@ -17,7 +17,7 @@ namespace SdProject
     {
         protected void Application_Start()
         {
-            Database.Delete(AppConfig.GetActiveConnectionString());
+            //Database.Delete(AppConfig.GetActiveConnectionString());
             AreaRegistration.RegisterAllAreas();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
