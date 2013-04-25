@@ -63,16 +63,45 @@ namespace SdProject.Controllers
             //Finds a house using the house repo and then returns a form with the elements of the house in the form.
             //The EnterInfo model/view can be reused, but a house id property needs to be added to both the model and the form.
             //Renaming EnterInfo to a more descriptive name would be nice.
-            throw new NotImplementedException();
+                EnterInfo houseModel;
+                using (var houserepo = new HouseRepository())
+                {
+                    houseModel = new EnterInfo(houserepo.Get<House>( h => h.Id == houseId, h => h.Address));
+                }
+                return View(houseModel);
+
+            //throw new NotImplementedException();
         }
 
         [HttpPost]
-        public ActionResult Edit() {
+        public ActionResult Edit(EnterInfo houseModel) {
+            House toUpdate;
             //Take in the form input
             //Get a house from the house respository and update the properties based on input
             //Save the updated house using the repository
             //Be sure to use ModelState.IsValid and to validate whether or not the current user has permission to edit the house
-            throw new NotImplementedException();
+            using (var houserepo = new HouseRepository())
+            {
+                toUpdate =  houserepo.Get<House>(h => h.Id == houseModel.houseId, h => h.Address);
+            }
+            if (ModelState.IsValid)
+            {
+                toUpdate.TrackingEnabled = true;
+                toUpdate.Address.StreetAddress = houseModel.StreetAddress;
+                toUpdate.Address.ZipCode = Convert.ToString(houseModel.ZipCode);
+                toUpdate.Style = houseModel.Style;
+                toUpdate.Extras = houseModel.Extras;
+                toUpdate.FloorSpace = houseModel.FloorSpace;
+                toUpdate.RoomCount = houseModel.Bathrooms;
+
+                using (var houseRepo = new HouseRepository())
+                {
+                    houseRepo.InsertOrUpdate(toUpdate);
+                }
+                return RedirectToAction("ProfileDisplay", "Account", new { userName = WebSecurity.CurrentUserName});
+            }
+            return View(houseModel);
+            //throw new NotImplementedException();
         }
 
         public ActionResult Display(int houseId)
