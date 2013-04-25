@@ -371,6 +371,7 @@
     <Content Include="Views\Permission\_PermissionDisplay.cshtml" />
     <Content Include="Views\Permission\EditPermission.cshtml" />
     <Content Include="Views\Permission\PermissionDisplay.cshtml" />
+    <Content Include="Views\House\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

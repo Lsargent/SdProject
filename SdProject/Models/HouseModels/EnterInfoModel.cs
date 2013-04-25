@@ -3,9 +3,31 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using Logic;
 
 namespace SdProject.Models.HouseModels {
     public class EnterInfo {
+
+        public EnterInfo(House house)
+        {
+            houseId = house.Id;
+            StreetAddress = house.Address.StreetAddress;
+            City = house.Address.City;
+            ZipCode = Convert.ToInt32(house.Address.ZipCode);
+            Style = house.Style;
+            FloorSpace = house.FloorSpace;
+            RoomCount = house.RoomCount;
+            StoryCount = house.StoryCount;
+            Bedrooms = house.Bedrooms;
+            Bathrooms = house.Bathrooms;
+            HeatingType = house.HeatingType;
+            Extras = house.Extras;
+        }
+
+        public EnterInfo()
+        {
+
+        }
 
         //public 
         public int houseId { get; set; }
