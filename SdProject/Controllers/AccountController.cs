@@ -19,10 +19,6 @@ namespace SdProject.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        //
-        // GET: /Account/Login
-        string user = WebSecurity.CurrentUserName;
-
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {

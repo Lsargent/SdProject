@@ -46,6 +46,8 @@
   <ItemGroup>
     <Compile Include="IRepositories\IAddressRepository.cs" />
     <Compile Include="IRepositories\IFriendshipRepository.cs" />
+    <Compile Include="IRepositories\IImageRepository.cs" />
+    <Compile Include="IRepositories\IOwnedEntityRepository.cs" />
     <Compile Include="Repositories\AddressRepository.cs" />
     <Compile Include="Repositories\FriendshipRepository.cs" />
     <Compile Include="Repositories\HouseRepository.cs" />
@@ -53,8 +55,10 @@
     <Compile Include="IRepositories\IHouseRepository.cs" />
     <Compile Include="IRepositories\IMessageRepository.cs" />
     <Compile Include="IRepositories\IUserRepository.cs" />
+    <Compile Include="Repositories\ImageRepository.cs" />
     <Compile Include="Repositories\MessageRepository.cs" />
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Repositories\OwnedEntityRepository.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="SdDb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
