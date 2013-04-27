@@ -68,6 +68,7 @@ namespace SdProject.Controllers
                 {
                     houseModel = new EnterInfo(houserepo.Get<House>( h => h.Id == houseId, h => h.Address));
                 }
+                
                 return View(houseModel);
         }
 
@@ -85,6 +86,7 @@ namespace SdProject.Controllers
             if (ModelState.IsValid)
             {
                 toUpdate.TrackingEnabled = true;
+                toUpdate.Address.TrackingEnabled = true;
                 toUpdate.RoomCount = houseModel.RoomCount;
                 toUpdate.Address.StreetAddress = houseModel.StreetAddress;
                 toUpdate.Address.ZipCode = Convert.ToString(houseModel.ZipCode);
