@@ -1,18 +1,28 @@
 ﻿@model SdProject.Models.HouseModels.HouseDisplayModel
 
-
-<h2>Address: @Model.StreetAddress</h2>
-<h2>City: @Model.City</h2>
-<h2>Zip Code: @Model.ZipCode</h2>
-<h2>Style: @Model.Style</h2>
-<h2>Square Feet: @Model.FloorSpace</h2>
-<h2>Room Count: @Model.RoomCount</h2>
-<h2>Story Count: @Model.StoryCount</h2>
-<h2>Heating Type: @Model.HeatingType</h2>
-<h2>Bedrooms: @Model.Bedrooms</h2>
-<h2>Bathrooms: @Model.Bathrooms</h2>
-<h2>Extras: @Model.Extras</h2>
+<div>
+    
+    @*<div class="houselisting">*@
+    
+<ul>
+<li><h3><strong>Address: @Model.StreetAddress</strong></h3></li>
+<li>City: @Model.City</li>
+<li>Zip Code: @Model.ZipCode</li>
+<li>Style: @Model.Style</li>
+<li>Square Feet: @Model.FloorSpace</li>
+<li>Room Count: @Model.RoomCount</li>
+<li>Story Count: @Model.StoryCount</li>
+<li>Heating Type: @Model.HeatingType</li>
+<li>Bedrooms: @Model.Bedrooms</li>
+<li>Bathrooms: @Model.Bathrooms</li>
+<li>Extras: @Model.Extras</li>
+    </ul>
+        @*</div>*@
 
 @Html.ActionLink("Edit this house", "Edit", new { houseId = @Model.houseId })
- 
+    @*<div id="newposition">
+     <a href="../Image/UploadImage"><img src="../Images/addpic.jpg" /></a>
+        </div>*@
 
+
+    </div>

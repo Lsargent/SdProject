@@ -17,7 +17,7 @@ using DataAccess.Repositories;
 namespace SdProject.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : HfController
     {
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
@@ -334,13 +334,13 @@ namespace SdProject.Controllers
 
         public ActionResult PageView()
         {
-            User user;
-            using (var userrepo = new UserRepository())
-            {
-                user = userrepo.Get<User>(u => u.Id == WebSecurity.CurrentUserId, u => u.Houses.Select(h => h.Address));
-                return View(new AccountDisplayModel() { User = user, Houses = user.Houses.Select(house => new HouseDisplayModel(house)).ToList() });
-        
-            }
+           ICollection<User> users;
+             using (var userRepo = new UserRepository()) 
+             {
+                 users = userRepo.GetAll<User>().ToList();
+                 //users = userRepo.Get<User>(u => u.Images);
+             }
+             return View(new AccountDisplayModel(users, CurrentUser));
         }
 
         public ActionResult ProfileDisplay(string userName) {
