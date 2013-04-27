@@ -8,41 +8,60 @@
 }
 
 <h2>Welcome, @Model.User.UserName!</h2>
-
+<h3>This is your feed page.  Scroll through users photo sliders to find one you like and make new friends!</h3>
+<p>this page will hopefully show random users photo sliders with a  link to their profile</p>
 <br />
 
-<h3>Your Houses:</h3>
-@if(Model.Houses.Count() == 0)
-{
-    <p>You have not yet added a home.  Click the link to add your house!</p>
-    @Html.ActionLink("Add your house!", "EnterInfo", "House")
-}
+     @if (Model.Users.Any())
+     {
+         foreach (var user in Model.Users)
+         {  @*<----------Foreach user display name and pictures----------------->*@
+                <div>
+                    @Html.Partial("~/Views/Account/_FeedPreview.cshtml", user)
+                </div>
 
- @foreach(HouseDisplayModel house in Model.Houses) {
-        @Html.Partial("~/Views/House/_House.cshtml", house)
-        <!--temporary breaks until we figure out how we're doing the layout/-->
-        <br />
-        <br />
-        <br />
-    }
+<br />
+        <div id="slider">
+		<div class="viewer">
+		    <div class="reel">
+		        @if (Model.Images.Any()) {
+		            foreach (var image in Model.Images) {
+		               <div class="slide">
+		                    @Html.Partial("~/Views/Image/_ImageDisplay.cshtml", image)
+		                </div> 
+		            }                
+		        }
+		        else {
+		            <div class="slide">
+		                <img src="../images/pic09.jpg" alt="" /> 
+		            </div>
+		            <div class="slide">
+		                <img src="../images/pic10.jpg" alt="" />
+		            </div>
+		        }
+		        
+		    </div>
+		</div>
+		<div class="indicator">
+		    <ul>
+		        @if (Model.Images.Any()) {
+                    bool isFirst = true; 
+		            foreach (var image in Model.Images) {
+		                <li @(isFirst ? "class=\"active\"" : "")>@image.ImageId</li>
+                        isFirst = false;
+		            }
+		        }
+		        else {
+		           <li class="active">1</li>
+		            <li>2</li> 
+		        }      
+		    </ul>
+		</div>
+	</div>
+         
+         } @*<------------End foreach user------------------------------------->*@
+     }
 
-@if(Model.Houses.Count() >= 1)
-{
-<h2>
-@Html.ActionLink("Add another house", "EnterInfo", "House")
- </h2>
-
-}
-
-
-@*@if (User.Identity.IsAuthenticated)
-{
-    <h2>feed to come</h2>
-}
-else
-{
-    <h2>login to view feed</h2>   
-}*@
 
 
 @section Scripts {

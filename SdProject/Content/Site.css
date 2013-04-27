@@ -1195,5 +1195,13 @@ button:hover {
 }
 
 #newposition {
-    padding: 0;
+    float: right;
+}
+
+.houselisting {
+    float: left;
+}
+
+.previewDetails p{
+margin: 0;
 }

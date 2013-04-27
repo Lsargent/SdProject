@@ -270,6 +270,7 @@
     <Content Include="Images\2.jpg" />
     <Content Include="Images\3.jpg" />
     <Content Include="Images\4.jpg" />
+    <Content Include="Images\addpic.jpg" />
     <Content Include="Images\logo.jpg" />
     <Content Include="Images\pic09.jpg" />
     <Content Include="Images\pic10.jpg" />
@@ -371,6 +372,7 @@
     <Content Include="Views\Permission\_PermissionDisplay.cshtml" />
     <Content Include="Views\Permission\EditPermission.cshtml" />
     <Content Include="Views\Permission\PermissionDisplay.cshtml" />
+    <Content Include="Views\Account\_FeedPreview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

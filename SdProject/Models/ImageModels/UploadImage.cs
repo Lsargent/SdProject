@@ -9,7 +9,7 @@ namespace SdProject.Models.ImageModels
 {
     public class UploadImageModel
     {
-        [FileSize(702400)]
+        [FileSize(16777216)]
         [FileTypes("jpg,jpeg,png")]
         public HttpPostedFileBase File { get; set; }
     }
