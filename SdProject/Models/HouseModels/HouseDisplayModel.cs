@@ -7,9 +7,11 @@ using SdProject.CustomValidators;
 namespace SdProject.Models.HouseModels {
     public class HouseDisplayModel {
         public HouseDisplayModel(House house) {
+            houseId = house.Id;
             StreetAddress = house.Address.StreetAddress;
             City = house.Address.City;
             ZipCode = Convert.ToInt32(house.Address.ZipCode);
+            State = house.Address.State;
             Style = house.Style;
             FloorSpace = house.FloorSpace;
             RoomCount = house.RoomCount;
@@ -20,8 +22,15 @@ namespace SdProject.Models.HouseModels {
             Extras = house.Extras;
         }
 
+        public HouseDisplayModel()
+        {
+
+        }
+
+        public int houseId { get; set; }
         public string StreetAddress { get; set; }
         public string City { get; set; }
+        public string State { get; set; }
         public int ZipCode { get; set; }
         public string Style { get; set; }
         public double FloorSpace { get; set; }

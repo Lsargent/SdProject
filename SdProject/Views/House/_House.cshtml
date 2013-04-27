@@ -8,6 +8,7 @@
 <li><h3><strong>Address: @Model.StreetAddress</strong></h3></li>
 <li>City: @Model.City</li>
 <li>Zip Code: @Model.ZipCode</li>
+<h2>Zip Code: @Model.State</h2>
 <li>Style: @Model.Style</li>
 <li>Square Feet: @Model.FloorSpace</li>
 <li>Room Count: @Model.RoomCount</li>
@@ -19,7 +20,7 @@
     </ul>
         @*</div>*@
 
-
+@Html.ActionLink("Edit this house", "Edit", new { houseId = @Model.houseId })
     @*<div id="newposition">
      <a href="../Image/UploadImage"><img src="../Images/addpic.jpg" /></a>
         </div>*@

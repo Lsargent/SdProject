@@ -3,9 +3,32 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using Logic;
 
 namespace SdProject.Models.HouseModels {
     public class EnterInfo {
+
+        public EnterInfo(House house)
+        {
+            houseId = house.Id;
+            StreetAddress = house.Address.StreetAddress;
+            City = house.Address.City;
+            State = house.Address.State;
+            ZipCode = Convert.ToInt32(house.Address.ZipCode);
+            Style = house.Style;
+            FloorSpace = house.FloorSpace;
+            RoomCount = house.RoomCount;
+            StoryCount = house.StoryCount;
+            Bedrooms = house.Bedrooms;
+            Bathrooms = house.Bathrooms;
+            HeatingType = house.HeatingType;
+            Extras = house.Extras;
+        }
+
+        public EnterInfo()
+        {
+
+        }
 
         //public 
         public int houseId { get; set; }
@@ -23,6 +46,9 @@ namespace SdProject.Models.HouseModels {
         [RegularExpression(@"^\d{5}(-\d{4})?$", ErrorMessage = "Zip code must be five characters.")]
         [Display(Name = "Zip Code*")]
         public int ZipCode { get; set; }
+
+        [Display(Name = "State / Municipality")]
+        public string State { get; set; }
 
         [Required(ErrorMessage = "Type of house required.")]
         [Display(Name = "House Style (Ranch, Victorian, etc.)")]
