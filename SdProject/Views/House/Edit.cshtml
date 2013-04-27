@@ -30,6 +30,11 @@
                 @Html.ValidationMessageFor(m => m.ZipCode)
             </li>
             <li>
+                @Html.LabelFor(m => m.State)
+                @Html.TextBoxFor(m => m.State)
+                @Html.ValidationMessageFor(m => m.State)
+            </li>
+            <li>
                 @Html.LabelFor(m => m.Style)
                 @Html.TextBoxFor(m => m.Style)
                 @Html.ValidationMessageFor(m => m.Style)
