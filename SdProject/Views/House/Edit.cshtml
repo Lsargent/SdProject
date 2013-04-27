@@ -1,0 +1,84 @@
+﻿@model SdProject.Models.HouseModels.EnterInfo
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+    <h2>Edit House Information.</h2>
+</hgroup>
+
+
+@using (Html.BeginForm("Edit", "House", FormMethod.Post)) {
+    <fieldset>
+        @Html.HiddenFor(m => m.houseId)
+        <legend>Edit House Information</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.StreetAddress)
+                @Html.TextBoxFor(m => m.StreetAddress)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.City)
+                @Html.TextBoxFor(m => m.City)
+                @Html.ValidationMessageFor(m => m.City)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.ZipCode)
+                @Html.TextBoxFor(m => m.ZipCode)
+                @Html.ValidationMessageFor(m => m.ZipCode)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.State)
+                @Html.TextBoxFor(m => m.State)
+                @Html.ValidationMessageFor(m => m.State)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Style)
+                @Html.TextBoxFor(m => m.Style)
+                @Html.ValidationMessageFor(m => m.Style)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.FloorSpace)
+                @Html.TextBoxFor(m => m.FloorSpace)
+                @Html.ValidationMessageFor(m => m.FloorSpace)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.RoomCount)
+                @Html.TextBoxFor(m => m.RoomCount)
+                @Html.ValidationMessageFor(m => m.RoomCount)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.StoryCount)
+                @Html.TextBoxFor(m => m.StoryCount)
+                @Html.ValidationMessageFor(m => m.StoryCount)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Bedrooms)
+                @Html.TextBoxFor(m => m.Bedrooms)
+                @Html.ValidationMessageFor(m => m.Bedrooms)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Bathrooms)
+                @Html.TextBoxFor(m => m.Bathrooms)
+                @Html.ValidationMessageFor(m => m.Bathrooms)
+
+            </li>
+            <li>
+                @Html.LabelFor(m => m.HeatingType)
+                @Html.TextBoxFor(m => m.HeatingType)
+                @Html.ValidationMessageFor(m => m.HeatingType)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Extras)
+                @Html.TextAreaFor(m => m.Extras, new { @cols = "25", @rows = "3" })
+                @Html.ValidationMessageFor(m => m.Extras)
+            </li>
+        </ol>
+        <input type="submit" value="Continue" />
+    </fieldset>
+}
+    @section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

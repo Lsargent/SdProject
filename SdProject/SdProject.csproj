@@ -170,12 +170,14 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AddressController.cs" />
     <Compile Include="Controllers\BaseComponentController.cs" />
-    <Compile Include="Controllers\FriendsController.cs" />
+    <Compile Include="Controllers\FriendshipController.cs" />
+    <Compile Include="Controllers\HfController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HouseController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
-    <Compile Include="Controllers\MessageTreadController.cs" />
+    <Compile Include="Controllers\MessageThreadController.cs" />
+    <Compile Include="Controllers\PermissionController.cs" />
     <Compile Include="CustomValidators\FileSizeAttribute.cs" />
     <Compile Include="CustomValidators\FileTypesAttribute.cs" />
     <Compile Include="CustomValidators\RoomsValidator.cs" />
@@ -185,11 +187,13 @@
     </Compile>
     <Compile Include="Models\AccountModels\AccountModels.cs" />
     <Compile Include="Models\AccountModels\AccountDisplayModel.cs" />
-    <Compile Include="Models\AccountModels\EditAddressModels.cs" />
     <Compile Include="Models\AccountModels\ProfileModel.cs" />
-    <Compile Include="Models\AddressModels\CreateAddressModel.cs" />
-    <Compile Include="Models\AddressModels\AddressDisplayModel.cs" />
-    <Compile Include="Models\FriendshipModels\FriendshipDisplayModel.cs" />
+    <Compile Include="Models\AccountModels\ProfilePreviewModel.cs" />
+    <Compile Include="Models\AddressModels\AddressModel.cs" />
+    <Compile Include="Models\FriendshipModels\CreateFriendshipModel.cs" />
+    <Compile Include="Models\FriendshipModels\FriendshipModel.cs" />
+    <Compile Include="Models\FriendshipModels\ProfileFriendshipModel.cs" />
+    <Compile Include="Models\HouseModels\EnterInfoModel.cs" />
     <Compile Include="Models\HouseModels\HouseDisplayModel.cs" />
     <Compile Include="Models\HouseModels\HousePreviewModel.cs" />
     <Compile Include="Models\ImageModels\ImageDisplayModel.cs" />
@@ -198,6 +202,7 @@
     <Compile Include="Models\MessageModels\EditMessageModels.cs" />
     <Compile Include="Models\MessageModels\MessageListingModel.cs" />
     <Compile Include="Models\MessageModels\MessageDisplayModel.cs" />
+    <Compile Include="Models\PermissionModels\PermissionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -262,6 +267,10 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
+    <Content Include="Images\2.jpg" />
+    <Content Include="Images\3.jpg" />
+    <Content Include="Images\4.jpg" />
+    <Content Include="Images\addpic.jpg" />
     <Content Include="Images\logo.jpg" />
     <Content Include="Images\pic09.jpg" />
     <Content Include="Images\pic10.jpg" />
@@ -343,7 +352,6 @@
     <Content Include="Views\Message\_DisplayMessageSubject.cshtml" />
     <Content Include="Views\Message\_EditMessageSubject.cshtml" />
     <Content Include="Views\Message\_DisplayMessageRoot.cshtml" />
-    <Content Include="Views\House\UploadImage.cshtml" />
     <Content Include="Views\Message\DisplayMessage.cshtml" />
     <Content Include="Views\Message\_CreateMessageFormContent.cshtml" />
     <Content Include="Views\Account\ProfileNotFound.cshtml" />
@@ -354,6 +362,18 @@
     <Content Include="Views\Address\_SmallAddressDisplay.cshtml" />
     <Content Include="Views\Test.cshtml" />
     <Content Include="Views\Test2.cshtml" />
+    <Content Include="Views\Address\Display.cshtml" />
+    <Content Include="Views\Address\Edit.cshtml" />
+    <Content Include="Views\Shared\NoEditPermission.cshtml" />
+    <Content Include="Views\Address\Create.cshtml" />
+    <Content Include="Views\Friendship\Create.cshtml" />
+    <Content Include="Views\Account\_ProfilePreview.cshtml" />
+    <Content Include="Views\Permission\_PermissionDisplayRoot.cshtml" />
+    <Content Include="Views\Permission\_PermissionDisplay.cshtml" />
+    <Content Include="Views\Permission\EditPermission.cshtml" />
+    <Content Include="Views\Permission\PermissionDisplay.cshtml" />
+    <Content Include="Views\House\Edit.cshtml" />
+    <Content Include="Views\Account\_FeedPreview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

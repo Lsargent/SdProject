@@ -19,7 +19,7 @@ namespace SdProject.CustomValidators
         {
             if (value == null) return true;
 
-            var fileExt = System.IO.Path.GetExtension((value as HttpPostedFile).FileName).Substring(1);
+            var fileExt = System.IO.Path.GetExtension((value as HttpPostedFileBase).FileName).Substring(1);
             return _types.Contains(fileExt, StringComparer.OrdinalIgnoreCase);
         }
 

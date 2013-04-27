@@ -15,7 +15,7 @@
 @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
-
+    <fieldset>
         <legend>Log in Form</legend>
         <br />
         <ol>
@@ -24,26 +24,33 @@
                 @Html.TextBoxFor(m => m.UserName)
                 @Html.ValidationMessageFor(m => m.UserName)
             </li>
-            <br />
             <li>
                <h3>@Html.LabelFor(m => m.Password)</h3>
                 @Html.PasswordFor(m => m.Password)
                 @Html.ValidationMessageFor(m => m.Password)
             </li>
-            <br />
             <li>
                 <h3>@Html.CheckBoxFor(m => m.RememberMe)@Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })</h3>
             </li>
         </ol>
-    <br />
         <input type="submit" value="Log in" />
-    <br />
-    <br />
-    <br />
-    <h2>
+        </fieldset>
+    <p>
        No account? @Html.ActionLink("Register", "Register") here.
-    </h2>
+    </p>
+    
 }
+
+</section>
+
+        <section class="social" id="socialLoginForm">
+    <h3>Dont Forget</h3>
+<ul>
+    <li class="one">
+        <h5>Upload as much pictures of your home as you want.  This is a great jumping off point to network with fellow home owners.</h5>
+       @* <img src="../Images/2.jpg" />*@
+    </li>
+</ul>
 </section>
 
 

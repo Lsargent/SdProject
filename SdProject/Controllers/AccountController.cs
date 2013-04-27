@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Transactions;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -16,11 +17,8 @@ using DataAccess.Repositories;
 namespace SdProject.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : HfController
     {
-        //
-        // GET: /Account/Login
-
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
@@ -36,9 +34,10 @@ namespace SdProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
+            string name = model.UserName;
             if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
             {
-                return RedirectToAction("PageView", "Account");
+                return RedirectToAction("ProfileDisplay", "Account", new { username = name });
             }
 
             // If we got this far, something failed, redisplay form
@@ -335,22 +334,44 @@ namespace SdProject.Controllers
 
         public ActionResult PageView()
         {
-            User user;
-            using (var userrepo = new UserRepository())
-            {
-                user = userrepo.GetUser(WebSecurity.CurrentUserId);
-                return View(new AccountDisplayModel() { User = user, Houses = user.Houses.Select(house => new HouseDisplayModel(house)).ToList() });
-        
-            }
+           ICollection<User> users;
+             using (var userRepo = new UserRepository()) 
+             {
+                 users = userRepo.GetAll<User>().ToList();
+                 //users = userRepo.Get<User>(u => u.Images);
+             }
+             return View(new AccountDisplayModel(users, CurrentUser));
         }
 
         public ActionResult ProfileDisplay(string userName) {
             User currentUser;
             User profileUser;
 
+            Expression<Func<User,bool>> where = u => u.UserName == userName;
+            try {
+                var userId = Convert.ToInt32(userName);
+                if (Convert.ToString(userId) == userName) {
+                    where = u => u.Id == userId;
+                }
+            }
+            catch (FormatException e) {
+                //Convert.ToInt32 didnt find a number in the string
+            }
+            catch (OverflowException e) {
+                //Convert.ToInt32 converted a number larger/smaller than the max/min value of an int
+            } 
+
             using (var userRepo = new UserRepository()) {
                 currentUser = userRepo.Get<User>(u => u.Id == WebSecurity.CurrentUserId);
-                profileUser = userRepo.Get<User>(u => u.UserName == userName, u => u.Houses.Select(h => h.Address), u => u.Friends.Select(f => f.Initiator), u => u.Friends.Select(f => f.Reciever), u => u.Images, u => u.PrimaryAddress);
+                profileUser = userRepo.Get<User>(where, u => u.Houses.Select(h => h.Address.OwnedEntity.UserOwnedEntities.Select(au => au.User)),
+                                                        u => u.Houses.Select(h => h.BaseComponent.OEntity.UserOwnedEntities.Select(hu => hu.User)),
+                                                        u => u.FriendInitiations.Select(f => f.Initiator),
+                                                        u => u.FriendReceptions.Select(f => f.Initiator),
+                                                        u => u.FriendInitiations.Select(f => f.Initiator),
+                                                        u => u.FriendInitiations.Select(f => f.Reciever),
+                                                        u => u.FriendInitiations.Select(f => f.OwnedEntity.UserOwnedEntities),
+                                                        u => u.FriendReceptions.Select(f => f.OwnedEntity.UserOwnedEntities),
+                                                        u => u.Images, u => u.PrimaryAddress);
             }
 
             if (profileUser != null) {

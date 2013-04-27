@@ -28,7 +28,7 @@ a {
     }
 
     a:hover {
-        background-color: #c7d1d6;
+        /*background-color: #c7d1d6;*/
     }
 
 header, footer, hgroup,
@@ -202,7 +202,7 @@ ul#menu {
         }
 
         ul#menu li a:hover {
-            color: #333;
+            /*color: #333;*/
             text-decoration: none;
         }
 
@@ -549,14 +549,14 @@ th {
     }
 
     th a:link, th a:visited, th a:active, th a:hover {
-        color: #333;
+        /*color: #333;*/
         font-weight: 600;
         text-decoration: none;
         padding: 0;
     }
 
     th a:hover {
-        color: #000;
+        /*color: #000;*/
     }
 
     th.asc a, th.desc a {
@@ -1195,5 +1195,13 @@ button:hover {
 }
 
 #newposition {
-    padding: 0;
+    float: right;
+}
+
+.houselisting {
+    float: left;
+}
+
+.previewDetails p{
+margin: 0;
 }
