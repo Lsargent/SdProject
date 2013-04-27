@@ -35,7 +35,7 @@ namespace SdProject.Controllers
                     user = userRepo.GetUserWithIncludes(WebSecurity.CurrentUserId, u => u.Houses, u => u.UserOwnedEntities, u => u.OwnedEntityChanges);
                 }
                 user.TrackingEnabled = true;
-                var newHouse = new House(   new Address(house.StreetAddress, "", house.City, "Wyoming", house.ZipCode.ToString(), 
+                var newHouse = new House(   new Address(house.StreetAddress, "", house.City, house.State, house.ZipCode.ToString(), 
                                                 new OwnedEntity(user, ViewPolicy.Open, 
                                                     new OwnedEntityChange(Request, user))), 
                                             house.Style,
@@ -68,9 +68,8 @@ namespace SdProject.Controllers
                 {
                     houseModel = new EnterInfo(houserepo.Get<House>( h => h.Id == houseId, h => h.Address));
                 }
+                
                 return View(houseModel);
-
-            //throw new NotImplementedException();
         }
 
         [HttpPost]
@@ -87,12 +86,18 @@ namespace SdProject.Controllers
             if (ModelState.IsValid)
             {
                 toUpdate.TrackingEnabled = true;
+                toUpdate.Address.TrackingEnabled = true;
+                toUpdate.RoomCount = houseModel.RoomCount;
                 toUpdate.Address.StreetAddress = houseModel.StreetAddress;
                 toUpdate.Address.ZipCode = Convert.ToString(houseModel.ZipCode);
+                toUpdate.Address.City = houseModel.City;
+                toUpdate.Address.State = houseModel.State;
                 toUpdate.Style = houseModel.Style;
                 toUpdate.Extras = houseModel.Extras;
                 toUpdate.FloorSpace = houseModel.FloorSpace;
-                toUpdate.RoomCount = houseModel.Bathrooms;
+                toUpdate.Bathrooms = houseModel.Bathrooms;
+                toUpdate.Bedrooms = houseModel.Bedrooms;
+                toUpdate.HeatingType = houseModel.HeatingType;
 
                 using (var houseRepo = new HouseRepository())
                 {
@@ -101,7 +106,6 @@ namespace SdProject.Controllers
                 return RedirectToAction("ProfileDisplay", "Account", new { userName = WebSecurity.CurrentUserName});
             }
             return View(houseModel);
-            //throw new NotImplementedException();
         }
 
         public ActionResult Display(int houseId)
