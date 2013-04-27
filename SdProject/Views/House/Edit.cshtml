@@ -1,18 +1,19 @@
 ﻿@model SdProject.Models.HouseModels.EnterInfo
 
 @{
-    ViewBag.Title = "EnterInfo";
+    ViewBag.Title = "Edit";
 }
 
 <hgroup class="title">
     <h1>@ViewBag.Title.</h1>
-    <h2>Tell us about your home.</h2>
+    <h2>Edit House Information.</h2>
 </hgroup>
 
 
-@using (Html.BeginForm("EnterInfo", "House", FormMethod.Post)) {
+@using (Html.BeginForm("Edit", "House", FormMethod.Post)) {
     <fieldset>
-        <legend>Enter Your Info</legend>
+        @Html.HiddenFor(m => m.houseId)
+        <legend>Edit House Information</legend>
         <ol>
             <li>
                 @Html.LabelFor(m => m.StreetAddress)
