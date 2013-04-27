@@ -13,6 +13,7 @@ namespace SdProject.Models.HouseModels {
             houseId = house.Id;
             StreetAddress = house.Address.StreetAddress;
             City = house.Address.City;
+            State = house.Address.State;
             ZipCode = Convert.ToInt32(house.Address.ZipCode);
             Style = house.Style;
             FloorSpace = house.FloorSpace;
@@ -45,6 +46,9 @@ namespace SdProject.Models.HouseModels {
         [RegularExpression(@"^\d{5}(-\d{4})?$", ErrorMessage = "Zip code must be five characters.")]
         [Display(Name = "Zip Code*")]
         public int ZipCode { get; set; }
+
+        [Display(Name = "State / Municipality")]
+        public string State { get; set; }
 
         [Required(ErrorMessage = "Type of house required.")]
         [Display(Name = "House Style (Ranch, Victorian, etc.)")]
