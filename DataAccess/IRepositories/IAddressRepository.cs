@@ -6,5 +6,6 @@ using System.Threading.Tasks;
 
 namespace DataAccess.IRepositories {
     public interface IAddressRepository {
+        //Never got a chance to implement each repository. Used generic methods instead.
     }
 }
