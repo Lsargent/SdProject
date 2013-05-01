@@ -16,7 +16,7 @@
      {
          foreach (var user in Model.Users)
          {  @*<----------Foreach user display name and pictures----------------->*@
-                <div>
+                @*<div>
                     @Html.Partial("~/Views/Account/_FeedPreview.cshtml", user)
                 </div>
 
@@ -57,7 +57,7 @@
 		        }      
 		    </ul>
 		</div>
-	</div>
+	</div>*@
          
          } @*<------------End foreach user------------------------------------->*@
      }
