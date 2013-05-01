@@ -117,53 +117,5 @@ namespace SdProject.Controllers
             }
             return Request.IsAjaxRequest() ? (ActionResult)PartialView("_House", house) : View("_House", house);
         }
-
-        //public ActionResult EditHouse(int houseId)
-        //{
-        //    EnterInfo houseModel;
-        //    using (var houserepo = new HouseRepository())
-        //    {
-        //        houseModel = new EnterInfo(houserepo.GetHouse(houseId));
-        //    }
-        //    return View();
-        //}
-
-        //public ActionResult EditInfo(EnterInfo house)
-        //{
-            
-        //}
-
-        //[HttpPost]
-        //public ActionResult UploadImage(HttpPostedFileBase photo)
-        //{
-        //    if (photo != null)
-        //    {
-        //        string path = @"D:\Temp\";
-
-        //        if (photo.ContentLength > 10240)
-        //        {
-        //            ModelState.AddModelError("photo", "The size of the file should not exceed 10 KB");
-        //            return View();
-        //        }
-
-        //        var supportedTypes = new[] { "jpg", "jpeg", "png" };
-
-        //        var fileExt = System.IO.Path.GetExtension(photo.FileName).Substring(1);
-
-        //        if (!supportedTypes.Contains(fileExt))
-        //        {
-        //            ModelState.AddModelError("photo", "Invalid type. Only the following types (jpg, jpeg, png) are supported.");
-        //            return View();
-        //        }
-
-        //        photo.SaveAs(path + photo.FileName);
-        //    }
-
-        //    return RedirectToAction("PageView", "Account");
-        //}
-
-        
-
-        
     }
 }
