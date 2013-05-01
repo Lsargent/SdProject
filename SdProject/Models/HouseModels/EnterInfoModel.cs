@@ -25,6 +25,7 @@ namespace SdProject.Models.HouseModels {
             Extras = house.Extras;
         }
 
+        //default constructor
         public EnterInfo()
         {
 
@@ -82,9 +83,8 @@ namespace SdProject.Models.HouseModels {
         [Display(Name = "Heating Type*")]
         public string HeatingType { get; set; }
 
-        [Required(ErrorMessage = "Extra description required.")]
         [DataType(DataType.MultilineText)]
-        [Display(Name = "Description/Extras*")]
+        [Display(Name = "Description/Extras")]
         public string Extras { get; set; }
     }
 }
